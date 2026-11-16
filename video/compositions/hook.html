@@ -91,10 +91,11 @@
     }
     #hook-photo {
       position: absolute;
-      left: -268px;
-      top: -55px;
-      width: 648px;
-      height: auto;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     #hook-name {
       position: absolute;
@@ -126,7 +127,7 @@
       <div id="hook-title"><span id="hook-title-text">BERBALOIKAH</span></div>
       <div id="hook-sub">IBADAH KERANA RIAK?</div>
       <div id="hook-arch-line"></div>
-      <div id="hook-arch" data-layout-allow-overflow><img id="hook-photo" src="assets/img/ustaz.jpg" alt="Al-Fadhil Ustaz Abd Aziz Al-Qurowy" /></div>
+      <div id="hook-arch" data-layout-allow-overflow><img id="hook-photo" src="assets/img/ustaz-arch.jpg" alt="Al-Fadhil Ustaz Abd Aziz Al-Qurowy" /></div>
       <div id="hook-name"><span id="hook-name-pill"><b>Ustaz Abd Aziz Al-Qurowy</b></span></div>
     </div>
   </div>
@@ -136,7 +137,7 @@
     tl.fromTo("#hook-title", { scale: 1.06, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.8, ease: "power3.out" }, 0);
     tl.fromTo("#hook-title-text", { backgroundPosition: "100% 0%" }, { backgroundPosition: "0% 0%", duration: 1.4, ease: "power2.inOut" }, 0.2);
     tl.fromTo("#hook-sub", { y: 14, opacity: 0.85 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, 0);
-    tl.fromTo("#hook-photo", { scale: 1, transformOrigin: "50% 30%" }, { scale: 1.08, duration: 4.2, ease: "none" }, 0);
+    tl.fromTo("#hook-photo", { scale: 1, transformOrigin: "50% 20%" }, { scale: 1.05, duration: 4.2, ease: "none" }, 0);
     tl.fromTo("#hook-arch-line", { scale: 0.97, opacity: 0.4, transformOrigin: "50% 50%" }, { scale: 1.02, opacity: 1, duration: 2, ease: "sine.inOut" }, 0);
     tl.fromTo("#hook-arabic", { scale: 1.1, transformOrigin: "50% 50%" }, { scale: 1, duration: 4.2, ease: "none" }, 0);
     tl.fromTo("#hook-name-pill", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.5);
