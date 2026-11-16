@@ -1,0 +1,148 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    #fh-wrap {
+      position: absolute;
+      inset: 0;
+    }
+    #fh-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 380px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.32em;
+      color: #d4af37;
+    }
+    #fh-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 418px;
+      text-align: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      font-size: 72px;
+      color: #f8f1de;
+    }
+    #fh-title em {
+      font-style: italic;
+      color: #f1d78a;
+    }
+    .fh-node {
+      position: absolute;
+      left: 200px;
+      width: 680px;
+      height: 130px;
+      border-radius: 70px;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      padding: 0 26px;
+      background: linear-gradient(90deg, rgba(15, 90, 69, 0.95), rgba(4, 36, 28, 0.95));
+      border: 2px solid #d4af37;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+    #fh-n1 {
+      top: 555px;
+    }
+    #fh-n2 {
+      top: 750px;
+    }
+    #fh-n3 {
+      top: 945px;
+    }
+    .fh-icon {
+      flex: 0 0 auto;
+      width: 88px;
+      height: 88px;
+    }
+    .fh-text {
+      font-weight: 800;
+      font-size: 36px;
+      letter-spacing: 0.03em;
+      color: #f8f1de;
+      line-height: 1.15;
+    }
+    .fh-text small {
+      display: block;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 0.08em;
+      color: #f1d78a;
+    }
+    .fh-link {
+      position: absolute;
+      left: 525px;
+      width: 30px;
+      height: 60px;
+    }
+    #fh-l1 {
+      top: 688px;
+    }
+    #fh-l2 {
+      top: 883px;
+    }
+  </style>
+  <div id="root" data-composition-id="faham" data-width="1080" data-height="1920">
+    <div id="fh-wrap">
+      <div id="fh-kicker">KUNCINYA</div>
+      <div id="fh-title">Bila Kita <em>Faham</em>...</div>
+
+      <div class="fh-node" id="fh-n1">
+        <svg class="fh-icon" viewBox="0 0 100 100" data-layout-ignore>
+          <circle cx="50" cy="50" r="47" fill="#d4af37" />
+          <path d="M22 34 C32 30 42 31 50 37 C58 31 68 30 78 34 L78 70 C68 66 58 67 50 73 C42 67 32 66 22 70 Z" fill="none" stroke="#04241c" stroke-width="5" stroke-linejoin="round" />
+          <path d="M50 37 L50 73" stroke="#04241c" stroke-width="5" />
+        </svg>
+        <div class="fh-text"><small>LANGKAH 1</small>FAHAM</div>
+      </div>
+      <svg class="fh-link" id="fh-l1" viewBox="0 0 30 60" data-layout-ignore>
+        <path d="M15 2 L15 52 M4 40 L15 55 L26 40" stroke="#d4af37" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <div class="fh-node" id="fh-n2">
+        <svg class="fh-icon" viewBox="0 0 100 100" data-layout-ignore>
+          <circle cx="50" cy="50" r="47" fill="#d4af37" />
+          <path d="M50 20 L74 30 L74 50 C74 66 62 76 50 82 C38 76 26 66 26 50 L26 30 Z" fill="none" stroke="#04241c" stroke-width="5" stroke-linejoin="round" />
+          <path d="M38 50 L47 59 L63 42" stroke="#04241c" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div class="fh-text"><small>LANGKAH 2</small>BERJAGA-JAGA</div>
+      </div>
+      <svg class="fh-link" id="fh-l2" viewBox="0 0 30 60" data-layout-ignore>
+        <path d="M15 2 L15 52 M4 40 L15 55 L26 40" stroke="#d4af37" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <div class="fh-node" id="fh-n3">
+        <svg class="fh-icon" viewBox="0 0 100 100" data-layout-ignore>
+          <circle cx="50" cy="50" r="47" fill="#d4af37" />
+          <path d="M30 76 L30 50 C30 38 40 30 50 22 C60 30 70 38 70 50 L70 76 Z" fill="none" stroke="#04241c" stroke-width="5" stroke-linejoin="round" />
+          <path d="M42 76 L42 62 C42 57 46 54 50 54 C54 54 58 57 58 62 L58 76" fill="none" stroke="#04241c" stroke-width="4" />
+          <path d="M50 22 L50 14" stroke="#04241c" stroke-width="4" />
+        </svg>
+        <div class="fh-text"><small>DALAM</small>SETIAP AMAL IBADAT</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#fh-kicker", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.05);
+    tl.fromTo("#fh-title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+    // "faham" @ 29.4s
+    tl.fromTo("#fh-n1", { scale: 0.8, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 0.6);
+    // "Bila kita faham" @ 30.7s
+    tl.fromTo("#fh-n1", { boxShadow: "0 0 0px rgba(241,215,138,0)" }, { boxShadow: "0 0 60px rgba(241,215,138,0.7)", duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 2.2);
+    // "berjaga-jaga" @ 34.0s
+    tl.fromTo("#fh-l1", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.35, ease: "power2.out" }, 5.05);
+    tl.fromTo("#fh-n2", { scale: 0.8, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 5.3);
+    // "setiap amal ibadat" @ 35.4s
+    tl.fromTo("#fh-l2", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.35, ease: "power2.out" }, 6.5);
+    tl.fromTo("#fh-n3", { scale: 0.8, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 6.75);
+    tl.to("#fh-wrap", { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, 8.23);
+    window.__timelines["faham"] = tl;
+  </script>
+</template>

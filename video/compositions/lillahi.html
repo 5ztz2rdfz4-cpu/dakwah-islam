@@ -1,0 +1,113 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Amiri";
+      font-weight: 700;
+      src: url("assets/fonts/Amiri-700-ar.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    #lh-wrap {
+      position: absolute;
+      inset: 0;
+    }
+    #lh-rays {
+      position: absolute;
+      left: 140px;
+      top: 330px;
+      width: 800px;
+      height: 800px;
+      opacity: 0.5;
+    }
+    #lh-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 380px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: 0.5em;
+      color: #d4af37;
+    }
+    #lh-arabic {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 500px;
+      text-align: center;
+      direction: rtl;
+      font-family: "Amiri", serif;
+      font-weight: 700;
+      font-size: 160px;
+      line-height: 1.5;
+    }
+    #lh-arabic-text {
+      background: linear-gradient(180deg, #fff6d5 0%, #f1d78a 45%, #b8902a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    #lh-l1,
+    #lh-l2 {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    #lh-l1 {
+      top: 850px;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 64px;
+      color: #f8f1de;
+    }
+    #lh-l2 {
+      top: 940px;
+      font-weight: 800;
+      font-size: 58px;
+      letter-spacing: 0.06em;
+      color: #f1d78a;
+    }
+  </style>
+  <div id="root" data-composition-id="lillahi" data-width="1080" data-height="1920">
+    <div id="lh-wrap">
+      <svg id="lh-rays" viewBox="-100 -100 200 200" data-layout-ignore>
+        <defs>
+          <radialGradient id="lh-glow">
+            <stop offset="0" stop-color="#f1d78a" stop-opacity="0.55" />
+            <stop offset="1" stop-color="#f1d78a" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <circle r="100" fill="url(#lh-glow)" />
+        <g id="lh-star" fill="none" stroke="#f1d78a" stroke-width="0.8" opacity="0.7">
+          <rect x="-60" y="-60" width="120" height="120" />
+          <rect x="-60" y="-60" width="120" height="120" transform="rotate(45)" />
+          <circle r="85" />
+          <circle r="90" stroke-dasharray="2 4" />
+        </g>
+      </svg>
+      <div id="lh-kicker">IKHLAS</div>
+      <div id="lh-arabic"><span id="lh-arabic-text">لِلّٰهِ تَعَالَى</span></div>
+      <div id="lh-l1">Semata-mata</div>
+      <div id="lh-l2">KERANA ALLAH SWT</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#lh-rays", { scale: 0.6, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 0.5, duration: 0.8, ease: "power2.out" }, 0);
+    tl.fromTo("#lh-star", { rotation: 0, transformOrigin: "0px 0px" }, { rotation: 40, duration: 3.7, ease: "none" }, 0);
+    tl.fromTo("#lh-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.05);
+    tl.fromTo("#lh-arabic", { scale: 1.25, opacity: 0, filter: "blur(10px)", transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 0.1);
+    // "semata-mata" @ 43.9s
+    tl.fromTo("#lh-l1", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }, 0.6);
+    // "kerana Allah" @ 44.6s
+    tl.fromTo("#lh-l2", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }, 1.25);
+    tl.to("#lh-wrap", { opacity: 0, duration: 0.35, ease: "power2.in" }, 3.33);
+    window.__timelines["lillahi"] = tl;
+  </script>
+</template>

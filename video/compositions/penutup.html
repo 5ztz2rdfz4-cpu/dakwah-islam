@@ -1,0 +1,162 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Amiri";
+      font-weight: 400;
+      src: url("assets/fonts/Amiri-400-ar.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    #pt-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 262px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.32em;
+      color: #d4af37;
+    }
+    #pt-ayah {
+      position: absolute;
+      left: 160px;
+      width: 760px;
+      top: 305px;
+      text-align: center;
+      direction: rtl;
+      font-family: "Amiri", serif;
+      font-size: 54px;
+      line-height: 1.8;
+      color: #f1d78a;
+    }
+    #pt-terjemah {
+      position: absolute;
+      left: 160px;
+      width: 760px;
+      top: 615px;
+      text-align: center;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 29px;
+      line-height: 1.45;
+      color: rgba(248, 241, 222, 0.92);
+    }
+    #pt-ref {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 838px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.1em;
+      color: #d4af37;
+    }
+    #pt-divider {
+      position: absolute;
+      left: 290px;
+      top: 892px;
+      width: 500px;
+      height: 24px;
+    }
+    #pt-card {
+      position: absolute;
+      left: 150px;
+      top: 940px;
+      width: 760px;
+      height: 170px;
+      border-radius: 85px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 30px 0 12px;
+      background: linear-gradient(90deg, rgba(4, 36, 28, 0.95), rgba(15, 90, 69, 0.9));
+      border: 2px solid rgba(212, 175, 55, 0.8);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    }
+    #pt-photo-ring {
+      position: relative;
+      flex: 0 0 auto;
+      width: 146px;
+      height: 146px;
+      border-radius: 50%;
+      border: 4px solid #d4af37;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.45);
+      overflow: hidden;
+      background: #04241c;
+    }
+    #pt-photo {
+      position: absolute;
+      left: -132px;
+      top: -55px;
+      width: 342px;
+      height: auto;
+    }
+    #pt-name {
+      font-weight: 800;
+      font-size: 36px;
+      line-height: 1.15;
+      color: #f8f1de;
+    }
+    #pt-name small {
+      display: block;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.14em;
+      color: #f1d78a;
+      margin-bottom: 4px;
+    }
+    #pt-cta {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1145px;
+      text-align: center;
+    }
+    #pt-cta-pill {
+      display: inline-block;
+      padding: 12px 34px;
+      border-radius: 999px;
+      background: #d4af37;
+      color: #04241c;
+      font-weight: 800;
+      font-size: 30px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+  <div id="root" data-composition-id="penutup" data-width="1080" data-height="1920">
+    <div id="pt-kicker">FIRMAN ALLAH SWT</div>
+    <div id="pt-ayah">فَمَن كَانَ يَرْجُو لِقَاءَ رَبِّهِ فَلْيَعْمَلْ عَمَلًا صَالِحًا وَلَا يُشْرِكْ بِعِبَادَةِ رَبِّهِ أَحَدًا</div>
+    <div id="pt-terjemah">"Sesiapa yang mengharapkan pertemuan dengan Tuhannya, hendaklah dia mengerjakan amal soleh dan janganlah dia mempersekutukan sesiapa pun dalam beribadat kepada Tuhannya."</div>
+    <div id="pt-ref">— SURAH AL-KAHFI, 18:110</div>
+    <svg id="pt-divider" viewBox="0 0 500 24" data-layout-ignore>
+      <path d="M0 12 L200 12 M300 12 L500 12" stroke="#d4af37" stroke-width="1.5" />
+      <path d="M250 2 L260 12 L250 22 L240 12 Z" fill="#d4af37" />
+      <path d="M222 12 L230 6 L238 12 L230 18 Z M262 12 L270 6 L278 12 L270 18 Z" fill="none" stroke="#d4af37" stroke-width="1.5" />
+    </svg>
+    <div id="pt-card">
+      <div id="pt-photo-ring" data-layout-allow-overflow><img id="pt-photo" src="assets/img/ustaz.jpg" alt="Al-Fadhil Ustaz Abd Aziz Al-Qurowy" /></div>
+      <div id="pt-name"><small>AL-FADHIL</small>Ustaz Abd Aziz<br />Al-Qurowy</div>
+    </div>
+    <div id="pt-cta"><span id="pt-cta-pill">Kongsikan · Semoga Bermanfaat</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#pt-kicker", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.05);
+    tl.fromTo("#pt-ayah", { y: 30, opacity: 0, filter: "blur(6px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.8, ease: "power2.out" }, 0.15);
+    tl.fromTo("#pt-terjemah", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, 0.8);
+    tl.fromTo("#pt-ref", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 1.2);
+    tl.fromTo("#pt-divider", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 1.4);
+    tl.fromTo("#pt-card", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 1.6);
+    tl.fromTo("#pt-photo-ring", { scale: 0.7, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.6, ease: "back.out(1.7)" }, 1.7);
+    tl.fromTo("#pt-photo", { scale: 1, transformOrigin: "50% 40%" }, { scale: 1.06, duration: 5.4, ease: "none" }, 1.6);
+    tl.fromTo("#pt-name", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 1.95);
+    tl.fromTo("#pt-cta-pill", { scale: 0.7, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 2.4);
+    tl.fromTo("#pt-cta-pill", { boxShadow: "0 0 0px rgba(241,215,138,0)" }, { boxShadow: "0 0 40px rgba(241,215,138,0.7)", duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 4 }, 3.0);
+    window.__timelines["penutup"] = tl;
+  </script>
+</template>

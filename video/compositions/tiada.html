@@ -1,0 +1,118 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    #td-wrap {
+      position: absolute;
+      inset: 0;
+    }
+    #td-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 380px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.32em;
+      color: #d4af37;
+    }
+    #td-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 418px;
+      text-align: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      font-size: 72px;
+      color: #f8f1de;
+    }
+    #td-title em {
+      font-style: italic;
+      color: #f1d78a;
+    }
+    .td-tag {
+      position: absolute;
+      left: 200px;
+      width: 680px;
+      height: 130px;
+      border-radius: 70px;
+      background: rgba(4, 36, 28, 0.92);
+      border: 2px solid rgba(224, 122, 106, 0.8);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    #td-t1 {
+      top: 570px;
+    }
+    #td-t2 {
+      top: 740px;
+    }
+    #td-t3 {
+      top: 910px;
+    }
+    .td-x {
+      flex: 0 0 auto;
+      width: 60px;
+      height: 60px;
+    }
+    .td-word {
+      position: relative;
+      font-weight: 800;
+      font-size: 50px;
+      color: #f8f1de;
+    }
+    .td-strike {
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: 50%;
+      height: 7px;
+      margin-top: -3px;
+      border-radius: 4px;
+      background: #e07a6a;
+    }
+  </style>
+  <div id="root" data-composition-id="tiada" data-width="1080" data-height="1920">
+    <div id="td-wrap">
+      <div id="td-kicker">SUPAYA IBADAH KITA</div>
+      <div id="td-title">Tidak Ada <em>Kerana...</em></div>
+      <div class="td-tag" id="td-t1">
+        <svg class="td-x" viewBox="0 0 100 100" data-layout-ignore><circle cx="50" cy="50" r="46" fill="#5a1e18" /><path d="M32 32 L68 68 M68 32 L32 68" stroke="#ffd2c8" stroke-width="11" stroke-linecap="round" /></svg>
+        <span class="td-word">Perkara lain<span class="td-strike" id="td-s1"></span></span>
+      </div>
+      <div class="td-tag" id="td-t2">
+        <svg class="td-x" viewBox="0 0 100 100" data-layout-ignore><circle cx="50" cy="50" r="46" fill="#5a1e18" /><path d="M32 32 L68 68 M68 32 L32 68" stroke="#ffd2c8" stroke-width="11" stroke-linecap="round" /></svg>
+        <span class="td-word">Orang lain<span class="td-strike" id="td-s2"></span></span>
+      </div>
+      <div class="td-tag" id="td-t3">
+        <svg class="td-x" viewBox="0 0 100 100" data-layout-ignore><circle cx="50" cy="50" r="46" fill="#5a1e18" /><path d="M32 32 L68 68 M68 32 L32 68" stroke="#ffd2c8" stroke-width="11" stroke-linecap="round" /></svg>
+        <span class="td-word">Sebab lain<span class="td-strike" id="td-s3"></span></span>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#td-kicker", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.05);
+    // "supaya tidak ada" @ 37.2s
+    tl.fromTo("#td-title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+    // "perkara lain" @ 39.6s
+    tl.fromTo("#td-t1", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 2.1);
+    tl.fromTo("#td-s1", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.35, ease: "power2.inOut" }, 2.75);
+    // "orang lain" @ 41.4s
+    tl.fromTo("#td-t2", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 3.6);
+    tl.fromTo("#td-s2", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.35, ease: "power2.inOut" }, 4.3);
+    // "sebab lain" @ 42.4s
+    tl.fromTo("#td-t3", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 4.85);
+    tl.fromTo("#td-s3", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.35, ease: "power2.inOut" }, 5.35);
+    tl.to("#td-wrap", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 5.78);
+    window.__timelines["tiada"] = tl;
+  </script>
+</template>

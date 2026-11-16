@@ -1,0 +1,220 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    #tb-wrap {
+      position: absolute;
+      inset: 0;
+    }
+    .tb-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 380px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.32em;
+      color: #d4af37;
+    }
+    .tb-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 418px;
+      text-align: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      font-size: 76px;
+      color: #f8f1de;
+    }
+    .tb-title em {
+      font-style: italic;
+      color: #f1d78a;
+      font-weight: 700;
+    }
+    #tb-pillar {
+      position: absolute;
+      left: 520px;
+      top: 600px;
+      width: 40px;
+      height: 470px;
+    }
+    #tb-beam {
+      position: absolute;
+      left: 290px;
+      top: 592px;
+      width: 500px;
+      height: 16px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #f1d78a, #b8902a);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+    #tb-pivot {
+      position: absolute;
+      left: 518px;
+      top: 578px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff2c4, #d4af37 55%, #8a6a1c);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .tb-pan {
+      position: absolute;
+      top: 600px;
+      width: 290px;
+    }
+    #tb-pan-l {
+      left: 145px;
+    }
+    #tb-pan-r {
+      left: 645px;
+    }
+    .tb-strings {
+      display: block;
+      width: 290px;
+      height: 70px;
+    }
+    .tb-card {
+      width: 290px;
+      height: 250px;
+      border-radius: 26px;
+      padding: 18px 14px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(15, 90, 69, 0.95), rgba(4, 36, 28, 0.95));
+      border: 2px solid #d4af37;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+    #tb-card-r {
+      border-color: #c0574a;
+      background: linear-gradient(180deg, rgba(90, 30, 24, 0.95), rgba(40, 12, 10, 0.95));
+    }
+    .tb-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 6px;
+      display: block;
+    }
+    .tb-label {
+      font-weight: 800;
+      font-size: 32px;
+      letter-spacing: 0.12em;
+      color: #f1d78a;
+    }
+    #tb-card-r .tb-label {
+      color: #ffb4a6;
+    }
+    .tb-text {
+      margin-top: 6px;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 1.15;
+      color: #f8f1de;
+    }
+    .tb-sub {
+      margin-top: 4px;
+      font-weight: 600;
+      font-size: 28px;
+      color: rgba(248, 241, 222, 0.75);
+    }
+    #tb-question {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1010px;
+      text-align: center;
+    }
+    #tb-question-pill {
+      display: inline-block;
+      padding: 14px 40px;
+      border-radius: 999px;
+      background: #d4af37;
+      color: #04241c;
+      font-weight: 900;
+      font-size: 38px;
+      letter-spacing: 0.06em;
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.55);
+    }
+  </style>
+  <div id="root" data-composition-id="timbangan" data-width="1080" data-height="1920">
+    <div id="tb-wrap">
+      <div class="tb-kicker" id="tb-kicker">RENUNGKAN</div>
+      <div class="tb-title" id="tb-title">Dunia <em>vs</em> Akhirat</div>
+
+      <svg id="tb-pillar" viewBox="0 0 40 520" data-layout-ignore>
+        <defs>
+          <linearGradient id="tb-gold" x1="0" x2="1">
+            <stop offset="0" stop-color="#8a6a1c" />
+            <stop offset="0.5" stop-color="#f1d78a" />
+            <stop offset="1" stop-color="#8a6a1c" />
+          </linearGradient>
+        </defs>
+        <rect x="14" y="0" width="12" height="470" fill="url(#tb-gold)" />
+        <path d="M0 520 L8 480 L32 480 L40 520 Z" fill="url(#tb-gold)" />
+      </svg>
+
+      <div class="tb-pan" id="tb-pan-l">
+        <svg class="tb-strings" viewBox="0 0 290 70" data-layout-ignore>
+          <path d="M145 0 L20 70 M145 0 L270 70" stroke="#d4af37" stroke-width="2.5" fill="none" />
+        </svg>
+        <div class="tb-card" id="tb-card-l">
+          <svg class="tb-icon" viewBox="0 0 64 64" data-layout-ignore>
+            <path d="M4 32 C14 16 50 16 60 32 C50 48 14 48 4 32 Z" fill="none" stroke="#f1d78a" stroke-width="4" />
+            <circle cx="32" cy="32" r="9" fill="#f1d78a" />
+          </svg>
+          <div class="tb-label">DUNIA</div>
+          <div class="tb-text">Ibadah kerana riak</div>
+          <div class="tb-sub">Pujian sementara</div>
+        </div>
+      </div>
+
+      <div class="tb-pan" id="tb-pan-r">
+        <svg class="tb-strings" viewBox="0 0 290 70" data-layout-ignore>
+          <path d="M145 0 L20 70 M145 0 L270 70" stroke="#d4af37" stroke-width="2.5" fill="none" />
+        </svg>
+        <div class="tb-card" id="tb-card-r">
+          <svg class="tb-icon" viewBox="0 0 64 64" data-layout-ignore>
+            <path d="M32 4 C40 18 52 24 50 40 C48 54 38 60 32 60 C24 60 14 54 14 40 C14 30 22 26 24 16 C28 22 30 26 32 28 C34 20 34 12 32 4 Z" fill="#ffb4a6" />
+          </svg>
+          <div class="tb-label">AKHIRAT</div>
+          <div class="tb-text">Seksa &amp; cercaan</div>
+          <div class="tb-sub">Kekal menanti</div>
+        </div>
+      </div>
+
+      <div id="tb-beam"></div>
+      <div id="tb-pivot"></div>
+
+      <div id="tb-question"><span id="tb-question-pill">BERBALOIKAH?</span></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // Masuk
+    tl.fromTo("#tb-kicker", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.05);
+    tl.fromTo("#tb-title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+    tl.fromTo("#tb-pillar", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.6, ease: "power3.out" }, 0.2);
+    tl.fromTo("#tb-beam", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 0.45);
+    tl.fromTo("#tb-pivot", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.4, ease: "back.out(2)" }, 0.6);
+    // Dunia (dunia @ 5.36s)
+    tl.fromTo("#tb-pan-l", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 0.9);
+    tl.fromTo("#tb-card-l", { scale: 0.85, transformOrigin: "50% 0%" }, { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.9);
+    // Akhirat (seksa @ 8.14s)
+    tl.fromTo("#tb-pan-r", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 3.75);
+    tl.fromTo("#tb-card-r", { scale: 0.85, transformOrigin: "50% 0%" }, { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 3.75);
+    // Timbangan condong ke akhirat (cerca @ 8.88s)
+    tl.fromTo("#tb-beam", { rotation: 0 }, { rotation: 13, duration: 1.1, ease: "elastic.out(1, 0.55)" }, 4.55);
+    tl.fromTo("#tb-pan-l", { y: 0 }, { y: -56, duration: 1.1, ease: "elastic.out(1, 0.55)" }, 4.55);
+    tl.fromTo("#tb-pan-r", { y: 0 }, { y: 56, duration: 1.1, ease: "elastic.out(1, 0.55)" }, 4.55);
+    tl.fromTo("#tb-card-l", { opacity: 1 }, { opacity: 0.55, duration: 0.6, ease: "power1.out" }, 5.2);
+    // Soalan (akhirat nanti @ 10.3s)
+    tl.fromTo("#tb-question-pill", { scale: 0.6, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 5.9);
+    // Keluar
+    tl.to("#tb-wrap", { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, 7.03);
+    window.__timelines["timbangan"] = tl;
+  </script>
+</template>

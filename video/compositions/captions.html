@@ -1,0 +1,103 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    .cg {
+      position: absolute;
+      left: 150px;
+      width: 780px;
+      top: 1110px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .cg-pill {
+      display: inline-block;
+      max-width: 780px;
+      padding: 14px 30px 16px;
+      border-radius: 22px;
+      background: rgba(2, 26, 20, 0.82);
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
+      font-weight: 800;
+      font-size: 42px;
+      line-height: 1.25;
+      color: #f8f1de;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+    .cg-pill b {
+      color: #f1d78a;
+      font-weight: 900;
+    }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="1080" data-height="1920" data-layout-allow-overlap>
+      <div class="cg" id="cg0"><span class="cg-pill">Adakah <b>memadai</b>,</span></div>
+      <div class="cg" id="cg1"><span class="cg-pill">adakah <b>berbaloi</b>,</span></div>
+      <div class="cg" id="cg2"><span class="cg-pill">bila mana dia buat ibadat</span></div>
+      <div class="cg" id="cg3"><span class="cg-pill">atas dunia dengan kadar <b>riak</b> tadi,</span></div>
+      <div class="cg" id="cg4"><span class="cg-pill">dengan <b>seksa</b> dan <b>cerca</b></span></div>
+      <div class="cg" id="cg5"><span class="cg-pill">yang dia terima di <b>akhirat</b> nanti?</span></div>
+      <div class="cg" id="cg6"><span class="cg-pill">Itu dia nak tanya orang.</span></div>
+      <div class="cg" id="cg7"><span class="cg-pill">Kalau tak <b>berbaloi</b>,</span></div>
+      <div class="cg" id="cg8"><span class="cg-pill">maknanya kena buat betul-betul</span></div>
+      <div class="cg" id="cg9"><span class="cg-pill">di atas dunia ni.</span></div>
+      <div class="cg" id="cg10"><span class="cg-pill">Dan janganlah ada <b>riak</b>.</span></div>
+      <div class="cg" id="cg11"><span class="cg-pill">Janganlah kita buat</span></div>
+      <div class="cg" id="cg12"><span class="cg-pill">kerana orang lain</span></div>
+      <div class="cg" id="cg13"><span class="cg-pill">segala hal ibadat kita,</span></div>
+      <div class="cg" id="cg14"><span class="cg-pill">melainkan kita buat</span></div>
+      <div class="cg" id="cg15"><span class="cg-pill"><b>semata-mata</b> kerana</span></div>
+      <div class="cg" id="cg16"><span class="cg-pill"><b>Allah SWT</b>.</span></div>
+      <div class="cg" id="cg17"><span class="cg-pill">Itu dia nak suruh <b>faham</b>.</span></div>
+      <div class="cg" id="cg18"><span class="cg-pill">Bila kita <b>faham</b>,</span></div>
+      <div class="cg" id="cg19"><span class="cg-pill">maknanya kita akan</span></div>
+      <div class="cg" id="cg20"><span class="cg-pill"><b>berjaga-jaga</b> di atas</span></div>
+      <div class="cg" id="cg21"><span class="cg-pill">setiap amal ibadat kita,</span></div>
+      <div class="cg" id="cg22"><span class="cg-pill">supaya tidak ada</span></div>
+      <div class="cg" id="cg23"><span class="cg-pill">kerana perkara lain,</span></div>
+      <div class="cg" id="cg24"><span class="cg-pill">tidak ada kerana orang lain,</span></div>
+      <div class="cg" id="cg25"><span class="cg-pill">tidak ada sebab lain,</span></div>
+      <div class="cg" id="cg26"><span class="cg-pill">melainkan kita <b>semata-mata</b></span></div>
+      <div class="cg" id="cg27"><span class="cg-pill">kerana <b>Allah SWT</b>.</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    function show(sel, start, end) {
+      tl.set(sel, { visibility: "visible" }, start);
+      tl.fromTo(sel, { opacity: 0, y: 14, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.16, ease: "power2.out" }, start);
+      tl.to(sel, { opacity: 0, duration: 0.1, ease: "power2.in" }, end - 0.1);
+      tl.set(sel, { opacity: 0, visibility: "hidden" }, end);
+    }
+    show("#cg0", 0.15, 1.85);
+    show("#cg1", 2.0, 3.4);
+    show("#cg2", 3.5, 5.0);
+    show("#cg3", 5.0, 7.6);
+    show("#cg4", 7.7, 9.3);
+    show("#cg5", 9.3, 11.3);
+    show("#cg6", 11.6, 12.5);
+    show("#cg7", 12.85, 15.6);
+    show("#cg8", 15.85, 17.4);
+    show("#cg9", 17.4, 18.55);
+    show("#cg10", 18.7, 20.2);
+    show("#cg11", 20.25, 21.4);
+    show("#cg12", 21.4, 22.2);
+    show("#cg13", 22.2, 23.75);
+    show("#cg14", 23.85, 24.95);
+    show("#cg15", 24.95, 26.45);
+    show("#cg16", 26.45, 28.5);
+    show("#cg17", 28.65, 29.8);
+    show("#cg18", 30.45, 31.6);
+    show("#cg19", 31.8, 34.0);
+    show("#cg20", 34.0, 35.45);
+    show("#cg21", 35.45, 37.2);
+    show("#cg22", 37.2, 39.25);
+    show("#cg23", 39.25, 40.4);
+    show("#cg24", 40.5, 41.95);
+    show("#cg25", 41.95, 43.3);
+    show("#cg26", 43.35, 44.6);
+    show("#cg27", 44.6, 46.6);
+    window.__timelines["captions"] = tl;
+  </script>
+</template>

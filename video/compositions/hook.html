@@ -1,0 +1,147 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Amiri";
+      font-weight: 700;
+      src: url("assets/fonts/Amiri-700-ar.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+    #hook-wrap {
+      position: absolute;
+      inset: 0;
+    }
+    #hook-arabic {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 520px;
+      text-align: center;
+      font-family: "Amiri", serif;
+      font-weight: 700;
+      font-size: 260px;
+      line-height: 1;
+      color: #d4af37;
+      opacity: 0.1;
+      direction: rtl;
+    }
+    #hook-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 252px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: 0.32em;
+      color: #f1d78a;
+    }
+    #hook-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 292px;
+      text-align: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 900;
+      font-size: 108px;
+      line-height: 1.05;
+    }
+    #hook-title-text {
+      background: linear-gradient(100deg, #b8902a 0%, #f1d78a 35%, #fff6d5 50%, #f1d78a 65%, #b8902a 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    #hook-sub {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 420px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 56px;
+      color: #f8f1de;
+      letter-spacing: 0.02em;
+    }
+    #hook-arch-line {
+      position: absolute;
+      left: 336px;
+      top: 514px;
+      width: 408px;
+      height: 532px;
+      border: 2px solid rgba(212, 175, 55, 0.45);
+      border-radius: 204px 204px 30px 30px;
+    }
+    #hook-arch {
+      position: absolute;
+      left: 350px;
+      top: 528px;
+      width: 380px;
+      height: 504px;
+      overflow: hidden;
+      border: 5px solid #d4af37;
+      border-radius: 190px 190px 22px 22px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      background: #04241c;
+    }
+    #hook-photo {
+      position: absolute;
+      left: -268px;
+      top: -55px;
+      width: 648px;
+      height: auto;
+    }
+    #hook-name {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1000px;
+      text-align: center;
+    }
+    #hook-name-pill {
+      display: inline-block;
+      padding: 16px 38px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #0f5a45, #04241c);
+      border: 2px solid #d4af37;
+      color: #f8f1de;
+      font-weight: 700;
+      font-size: 28px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+    }
+    #hook-name-pill b {
+      color: #f1d78a;
+      font-weight: 800;
+    }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+    <div id="hook-wrap">
+      <div id="hook-arabic">الرِّيَاء</div>
+      <div id="hook-kicker">◆ PERINGATAN BUAT HATI ◆</div>
+      <div id="hook-title"><span id="hook-title-text">BERBALOIKAH</span></div>
+      <div id="hook-sub">IBADAH KERANA RIAK?</div>
+      <div id="hook-arch-line"></div>
+      <div id="hook-arch" data-layout-allow-overflow><img id="hook-photo" src="assets/img/ustaz.jpg" alt="Al-Fadhil Ustaz Abd Aziz Al-Qurowy" /></div>
+      <div id="hook-name"><span id="hook-name-pill"><b>Ustaz Abd Aziz Al-Qurowy</b></span></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // Frame 0 sudah lengkap (thumbnail = hook); gerakan halus sahaja
+    tl.fromTo("#hook-title", { scale: 1.06, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.8, ease: "power3.out" }, 0);
+    tl.fromTo("#hook-title-text", { backgroundPosition: "100% 0%" }, { backgroundPosition: "0% 0%", duration: 1.4, ease: "power2.inOut" }, 0.2);
+    tl.fromTo("#hook-sub", { y: 14, opacity: 0.85 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, 0);
+    tl.fromTo("#hook-photo", { scale: 1, transformOrigin: "50% 30%" }, { scale: 1.08, duration: 4.2, ease: "none" }, 0);
+    tl.fromTo("#hook-arch-line", { scale: 0.97, opacity: 0.4, transformOrigin: "50% 50%" }, { scale: 1.02, opacity: 1, duration: 2, ease: "sine.inOut" }, 0);
+    tl.fromTo("#hook-arabic", { scale: 1.1, transformOrigin: "50% 50%" }, { scale: 1, duration: 4.2, ease: "none" }, 0);
+    tl.fromTo("#hook-name-pill", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.5);
+    // Keluar
+    tl.to("#hook-wrap", { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, 3.83);
+    window.__timelines["hook"] = tl;
+  </script>
+</template>

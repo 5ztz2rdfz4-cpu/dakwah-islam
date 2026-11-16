@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Amiri";
+        font-weight: 400;
+        src: url("assets/fonts/Amiri-400-ar.woff2") format("woff2");
+      }
+      :root {
+        --emerald-950: #021a14;
+        --emerald-900: #04241c;
+        --emerald-800: #073b2e;
+        --emerald-600: #0f5a45;
+        --gold: #d4af37;
+        --gold-light: #f1d78a;
+        --cream: #f8f1de;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--emerald-950);
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        font-family: "Montserrat", sans-serif;
+      }
+      #bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 90% 55% at 50% 38%, #0f5a45 0%, #073b2e 45%, #04241c 75%, #021a14 100%);
+      }
+      #bg-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.09;
+      }
+      #bg-rosette {
+        position: absolute;
+        left: 90px;
+        top: 230px;
+        width: 900px;
+        height: 900px;
+        opacity: 0.07;
+      }
+      #bg-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 75% 60% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%);
+      }
+      #frame-outer,
+      #frame-inner {
+        position: absolute;
+        border-radius: 28px;
+        pointer-events: none;
+      }
+      #frame-outer {
+        inset: 30px;
+        border: 2px solid rgba(212, 175, 55, 0.55);
+      }
+      #frame-inner {
+        inset: 42px;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+      }
+      #footer-ornament {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1420px;
+        text-align: center;
+        opacity: 0.16;
+      }
+      #footer-hadith {
+        font-family: "Amiri", serif;
+        font-size: 64px;
+        color: var(--gold-light);
+        direction: rtl;
+      }
+      #footer-line {
+        margin: 26px auto 0;
+        width: 520px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="54"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Latar belakang islamik (tidak bertempoh) -->
+      <div id="bg" data-layout-ignore>
+        <svg id="bg-pattern" width="1080" height="1920" viewBox="0 0 1080 1920" data-layout-ignore>
+          <defs>
+            <pattern id="star8" width="120" height="120" patternUnits="userSpaceOnUse">
+              <g fill="none" stroke="#d4af37" stroke-width="1.6">
+                <rect x="30" y="30" width="60" height="60" />
+                <rect x="30" y="30" width="60" height="60" transform="rotate(45 60 60)" />
+                <circle cx="60" cy="60" r="12" />
+                <path d="M0 0 L30 30 M120 0 L90 30 M0 120 L30 90 M120 120 L90 90" />
+              </g>
+            </pattern>
+          </defs>
+          <rect width="1080" height="1920" fill="url(#star8)" />
+        </svg>
+        <svg id="bg-rosette" viewBox="-100 -100 200 200" data-layout-ignore>
+          <g fill="none" stroke="#f1d78a" stroke-width="0.6">
+            <circle r="96" />
+            <circle r="80" />
+            <circle r="34" />
+            <g id="rosette-petals">
+              <rect x="-56" y="-56" width="112" height="112" />
+              <rect x="-56" y="-56" width="112" height="112" transform="rotate(22.5)" />
+              <rect x="-56" y="-56" width="112" height="112" transform="rotate(45)" />
+              <rect x="-56" y="-56" width="112" height="112" transform="rotate(67.5)" />
+            </g>
+          </g>
+        </svg>
+        <div id="bg-vignette"></div>
+        <div id="footer-ornament">
+          <div id="footer-hadith">إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ</div>
+          <div id="footer-line"></div>
+        </div>
+        <div id="frame-outer"></div>
+        <div id="frame-inner"></div>
+      </div>
+
+      <!-- Babak (satu lorong, berturutan) -->
+      <div id="hook" data-composition-id="hook" data-composition-src="compositions/hook.html"
+        data-start="0" data-duration="4.2" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="timbangan" data-composition-id="timbangan" data-composition-src="compositions/timbangan.html"
+        data-start="4.2" data-duration="7.4" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="takberbaloi" data-composition-id="takberbaloi" data-composition-src="compositions/takberbaloi.html"
+        data-start="11.6" data-duration="7" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="pesanan" data-composition-id="pesanan" data-composition-src="compositions/pesanan.html"
+        data-start="18.6" data-duration="10" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="faham" data-composition-id="faham" data-composition-src="compositions/faham.html"
+        data-start="28.6" data-duration="8.6" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="tiada" data-composition-id="tiada" data-composition-src="compositions/tiada.html"
+        data-start="37.2" data-duration="6.1" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="lillahi" data-composition-id="lillahi" data-composition-src="compositions/lillahi.html"
+        data-start="43.3" data-duration="3.7" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="penutup" data-composition-id="penutup" data-composition-src="compositions/penutup.html"
+        data-start="47" data-duration="7" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+
+      <!-- Lencana ustaz di atas (babak 2 hingga 7) -->
+      <div id="header" data-composition-id="header" data-composition-src="compositions/header.html"
+        data-start="4.2" data-duration="42.8" data-track-index="2" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+
+      <!-- Sari kata -->
+      <div id="captions" data-composition-id="captions" data-composition-src="compositions/captions.html"
+        data-start="0" data-duration="46.9" data-track-index="3" data-track-kind="captions"
+        data-width="1080" data-height="1920"></div>
+
+      <!-- Audio penuh ceramah -->
+      <audio id="ceramah" class="clip" src="assets/audio/ceramah.m4a"
+        data-start="0" data-duration="46.9" data-track-index="4" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#rosette-petals", { rotation: 0, transformOrigin: "0px 0px" },
+        { rotation: 90, duration: 54, ease: "none" }, 0);
+      tl.fromTo("#bg-rosette", { scale: 0.92, transformOrigin: "50% 50%" },
+        { scale: 1.06, duration: 54, ease: "sine.inOut" }, 0);
+      tl.fromTo("#bg-pattern", { y: 0 }, { y: -120, duration: 54, ease: "none" }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
