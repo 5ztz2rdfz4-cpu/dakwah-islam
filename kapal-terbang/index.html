@@ -85,17 +85,18 @@
 
       /* ---------- speaker badge ---------- */
       #badge { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; top: 150px; display: flex; align-items: center; gap: 22px; padding: 12px 34px 12px 14px; border-radius: 999px; background: rgba(3, 20, 15, 0.55); border: 2px solid rgba(226, 189, 91, 0.55); white-space: nowrap; }
-      .mini-arch { position: relative; width: 92px; height: 106px; border-radius: 46px 46px 14px 14px; overflow: hidden; background: radial-gradient(circle at 50% 35%, #f7dc8e, #b78a2c 75%); border: 2px solid var(--gold-hi); }
-      .mini-arch img { position: absolute; width: 212px; left: -60px; top: -2px; }
+      .mini-arch { position: relative; width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold-hi); box-shadow: 0 0 16px rgba(247, 220, 142, 0.45); }
+      .mini-arch img { position: absolute; inset: 0; width: 100%; height: 100%; }
       #badge .nm { font: 800 27px var(--font-body); letter-spacing: 0.04em; color: var(--ink); }
       #badge .rl { font: 600 22px var(--font-body); color: var(--gold); letter-spacing: 0.05em; margin-top: 4px; }
 
-      /* ---------- arch portrait ---------- */
-      .arch { position: absolute; overflow: hidden; border-radius: 300px 300px 24px 24px; background: radial-gradient(ellipse at 50% 32%, #1a7a64 0%, #0b4a3c 45%, #062c24 100%); }
-      .arch-border { position: absolute; border-radius: 320px 320px 34px 34px; border: 4px solid var(--gold); box-shadow: 0 0 40px rgba(226, 189, 91, 0.35), inset 0 0 0 10px rgba(4, 33, 27, 0.9), inset 0 0 0 12px rgba(226, 189, 91, 0.6); }
-      .arch img { position: absolute; }
-      .arch .halo { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(247, 220, 142, 0.45), transparent 62%); }
-      .arch .fadebot { position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: linear-gradient(180deg, transparent, rgba(4, 33, 27, 0.95)); }
+      /* ---------- round portrait ---------- */
+      .ring-wrap { position: absolute; }
+      .ring-glow { position: absolute; inset: -60px; border-radius: 50%; background: radial-gradient(circle, rgba(247, 220, 142, 0.38), transparent 66%); }
+      .ring-deco { position: absolute; inset: -30px; border-radius: 50%; border: 3px dashed rgba(226, 189, 91, 0.6); }
+      .ring-deco2 { position: absolute; inset: -14px; border-radius: 50%; border: 2px solid rgba(226, 189, 91, 0.45); }
+      .ring { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 8px solid var(--gold); box-shadow: 0 0 50px rgba(226, 189, 91, 0.45), 0 30px 60px rgba(0, 0, 0, 0.5); background: #0b4a3c; }
+      .ring img { position: absolute; inset: 0; width: 100%; height: 100%; }
       .plaque { position: absolute; padding: 20px 48px; border-radius: 18px; text-align: center; white-space: nowrap; background: linear-gradient(180deg, #f7dc8e, #c99a3a); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       .plaque .nm { font: 900 40px var(--font-body); color: #1d1406; letter-spacing: 0.02em; }
       .plaque .rl { font: 700 26px var(--font-body); color: #3b2a0a; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
@@ -123,10 +124,10 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="68.5" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="65.13" data-width="1080" data-height="1920">
       <!-- ================= AUDIO ================= -->
-      <audio id="a-voice" src="assets/audio/voice.wav" data-start="3" data-duration="58.8" data-volume="1"></audio>
-      <audio id="a-bgm" src="assets/audio/bgm.wav" data-start="0" data-duration="68.5" data-volume="1" data-fade-out="2.5"></audio>
+      <audio id="a-voice" src="assets/audio/voice.wav" data-start="3" data-duration="57.09" data-volume="1"></audio>
+      <audio id="a-bgm" src="assets/audio/bgm.wav" data-start="0" data-duration="65.13" data-volume="1" data-fade-out="2.5"></audio>
       <audio id="sfx-0" src="assets/audio/impact.wav" data-start="0.28" data-duration="3.2" data-volume="0.55"></audio>
       <audio id="sfx-1" src="assets/audio/whoosh.wav" data-start="0.0" data-duration="0.7" data-volume="0.35"></audio>
       <audio id="sfx-2" src="assets/audio/whoosh.wav" data-start="1.0" data-duration="0.7" data-volume="0.3"></audio>
@@ -135,9 +136,9 @@
       <audio id="sfx-5" src="assets/audio/impact.wav" data-start="3.0" data-duration="3.2" data-volume="0.3"></audio>
       <audio id="sfx-6" src="assets/audio/shimmer.wav" data-start="3.05" data-duration="2.2" data-volume="0.25"></audio>
       <audio id="sfx-7" src="assets/audio/flyby.wav" data-start="4.6" data-duration="3.0" data-volume="0.32"></audio>
-      <audio id="sfx-8" src="assets/audio/whoosh.wav" data-start="6.85" data-duration="0.7" data-volume="0.3"></audio>
-      <audio id="sfx-9" src="assets/audio/pop.wav" data-start="8.6" data-duration="0.18" data-volume="0.4"></audio>
-      <audio id="sfx-10" src="assets/audio/pop.wav" data-start="10.1" data-duration="0.18" data-volume="0.4"></audio>
+      <audio id="sfx-8" src="assets/audio/whoosh.wav" data-start="8.3" data-duration="0.7" data-volume="0.3"></audio>
+      <audio id="sfx-9" src="assets/audio/pop.wav" data-start="9.46" data-duration="0.18" data-volume="0.4"></audio>
+      <audio id="sfx-10" src="assets/audio/pop.wav" data-start="10.71" data-duration="0.18" data-volume="0.4"></audio>
       <audio id="sfx-11" src="assets/audio/whoosh_down.wav" data-start="11.6" data-duration="0.6" data-volume="0.3"></audio>
       <audio id="sfx-12" src="assets/audio/whoosh_down.wav" data-start="13.7" data-duration="0.6" data-volume="0.25"></audio>
       <audio id="sfx-13" src="assets/audio/tick.wav" data-start="14.4" data-duration="0.06" data-volume="0.45"></audio>
@@ -183,7 +184,7 @@
       <audio id="sfx-53" src="assets/audio/pop.wav" data-start="65.36" data-duration="0.18" data-volume="0.3"></audio>
 
       <!-- ================= BACKGROUND ================= -->
-      <div id="bg" class="clip" data-start="0" data-duration="68.5">
+      <div id="bg" class="clip" data-start="0" data-duration="65.13">
         <div id="rays"></div>
         <svg id="pattern" viewBox="0 0 2160 3000" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -227,21 +228,19 @@
       </div>
 
       <!-- ================= S1 TITLE + SPEAKER 3.0-7.05 ================= -->
-      <div id="s1" class="clip" data-start="3" data-duration="4.05">
+      <div id="s1" class="clip" data-start="3" data-duration="3.32">
         <div class="abs center" style="left: 0; right: 0; top: 190px">
           <div id="s1-k" class="orn"><i></i><span class="kicker">Perkongsian Kehidupan</span><i></i></div>
           <div id="s1-t1" class="h-display" style="font-size: 88px; margin-top: 26px">Hidup Ibarat</div>
           <div id="s1-t2" class="h-display gold-text shadow" style="font-size: 108px">Kapal Terbang</div>
         </div>
-        <div id="s1-arch-wrap" class="abs" style="left: 240px; top: 560px; width: 600px; height: 700px">
-          <div class="arch-border" style="left: -14px; top: -14px; width: 628px; height: 728px"></div>
-          <div class="arch" style="left: 0; top: 0; width: 600px; height: 700px">
-            <div class="halo" style="left: 50px; top: -20px; width: 500px; height: 500px"></div>
-            <img id="s1-img" src="assets/img/nabil_cutout.png" style="width: 690px; left: -45px; top: 46px" alt="" />
-            <div class="fadebot"></div>
-          </div>
+        <div id="s1-arch-wrap" class="ring-wrap" style="left: 230px; top: 570px; width: 620px; height: 620px">
+          <div class="ring-glow"></div>
+          <div id="s1-deco" class="ring-deco"></div>
+          <div class="ring-deco2"></div>
+          <div class="ring"><img id="s1-img" src="assets/img/nabil_round.jpg" alt="" /></div>
         </div>
-        <div id="s1-plaque" class="plaque cx" style="top: 1190px">
+        <div id="s1-plaque" class="plaque cx" style="top: 1150px">
           <div class="nm">MUHAMMAD NABIL AHNAF</div>
           <div class="rl">Founder · Salam Automobile</div>
         </div>
@@ -249,7 +248,7 @@
       </div>
 
       <!-- ================= S2 FLIGHT PATH 7.0-11.8 ================= -->
-      <div id="s2" class="clip" data-start="7" data-duration="4.8">
+      <div id="s2" class="clip" data-start="6.28" data-duration="3.13">
         <div class="abs center" style="left: 0; right: 0; top: 330px">
           <div id="s2-k" class="kicker">✈ Perjalanan Sebuah Kapal Terbang</div>
           <div id="s2-t" class="h-display" style="font-size: 76px; margin-top: 18px">Ada <span class="gold-text">Naik</span>, Ada <span style="color: var(--rose)">Turun</span></div>
@@ -274,7 +273,7 @@
       </div>
 
       <!-- ================= S3 ALTIMETER 11.75-20.3 ================= -->
-      <div id="s3" class="clip" data-start="11.75" data-duration="8.55">
+      <div id="s3" class="clip" data-start="9.36" data-duration="8.55">
         <div class="abs center" style="left: 0; right: 0; top: 330px">
           <div id="s3-k" class="kicker">Sama Juga Kehidupan Kita</div>
           <div id="s3-t" class="h-display" style="font-size: 72px; margin-top: 18px">Altitud <span class="gold-text">Kehidupan</span></div>
@@ -304,7 +303,7 @@
       </div>
 
       <!-- ================= S4 INGAT / RADAR / ALLAH 20.2-29.0 ================= -->
-      <div id="s4" class="clip" data-start="20.2" data-duration="8.8">
+      <div id="s4" class="clip" data-start="17.81" data-duration="8.8">
         <div id="s4a" class="abs center" style="left: 0; right: 0; top: 520px">
           <div id="s4a-k" class="kicker" style="font-size: 40px">Tapi Kita Kena</div>
           <div id="s4a-t" class="h-display gold-text shadow" style="font-size: 170px; margin-top: 16px">INGAT</div>
@@ -342,7 +341,7 @@
       </div>
 
       <!-- ================= S5 BOARDING PASS 28.95-36.98 ================= -->
-      <div id="s5" class="clip" data-start="28.95" data-duration="8.03">
+      <div id="s5" class="clip" data-start="26.56" data-duration="7.75">
         <div class="abs center" style="left: 0; right: 0; top: 320px">
           <div id="s5-k" class="kicker">Allah Dah Aturkan</div>
           <div id="s5-t" class="h-display" style="font-size: 78px; margin-top: 16px"><span class="gold-text">Takdir</span> Untuk Kita</div>
@@ -366,7 +365,7 @@
       </div>
 
       <!-- ================= S6 TANGGUNGJAWAB 36.9-44.35 ================= -->
-      <div id="s6" class="clip" data-start="36.9" data-duration="7.45">
+      <div id="s6" class="clip" data-start="34.23" data-duration="7.11">
         <div class="abs center" style="left: 0; right: 0; top: 320px">
           <div id="s6-k" class="kicker">2 Tanggungjawab Kita</div>
           <div id="s6-t" class="h-display" style="font-size: 76px; margin-top: 16px">Redha <span class="gold-text">&amp;</span> Syukur</div>
@@ -384,7 +383,7 @@
       </div>
 
       <!-- ================= S7 SYUKUR = SIKAP 44.3-54.8 ================= -->
-      <div id="s7" class="clip" data-start="44.3" data-duration="10.5">
+      <div id="s7" class="clip" data-start="41.29" data-duration="10.14">
         <div id="s7a" class="abs center" style="left: 0; right: 0; top: 600px">
           <div class="h-display gold-text shadow" style="font-size: 200px">INGAT!</div>
           <div class="kicker" style="margin-top: 20px; font-size: 38px">Satu Benda Tentang Syukur</div>
@@ -409,7 +408,7 @@
       </div>
 
       <!-- ================= S8 JANGAN PUTUS ASA 54.75-59.5 ================= -->
-      <div id="s8" class="clip" data-start="54.75" data-duration="4.75">
+      <div id="s8" class="clip" data-start="51.38" data-duration="4.75">
         <div id="s8-k" class="abs center" style="left: 0; right: 0; top: 400px"><div class="orn"><i></i><span class="kicker" style="font-size: 38px">Oleh Itu, Sekali Lagi</span><i></i></div></div>
         <div class="abs center" style="left: 0; right: 0; top: 560px">
           <div id="s8-l1" class="h-display" style="font-size: 96px">Jangan Pernah</div>
@@ -423,7 +422,7 @@
       </div>
 
       <!-- ================= S9 AYAH 59.45-63.3 ================= -->
-      <div id="s9" class="clip" data-start="59.45" data-duration="3.85">
+      <div id="s9" class="clip" data-start="56.08" data-duration="3.85">
         <div class="abs center" style="left: 0; right: 0; top: 380px">
           <div id="s9-k" class="orn"><i></i><b></b><i></i></div>
           <div id="s9-ar" class="ayah gold-text shadow" style="margin-top: 40px">لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ</div>
@@ -433,26 +432,24 @@
       </div>
 
       <!-- ================= S10 OUTRO 63.2-68.5 ================= -->
-      <div id="s10" class="clip" data-start="63.2" data-duration="5.3">
+      <div id="s10" class="clip" data-start="59.83" data-duration="5.3">
         <div class="abs center" style="left: 0; right: 0; top: 190px">
           <div id="o-k" class="orn"><i></i><span class="kicker">Semoga Bermanfaat</span><i></i></div>
         </div>
-        <div id="o-arch" class="abs" style="left: 265px; top: 300px; width: 550px; height: 650px">
-          <div class="arch-border" style="left: -14px; top: -14px; width: 578px; height: 678px"></div>
-          <div class="arch" style="left: 0; top: 0; width: 550px; height: 650px">
-            <div class="halo" style="left: 40px; top: -20px; width: 470px; height: 470px"></div>
-            <img src="assets/img/nabil_cutout.png" style="width: 640px; left: -46px; top: 44px" alt="" />
-            <div class="fadebot"></div>
-          </div>
+        <div id="o-arch" class="ring-wrap" style="left: 270px; top: 320px; width: 540px; height: 540px">
+          <div class="ring-glow"></div>
+          <div id="o-deco" class="ring-deco"></div>
+          <div class="ring-deco2"></div>
+          <div class="ring"><img src="assets/img/nabil_round.jpg" alt="" /></div>
         </div>
-        <div id="o-plaque" class="plaque cx" style="top: 890px">
+        <div id="o-plaque" class="plaque cx" style="top: 830px">
           <div class="nm">MUHAMMAD NABIL AHNAF</div>
           <div class="rl">Founder · Salam Automobile</div>
         </div>
-        <div id="o-msg" class="abs center" style="left: 0; right: 0; top: 1080px">
+        <div id="o-msg" class="abs center" style="left: 0; right: 0; top: 1030px">
           <div style="font: 400 52px/1.3 AmiriLat, serif; font-style: italic; color: var(--ink)">Sebarkan kebaikan,<br /><span style="color: var(--gold-hi)">moga jadi saham akhirat.</span></div>
         </div>
-        <div class="abs" style="left: 0; right: 0; top: 1300px; display: flex; justify-content: center; gap: 20px">
+        <div class="abs" style="left: 0; right: 0; top: 1250px; display: flex; justify-content: center; gap: 20px">
           <div id="o-c1" class="chip" style="background: rgba(248,241,222,0.12); border: 2px solid rgba(226,189,91,0.6)">♥ LIKE</div>
           <div id="o-c2" class="chip" style="background: rgba(248,241,222,0.12); border: 2px solid rgba(226,189,91,0.6)">↗ KONGSI</div>
           <div id="o-c3" class="chip" style="background: var(--gold); color: #1d1406">＋ FOLLOW</div>
@@ -460,21 +457,21 @@
       </div>
 
       <!-- ================= OVERLAYS ================= -->
-      <div id="ov-badge" class="clip" data-start="7" data-duration="52.5">
+      <div id="ov-badge" class="clip" data-start="6.28" data-duration="49.85">
         <div id="badge">
-          <div class="mini-arch"><img src="assets/img/nabil_cutout.png" alt="" /></div>
+          <div class="mini-arch"><img src="assets/img/nabil_round.jpg" alt="" /></div>
           <div><div class="nm">MUHAMMAD NABIL AHNAF</div><div class="rl">Founder · Salam Automobile</div></div>
         </div>
       </div>
-      <div id="ov-caps" class="clip" data-start="3" data-duration="59.3">
+      <div id="ov-caps" class="clip" data-start="3" data-duration="55.93">
         <div id="caps"></div>
       </div>
-      <div id="ov-fade" class="clip" data-start="0" data-duration="68.5" style="background: #000; opacity: 0; pointer-events: none"></div>
+      <div id="ov-fade" class="clip" data-start="0" data-duration="65.13" style="background: #000; opacity: 0; pointer-events: none"></div>
     </div>
 
     <script>
       gsap.registerPlugin(MotionPathPlugin);
-      const CAPS = [{"s":3.0,"e":4.76,"w":[["Hidup",3.0,3.96,0],["kita",3.96,4.28,0],["ni",4.28,4.46,0],["tuan-tuan",4.46,4.78,0]]},{"s":4.78,"e":7.0,"w":[["dia",4.78,5.04,0],["ibarat",5.04,5.24,0],["macam",5.24,5.52,0],["kapal",5.52,5.7,1],["terbang",5.7,6.6,1]]},{"s":7.02,"e":8.44,"w":[["Dia",7.02,7.54,0],["macam",7.54,7.7,0],["kapal",7.7,7.98,1],["terbang",7.98,8.32,1]]},{"s":8.46,"e":10.06,"w":[["Dia",8.46,8.58,0],["ada",8.58,8.8,0],["waktu",8.8,9.04,0],["dia",9.04,9.32,0],["dekat",9.32,9.52,0],["atas",9.52,9.94,1]]},{"s":10.08,"e":11.76,"w":[["ada",10.08,10.24,0],["waktu",10.24,10.48,0],["dia",10.48,10.58,0],["dekat",10.58,10.78,0],["bawah",10.78,11.52,1]]},{"s":11.78,"e":13.64,"w":[["Sama",11.78,11.96,0],["juga",11.96,12.14,0],["macam",12.14,12.34,0],["kehidupan",12.34,12.76,0],["kita",12.76,13.08,0]]},{"s":13.66,"e":14.7,"w":[["Ada",13.66,13.78,0],["waktu",13.78,14.1,0],["kita",14.1,14.38,0],["berada",14.38,14.72,0]]},{"s":14.72,"e":16.84,"w":[["kat",14.72,14.92,0],["titik",14.92,15.24,1],["terendah",15.24,15.62,1],["kehidupan",15.62,16.1,0],["kita",16.1,16.36,0]]},{"s":16.86,"e":17.96,"w":[["Ada",16.86,17.08,0],["waktu",17.08,17.36,0],["kita",17.36,17.68,0],["berada",17.68,17.98,0]]},{"s":17.98,"e":20.22,"w":[["di",17.98,18.12,0],["puncak",18.12,18.52,1],["kejayaan",18.52,19.04,1],["kehidupan",19.04,19.52,0],["kita",19.52,19.9,0]]},{"s":20.24,"e":21.67,"w":[["Tapi",20.24,20.42,0],["kita",20.42,20.68,0],["kena",20.68,20.82,0],["ingat",20.82,21.04,1],["satu",21.04,21.22,0],["benda",21.22,22.02,1]]},{"s":21.69,"e":24.01,"w":[["Di",21.69,21.91,0],["mana-mana",21.91,22.43,0],["sekalipun",22.43,22.89,0],["posisi",22.89,23.33,1],["kita",23.33,23.79,0]]},{"s":24.03,"e":25.97,"w":[["apa",24.03,24.17,0],["pun",24.17,24.35,0],["yang",24.35,24.49,0],["berlaku",24.49,24.81,0],["dalam",24.81,24.99,0],["kehidupan",24.99,25.45,0],["kita",25.45,25.73,0]]},{"s":25.99,"e":26.97,"w":[["semua",25.99,26.13,0],["itu",26.13,26.37,0],["telah",26.37,26.59,0],["diatur",26.59,26.99,1]]},{"s":26.99,"e":28.95,"w":[["oleh",26.99,27.19,0],["Allah",27.19,27.41,1],["SWT",27.41,28.47,1]]},{"s":28.97,"e":30.31,"w":[["Allah",28.97,29.31,1],["SWT",29.31,29.63,1],["dah",29.63,29.81,0],["aturkan",29.81,30.33,1]]},{"s":30.33,"e":32.47,"w":[["suatu",30.33,30.59,0],["takdir",30.59,30.97,1],["untuk",30.97,31.27,0],["kita",31.27,32.21,0]]},{"s":32.49,"e":34.17,"w":[["Sebab",32.49,32.65,0],["itu",32.65,32.93,0],["yang",32.93,33.07,0],["terbaik",33.07,33.51,1],["untuk",33.51,33.73,0],["kita",33.73,34.07,0]]},{"s":34.19,"e":35.35,"w":[["Tanpa",34.19,34.57,0],["kita",34.57,34.89,0],["sedar",34.89,35.31,0]]},{"s":35.37,"e":36.93,"w":[["tanpa",35.37,35.75,0],["kita",35.75,36.07,0],["ketahui",36.07,36.71,0]]},{"s":36.95,"e":38.95,"w":[["Tanggungjawab",36.95,37.37,0],["kita",37.37,37.89,0],["redha",37.89,38.97,1]]},{"s":38.97,"e":40.01,"w":[["atas",38.97,39.27,1],["setiap",39.27,39.53,0],["yang",39.53,39.67,0],["berlaku",39.67,40.03,0]]},{"s":40.03,"e":40.79,"w":[["dalam",40.03,40.25,0],["kehidupan",40.25,40.59,0],["kita",40.59,40.81,0]]},{"s":40.81,"e":42.43,"w":[["dan",40.81,41.05,0],["bersyukur",41.05,41.51,1],["atas",41.51,41.85,1],["setiap",41.85,42.07,0],["nikmat",42.07,42.45,1]]},{"s":42.45,"e":44.33,"w":[["yang",42.45,42.59,0],["Allah",42.59,42.73,1],["beri",42.73,43.09,0],["kepada",43.09,43.31,0],["kita",43.31,43.77,0]]},{"s":44.35,"e":46.11,"w":[["Kita",44.35,44.47,0],["kena",44.47,44.65,0],["ingat",44.65,44.87,1],["satu",44.87,45.01,0],["benda",45.01,45.71,1]]},{"s":46.13,"e":48.69,"w":[["Syukur",46.13,46.53,1],["ni",46.53,47.31,0],["bukan",47.31,47.79,1],["atas",47.79,48.27,1],["dasar",48.27,48.71,0]]},{"s":48.71,"e":50.27,"w":[["apa",48.71,49.09,0],["yang",49.09,49.31,0],["kita",49.31,49.57,0],["ada",49.57,49.87,0]]},{"s":50.29,"e":53.51,"w":[["Tapi",50.29,50.59,0],["syukur",50.59,51.27,1],["ni",51.27,52.01,0],["adalah",52.01,52.45,0],["sikap",52.45,52.97,1],["kita",52.97,53.53,0]]},{"s":53.53,"e":54.75,"w":[["dengan",53.53,53.87,0],["apa",53.87,54.11,0],["yang",54.11,54.29,0],["kita",54.29,54.51,0],["ada",54.51,54.77,0]]},{"s":54.77,"e":57.11,"w":[["Oleh",54.77,55.53,0],["itu",55.53,55.85,0],["sekali",56.17,56.21,0],["lagi",56.21,56.75,0]]},{"s":57.13,"e":59.47,"w":[["jangan",57.13,57.31,0],["pernah",57.31,57.61,0],["putus",57.61,57.95,1],["asa",57.95,58.35,1],["dengan",58.35,58.65,0],["Allah",58.65,59.19,1]]},{"s":59.49,"e":61.77,"w":[["Lā",59.49,59.87,1],["taqnaṭū",59.87,60.45,1],["min",60.45,60.7,1],["raḥmatillāh",60.7,61.37,1]]}];
+      const CAPS = [{"s":3.0,"e":4.76,"w":[["Hidup",3.0,3.96,0],["kita",3.96,4.28,0],["ni",4.28,4.46,0],["tuan-tuan",4.46,4.78,0]]},{"s":4.78,"e":6.28,"w":[["dia",4.78,5.04,0],["ibarat",5.04,5.24,0],["macam",5.24,5.52,0],["kapal",5.56,5.82,1],["terbang",5.82,6.16,1]]},{"s":6.3,"e":7.9,"w":[["Dia",6.3,6.42,0],["ada",6.42,6.64,0],["waktu",6.64,6.88,0],["dia",6.88,7.16,0],["dekat",7.16,7.36,0],["atas",7.36,7.78,1]]},{"s":7.92,"e":9.37,"w":[["ada",7.92,8.08,0],["waktu",8.08,8.32,0],["dia",8.32,8.42,0],["dekat",8.42,8.62,0],["bawah",8.62,9.13,1]]},{"s":9.39,"e":11.25,"w":[["Sama",9.39,9.57,0],["juga",9.57,9.75,0],["macam",9.75,9.95,0],["kehidupan",9.95,10.37,0],["kita",10.37,10.69,0]]},{"s":11.27,"e":12.31,"w":[["Ada",11.27,11.39,0],["waktu",11.39,11.71,0],["kita",11.71,11.99,0],["berada",11.99,12.33,0]]},{"s":12.33,"e":14.45,"w":[["kat",12.33,12.53,0],["titik",12.53,12.85,1],["terendah",12.85,13.23,1],["kehidupan",13.23,13.71,0],["kita",13.71,13.97,0]]},{"s":14.47,"e":15.57,"w":[["Ada",14.47,14.69,0],["waktu",14.69,14.97,0],["kita",14.97,15.29,0],["berada",15.29,15.59,0]]},{"s":15.59,"e":17.83,"w":[["di",15.59,15.73,0],["puncak",15.73,16.13,1],["kejayaan",16.13,16.65,1],["kehidupan",16.65,17.13,0],["kita",17.13,17.51,0]]},{"s":17.85,"e":19.28,"w":[["Tapi",17.85,18.03,0],["kita",18.03,18.29,0],["kena",18.29,18.43,0],["ingat",18.43,18.65,1],["satu",18.65,18.83,0],["benda",18.83,19.16,1]]},{"s":19.3,"e":21.62,"w":[["Di",19.3,19.52,0],["mana-mana",19.52,20.04,0],["sekalipun",20.04,20.5,0],["posisi",20.5,20.94,1],["kita",20.94,21.4,0]]},{"s":21.64,"e":23.58,"w":[["apa",21.64,21.78,0],["pun",21.78,21.96,0],["yang",21.96,22.1,0],["berlaku",22.1,22.42,0],["dalam",22.42,22.6,0],["kehidupan",22.6,23.06,0],["kita",23.06,23.34,0]]},{"s":23.6,"e":24.58,"w":[["semua",23.6,23.74,0],["itu",23.74,23.98,0],["telah",23.98,24.2,0],["diatur",24.2,24.6,1]]},{"s":24.6,"e":26.56,"w":[["oleh",24.6,24.8,0],["Allah",24.8,25.02,1],["SWT",25.02,26.08,1]]},{"s":26.58,"e":27.92,"w":[["Allah",26.58,26.92,1],["SWT",26.92,27.24,1],["dah",27.24,27.42,0],["aturkan",27.42,27.94,1]]},{"s":27.94,"e":29.8,"w":[["suatu",27.94,28.2,0],["takdir",28.2,28.58,1],["untuk",28.58,28.88,0],["kita",28.88,29.54,0]]},{"s":29.82,"e":31.5,"w":[["Sebab",29.82,29.98,0],["itu",29.98,30.26,0],["yang",30.26,30.4,0],["terbaik",30.4,30.84,1],["untuk",30.84,31.06,0],["kita",31.06,31.4,0]]},{"s":31.52,"e":32.68,"w":[["Tanpa",31.52,31.9,0],["kita",31.9,32.22,0],["sedar",32.22,32.64,0]]},{"s":32.7,"e":34.26,"w":[["tanpa",32.7,33.08,0],["kita",33.08,33.4,0],["ketahui",33.4,34.04,0]]},{"s":34.28,"e":35.94,"w":[["Tanggungjawab",34.28,34.7,0],["kita",34.7,35.22,0],["redha",35.22,35.96,1]]},{"s":35.96,"e":37.0,"w":[["atas",35.96,36.26,1],["setiap",36.26,36.52,0],["yang",36.52,36.66,0],["berlaku",36.66,37.02,0]]},{"s":37.02,"e":37.78,"w":[["dalam",37.02,37.24,0],["kehidupan",37.24,37.58,0],["kita",37.58,37.8,0]]},{"s":37.8,"e":39.42,"w":[["dan",37.8,38.04,0],["bersyukur",38.04,38.5,1],["atas",38.5,38.84,1],["setiap",38.84,39.06,0],["nikmat",39.06,39.44,1]]},{"s":39.44,"e":41.32,"w":[["yang",39.44,39.58,0],["Allah",39.58,39.72,1],["beri",39.72,40.08,0],["kepada",40.08,40.3,0],["kita",40.3,40.76,0]]},{"s":41.34,"e":43.1,"w":[["Kita",41.34,41.46,0],["kena",41.46,41.64,0],["ingat",41.64,41.86,1],["satu",41.86,42.0,0],["benda",42.0,42.7,1]]},{"s":43.12,"e":45.51,"w":[["Syukur",43.12,43.52,1],["ni",43.52,44.13,0],["bukan",44.13,44.61,1],["atas",44.61,45.09,1],["dasar",45.09,45.53,0]]},{"s":45.53,"e":47.09,"w":[["apa",45.53,45.91,0],["yang",45.91,46.13,0],["kita",46.13,46.39,0],["ada",46.39,46.69,0]]},{"s":47.11,"e":50.14,"w":[["Tapi",47.11,47.41,0],["syukur",47.41,48.09,1],["ni",48.09,48.64,0],["adalah",48.64,49.08,0],["sikap",49.08,49.6,1],["kita",49.6,50.16,0]]},{"s":50.16,"e":51.38,"w":[["dengan",50.16,50.5,0],["apa",50.5,50.74,0],["yang",50.74,50.92,0],["kita",50.92,51.14,0],["ada",51.14,51.4,0]]},{"s":51.4,"e":53.74,"w":[["Oleh",51.4,52.16,0],["itu",52.16,52.48,0],["sekali",52.8,52.84,0],["lagi",52.84,53.38,0]]},{"s":53.76,"e":56.1,"w":[["jangan",53.76,53.94,0],["pernah",53.94,54.24,0],["putus",54.24,54.58,1],["asa",54.58,54.98,1],["dengan",54.98,55.28,0],["Allah",55.28,55.82,1]]},{"s":56.12,"e":58.4,"w":[["Lā",56.12,56.5,1],["taqnaṭū",56.5,57.08,1],["min",57.08,57.33,1],["raḥmatillāh",57.33,58.0,1]]}];
       gsap.defaults({ lazy: false });
       const tl = gsap.timeline({ paused: true });
       const E = "power3.out";
@@ -523,130 +520,132 @@
       out("#s0 > div, #h0-plane", { scale: 1.25, opacity: 0, filter: "blur(16px)", duration: 0.35, ease: "power2.in" }, 2.7);
 
       /* ---------------- S1 TITLE + SPEAKER ---------------- */
-      tl.fromTo("#s1-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 3.0);
+      tl.fromTo("#s1-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 3);
       tl.fromTo("#s1-t1", { opacity: 0, y: 40, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: E }, 3.1);
       tl.fromTo("#s1-t2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, 5.4);
       tl.fromTo("#s1-arch-wrap", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: E }, 3.2);
-      tl.fromTo("#s1-img", { y: 60 }, { y: 0, duration: 3.8, ease: "power2.out" }, 3.2);
+      tl.fromTo("#s1-img", { scale: 1.12 }, { scale: 1, duration: 3.8, ease: "power2.out" }, 3.2);
+      tl.fromTo("#s1-deco", { rotation: 0 }, { rotation: 60, duration: 4, ease: "none" }, 3);
       tl.fromTo("#s1-plaque", { opacity: 0, y: 40, xPercent: 0 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 3.7);
-      tl.fromTo("#s1-plane", { x: 0, y: 0, rotation: 80 }, { x: 1400, y: -200, rotation: 80, duration: 1.6, ease: "power1.inOut" }, 5.2);
-      out("#s1 > div:not(#s1-plane)", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 6.75);
+      tl.fromTo("#s1-plane", { x: 0, y: 0, rotation: 80 }, { x: 1400, y: -200, rotation: 80, duration: 1.3, ease: "power1.inOut" }, 4.9);
+      out("#s1 > div:not(#s1-plane)", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 6);
 
       /* ---------------- S2 FLIGHT ---------------- */
-      tl.fromTo("#s2-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 7.0);
-      tl.fromTo("#s2-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 7.1);
+      tl.fromTo("#s2-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 6.3);
+      tl.fromTo("#s2-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 6.4);
       const p2 = document.getElementById("s2-path");
       const L2 = p2.getTotalLength();
-      tl.fromTo(p2, { strokeDasharray: L2, strokeDashoffset: L2 }, { strokeDashoffset: 0, duration: 4.2, ease: "none" }, 7.2);
-      tl.fromTo("#s2-clouds", { x: 40 }, { x: -60, duration: 4.8, ease: "none" }, 7.0);
-      tl.fromTo("#s2-plane", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 7.2);
-      tl.to("#s2-plane", { motionPath: { path: "#s2-path", align: "#s2-path", alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 4.2, ease: "none", immediateRender: true }, 7.2);
-      tl.fromTo(["#s2-pk", "#s2-lbl-up"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 8.6);
-      tl.fromTo(["#s2-tr", "#s2-lbl-dn"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 10.1);
-      out("#s2 > *", { opacity: 0, duration: 0.3, ease: "power2.in" }, 11.5);
+      tl.fromTo(p2, { strokeDasharray: L2, strokeDashoffset: L2 }, { strokeDashoffset: 0, duration: 2.75, ease: "none" }, 6.45);
+      tl.fromTo("#s2-clouds", { x: 40 }, { x: -60, duration: 3.2, ease: "none" }, 6.28);
+      tl.fromTo("#s2-plane", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 6.45);
+      tl.to("#s2-plane", { motionPath: { path: "#s2-path", align: "#s2-path", alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 2.75, ease: "none", immediateRender: true }, 6.45);
+      tl.fromTo(["#s2-pk", "#s2-lbl-up"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 7.3);
+      tl.fromTo(["#s2-tr", "#s2-lbl-dn"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 8.55);
+      out("#s2 > *", { opacity: 0, duration: 0.3, ease: "power2.in" }, 9.02);
 
       /* ---------------- S3 ALTIMETER ---------------- */
-      tl.fromTo("#s3-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 11.8);
-      tl.fromTo("#s3-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 11.9);
-      tl.fromTo("#s3-gauge", { opacity: 0, scaleY: 0, transformOrigin: "50% 100%" }, { opacity: 1, scaleY: 1, duration: 0.7, ease: E }, 12.0);
-      tl.fromTo("#s3-marker", { y: 0 }, { y: 290, duration: 1.1, ease: "power2.inOut" }, 13.7);
-      tl.fromTo("#s3-bot", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.55, ease: E }, 14.4);
-      tl.to("#s3-bot", { boxShadow: "0 0 60px rgba(224,112,95,0.45)", duration: 0.4, yoyo: true, repeat: 1 }, 15.0);
-      tl.to("#s3-marker", { y: -300, duration: 1.3, ease: "power3.inOut" }, 16.9);
-      tl.fromTo("#s3-top", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.55, ease: E }, 17.7);
-      tl.to("#s3-top", { boxShadow: "0 0 80px rgba(247,220,142,0.55)", scale: 1.03, duration: 0.5, yoyo: true, repeat: 1 }, 18.3);
-      out("#s3 > *", { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 20.0);
+      tl.fromTo("#s3-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 9.41);
+      tl.fromTo("#s3-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 9.51);
+      tl.fromTo("#s3-gauge", { opacity: 0, scaleY: 0, transformOrigin: "50% 100%" }, { opacity: 1, scaleY: 1, duration: 0.7, ease: E }, 9.61);
+      tl.fromTo("#s3-marker", { y: 0 }, { y: 290, duration: 1.1, ease: "power2.inOut" }, 11.31);
+      tl.fromTo("#s3-bot", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.55, ease: E }, 12.01);
+      tl.to("#s3-bot", { boxShadow: "0 0 60px rgba(224,112,95,0.45)", duration: 0.4, yoyo: true, repeat: 1 }, 12.61);
+      tl.to("#s3-marker", { y: -300, duration: 1.3, ease: "power3.inOut" }, 14.51);
+      tl.fromTo("#s3-top", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.55, ease: E }, 15.31);
+      tl.to("#s3-top", { boxShadow: "0 0 80px rgba(247,220,142,0.55)", scale: 1.03, duration: 0.5, yoyo: true, repeat: 1 }, 15.91);
+      out("#s3 > *", { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 17.61);
 
       /* ---------------- S4 ---------------- */
-      tl.fromTo("#s4a-k", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 20.25);
-      tl.fromTo("#s4a-t", { opacity: 0, scale: 2.2, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power4.out" }, 20.4);
-      tl.fromTo("#s4a-n", { opacity: 0, scale: 0, rotation: -90 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }, 21.0);
-      out("#s4a", { opacity: 0, scale: 0.85, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 21.45);
-      tl.fromTo("#s4b-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 21.75);
-      tl.fromTo("#s4b-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 24.0);
-      tl.fromTo("#s4-radar", { opacity: 0, scale: 0.6, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: E }, 21.75);
-      tl.fromTo("#s4-sweep", { rotation: 0 }, { rotation: 1080, duration: 7, ease: "none" }, 21.75);
+      tl.fromTo("#s4a-k", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 17.86);
+      tl.fromTo("#s4a-t", { opacity: 0, scale: 2.2, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power4.out" }, 18.01);
+      tl.fromTo("#s4a-n", { opacity: 0, scale: 0, rotation: -90 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }, 18.61);
+      out("#s4a", { opacity: 0, scale: 0.85, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 19.06);
+      tl.fromTo("#s4b-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 19.36);
+      tl.fromTo("#s4b-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 21.61);
+      tl.fromTo("#s4-radar", { opacity: 0, scale: 0.6, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: E }, 19.36);
+      tl.fromTo("#s4-sweep", { rotation: 0 }, { rotation: 1080, duration: 7, ease: "none" }, 19.36);
       ["#s4-p1", "#s4-p2", "#s4-p3", "#s4-p4"].forEach((id, i) => {
-        tl.fromTo(id, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)" }, 22.2 + i * 0.55);
-        tl.to(id, { y: i % 2 ? 14 : -14, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 22.8 + i * 0.3);
+        tl.fromTo(id, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)" }, 19.81 + i * 0.55);
+        tl.to(id, { y: i % 2 ? 14 : -14, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 20.41 + i * 0.3);
       });
-      tl.fromTo("#s4-allah", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)" }, 25.9);
-      tl.to(["#s4-p1", "#s4-p2", "#s4-p3", "#s4-p4"], { x: (i) => [-120, 170, -160, 150][i], y: (i) => [130, 120, -120, -150][i], scale: 0.6, opacity: 0.3, duration: 1.0, ease: "power2.inOut" }, 26.2);
-      out(["#s4b-k", "#s4b-t"], { opacity: 0, y: -20, duration: 0.3 }, 25.8);
-      tl.fromTo("#s4c", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 26.1);
-      tl.to("#s4-allah", { boxShadow: "0 0 140px rgba(247,220,142,0.9)", scale: 1.08, duration: 0.8, yoyo: true, repeat: 1, ease: "sine.inOut" }, 27.0);
-      out("#s4b", { opacity: 0, scale: 1.08, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 28.7);
+      tl.fromTo("#s4-allah", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)" }, 23.51);
+      tl.to(["#s4-p1", "#s4-p2", "#s4-p3", "#s4-p4"], { x: (i) => [-120, 170, -160, 150][i], y: (i) => [130, 120, -120, -150][i], scale: 0.6, opacity: 0.3, duration: 1.0, ease: "power2.inOut" }, 23.81);
+      out(["#s4b-k", "#s4b-t"], { opacity: 0, y: -20, duration: 0.3 }, 23.41);
+      tl.fromTo("#s4c", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 23.71);
+      tl.to("#s4-allah", { boxShadow: "0 0 140px rgba(247,220,142,0.9)", scale: 1.08, duration: 0.8, yoyo: true, repeat: 1, ease: "sine.inOut" }, 24.61);
+      out("#s4b", { opacity: 0, scale: 1.08, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 26.31);
 
       /* ---------------- S5 BOARDING PASS ---------------- */
-      tl.fromTo("#s5-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 29.0);
-      tl.fromTo("#s5-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 29.1);
-      tl.fromTo("#s5-ticket", { opacity: 0, y: 260, rotation: -6 }, { opacity: 1, y: 0, rotation: 0, duration: 0.7, ease: "back.out(1.3)" }, 29.2);
-      tl.fromTo("#s5-r1", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: E }, 29.6);
-      tl.fromTo("#s5-r2", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: E }, 30.8);
-      tl.fromTo("#s5-r3", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: E }, 32.5);
-      tl.fromTo("#s5-stamp", { opacity: 0, scale: 2.6, rotation: -30 }, { opacity: 0.92, scale: 1, rotation: -14, duration: 0.3, ease: "power4.in" }, 32.9);
-      tl.fromTo("#s5-ticket", { y: 0 }, { y: 10, duration: 0.06, yoyo: true, repeat: 1, immediateRender: false }, 33.2);
-      tl.fromTo("#s5-c1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, 34.2);
-      tl.fromTo("#s5-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, 35.4);
-      out("#s5 > *", { opacity: 0, y: -24, duration: 0.3, ease: "power2.in" }, 36.65);
+      tl.fromTo("#s5-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 26.61);
+      tl.fromTo("#s5-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 26.71);
+      tl.fromTo("#s5-ticket", { opacity: 0, y: 260, rotation: -6 }, { opacity: 1, y: 0, rotation: 0, duration: 0.7, ease: "back.out(1.3)" }, 26.81);
+      tl.fromTo("#s5-r1", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: E }, 27.21);
+      tl.fromTo("#s5-r2", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: E }, 28.41);
+      tl.fromTo("#s5-r3", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: E }, 29.83);
+      tl.fromTo("#s5-stamp", { opacity: 0, scale: 2.6, rotation: -30 }, { opacity: 0.92, scale: 1, rotation: -14, duration: 0.3, ease: "power4.in" }, 30.23);
+      tl.fromTo("#s5-ticket", { y: 0 }, { y: 10, duration: 0.06, yoyo: true, repeat: 1, immediateRender: false }, 30.53);
+      tl.fromTo("#s5-c1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, 31.53);
+      tl.fromTo("#s5-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, 32.73);
+      out("#s5 > *", { opacity: 0, y: -24, duration: 0.3, ease: "power2.in" }, 33.98);
 
       /* ---------------- S6 DUTIES ---------------- */
-      tl.fromTo("#s6-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 36.95);
-      tl.fromTo("#s6-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 37.05);
-      tl.fromTo("#s6-c1", { opacity: 0, x: -140 }, { opacity: 1, x: 0, duration: 0.6, ease: E }, 37.7);
-      tl.fromTo("#s6-c1 .ar", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 38.0);
-      tl.fromTo("#s6-c2", { opacity: 0, x: 140 }, { opacity: 1, x: 0, duration: 0.6, ease: E }, 40.9);
-      tl.fromTo("#s6-c2 .ar", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 41.2);
-      tl.to("#s6-c1", { borderColor: "rgba(247,220,142,1)", boxShadow: "0 0 60px rgba(247,220,142,0.35)", duration: 0.5, yoyo: true, repeat: 1 }, 38.4);
-      tl.to("#s6-c2", { borderColor: "rgba(247,220,142,1)", boxShadow: "0 0 60px rgba(247,220,142,0.35)", duration: 0.5, yoyo: true, repeat: 1 }, 41.7);
-      out("#s6 > *", { opacity: 0, y: -24, duration: 0.3, ease: "power2.in" }, 44.05);
+      tl.fromTo("#s6-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 34.28);
+      tl.fromTo("#s6-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 34.38);
+      tl.fromTo("#s6-c1", { opacity: 0, x: -140 }, { opacity: 1, x: 0, duration: 0.6, ease: E }, 35.03);
+      tl.fromTo("#s6-c1 .ar", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 35.28);
+      tl.fromTo("#s6-c2", { opacity: 0, x: 140 }, { opacity: 1, x: 0, duration: 0.6, ease: E }, 37.89);
+      tl.fromTo("#s6-c2 .ar", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 38.19);
+      tl.to("#s6-c1", { borderColor: "rgba(247,220,142,1)", boxShadow: "0 0 60px rgba(247,220,142,0.35)", duration: 0.5, yoyo: true, repeat: 1 }, 35.39);
+      tl.to("#s6-c2", { borderColor: "rgba(247,220,142,1)", boxShadow: "0 0 60px rgba(247,220,142,0.35)", duration: 0.5, yoyo: true, repeat: 1 }, 38.69);
+      out("#s6 > *", { opacity: 0, y: -24, duration: 0.3, ease: "power2.in" }, 41.04);
 
       /* ---------------- S7 SYUKUR ---------------- */
-      tl.fromTo("#s7a", { opacity: 0, scale: 2, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.4, ease: "power4.out" }, 44.35);
-      out("#s7a", { opacity: 0, scale: 0.85, duration: 0.3, ease: "power2.in" }, 45.8);
-      tl.fromTo("#s7-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 46.1);
-      tl.fromTo("#s7-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 46.15);
-      tl.fromTo("#s7-r1", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.55, ease: E }, 46.6);
-      tl.fromTo("#s7-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.inOut" }, 49.2);
-      tl.to("#s7-r1", { opacity: 0.55, scale: 0.97, duration: 0.5 }, 50.2);
-      tl.fromTo("#s7-r2", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.55, ease: E }, 50.3);
-      tl.fromTo("#s7-sikap", { scale: 1 }, { scale: 1.15, duration: 0.35, yoyo: true, repeat: 1, ease: "sine.inOut" }, 52.4);
-      tl.fromTo("#s7-eq", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 52.9);
-      out("#s7b", { opacity: 0, y: -24, duration: 0.3, ease: "power2.in" }, 54.5);
+      tl.fromTo("#s7a", { opacity: 0, scale: 2, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.4, ease: "power4.out" }, 41.34);
+      out("#s7a", { opacity: 0, scale: 0.85, duration: 0.3, ease: "power2.in" }, 42.79);
+      tl.fromTo("#s7-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 43.09);
+      tl.fromTo("#s7-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 43.14);
+      tl.fromTo("#s7-r1", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.55, ease: E }, 43.59);
+      tl.fromTo("#s7-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.inOut" }, 46.02);
+      tl.to("#s7-r1", { opacity: 0.55, scale: 0.97, duration: 0.5 }, 47.02);
+      tl.fromTo("#s7-r2", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.55, ease: E }, 47.12);
+      tl.fromTo("#s7-sikap", { scale: 1 }, { scale: 1.15, duration: 0.35, yoyo: true, repeat: 1, ease: "sine.inOut" }, 49.03);
+      tl.fromTo("#s7-eq", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 49.53);
+      out("#s7b", { opacity: 0, y: -24, duration: 0.3, ease: "power2.in" }, 51.13);
 
       /* ---------------- S8 PUTUS ASA ---------------- */
-      tl.fromTo("#s8-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 54.8);
-      tl.fromTo("#s8-l1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 57.1);
-      tl.fromTo("#s8-l2", { opacity: 0, scale: 1.8, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power4.out" }, 57.5);
-      tl.fromTo("#s8-l3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 58.2);
+      tl.fromTo("#s8-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 51.43);
+      tl.fromTo("#s8-l1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 53.73);
+      tl.fromTo("#s8-l2", { opacity: 0, scale: 1.8, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power4.out" }, 54.13);
+      tl.fromTo("#s8-l3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 54.83);
       const p8 = document.getElementById("s8-trail");
       const L8 = p8.getTotalLength();
-      tl.fromTo(p8, { strokeDashoffset: L8, strokeDasharray: "16 14" }, { strokeDashoffset: 0, duration: 4.0, ease: "power1.inOut" }, 55.2);
-      tl.fromTo("#s8-plane", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 55.2);
-      tl.to("#s8-plane", { motionPath: { path: "#s8-trail", align: "#s8-trail", alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 4.0, ease: "power1.inOut", immediateRender: true }, 55.2);
-      out("#s8 > div", { opacity: 0, scale: 1.1, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 59.2);
-      tl.to("#rays", { opacity: 0.85, duration: 1.2, ease: "sine.inOut" }, 58.8);
-      tl.to("#rays", { opacity: 0.35, duration: 1.5, ease: "sine.inOut" }, 64);
+      tl.fromTo(p8, { strokeDashoffset: L8, strokeDasharray: "16 14" }, { strokeDashoffset: 0, duration: 4.0, ease: "power1.inOut" }, 51.83);
+      tl.fromTo("#s8-plane", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 51.83);
+      tl.to("#s8-plane", { motionPath: { path: "#s8-trail", align: "#s8-trail", alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 4.0, ease: "power1.inOut", immediateRender: true }, 51.83);
+      out("#s8 > div", { opacity: 0, scale: 1.1, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 55.83);
+      tl.to("#rays", { opacity: 0.85, duration: 1.2, ease: "sine.inOut" }, 55.43);
+      tl.to("#rays", { opacity: 0.35, duration: 1.5, ease: "sine.inOut" }, 60.63);
 
       /* ---------------- S9 AYAH ---------------- */
-      tl.fromTo("#s9-k", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: E }, 59.5);
-      tl.fromTo("#s9-ar", { opacity: 0, y: 30, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: E }, 59.55);
-      tl.fromTo("#s9-tr", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 60.4);
-      tl.fromTo("#s9-src", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 61.0);
-      out("#s9 > div", { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, 62.95);
+      tl.fromTo("#s9-k", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: E }, 56.13);
+      tl.fromTo("#s9-ar", { opacity: 0, y: 30, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: E }, 56.18);
+      tl.fromTo("#s9-tr", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 57.03);
+      tl.fromTo("#s9-src", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 57.63);
+      out("#s9 > div", { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, 59.58);
 
       /* ---------------- S10 OUTRO ---------------- */
-      tl.fromTo("#o-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 63.3);
-      tl.fromTo("#o-arch", { opacity: 0, y: 100, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: E }, 63.3);
-      tl.fromTo("#o-plaque", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 63.8);
-      tl.fromTo("#o-msg", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 64.3);
-      ["#o-c1", "#o-c2", "#o-c3"].forEach((id, i) => tl.fromTo(id, { opacity: 0, y: 40, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)" }, 65.0 + i * 0.18));
-      tl.to("#o-c3", { scale: 1.08, duration: 0.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 65.8);
-      tl.to("#ov-fade", { opacity: 1, duration: 1.0, ease: "power1.in" }, 67.5);
+      tl.fromTo("#o-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 59.93);
+      tl.fromTo("#o-deco", { rotation: 0 }, { rotation: 60, duration: 5.3, ease: "none" }, 59.83);
+      tl.fromTo("#o-arch", { opacity: 0, y: 100, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: E }, 59.93);
+      tl.fromTo("#o-plaque", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 60.43);
+      tl.fromTo("#o-msg", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 60.93);
+      ["#o-c1", "#o-c2", "#o-c3"].forEach((id, i) => tl.fromTo(id, { opacity: 0, y: 40, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)" }, 61.63 + i * 0.18));
+      tl.to("#o-c3", { scale: 1.08, duration: 0.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 62.43);
+      tl.to("#ov-fade", { opacity: 1, duration: 1.0, ease: "power1.in" }, 64.13);
 
       /* ---------------- BADGE ---------------- */
-      tl.fromTo("#badge", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 7.05);
-      out("#badge", { opacity: 0, y: -30, duration: 0.35 }, 59.1);
+      tl.fromTo("#badge", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 6.34);
+      out("#badge", { opacity: 0, y: -30, duration: 0.35 }, 55.73);
 
       /* ---------------- CAPTIONS ---------------- */
       const capWrap = document.getElementById("caps");

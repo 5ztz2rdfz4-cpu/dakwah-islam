@@ -85,17 +85,18 @@
 
       /* ---------- speaker badge ---------- */
       #badge { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; top: 150px; display: flex; align-items: center; gap: 22px; padding: 12px 34px 12px 14px; border-radius: 999px; background: rgba(3, 20, 15, 0.55); border: 2px solid rgba(226, 189, 91, 0.55); white-space: nowrap; }
-      .mini-arch { position: relative; width: 92px; height: 106px; border-radius: 46px 46px 14px 14px; overflow: hidden; background: radial-gradient(circle at 50% 35%, #f7dc8e, #b78a2c 75%); border: 2px solid var(--gold-hi); }
-      .mini-arch img { position: absolute; width: 212px; left: -60px; top: -2px; }
+      .mini-arch { position: relative; width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold-hi); box-shadow: 0 0 16px rgba(247, 220, 142, 0.45); }
+      .mini-arch img { position: absolute; inset: 0; width: 100%; height: 100%; }
       #badge .nm { font: 800 27px var(--font-body); letter-spacing: 0.04em; color: var(--ink); }
       #badge .rl { font: 600 22px var(--font-body); color: var(--gold); letter-spacing: 0.05em; margin-top: 4px; }
 
-      /* ---------- arch portrait ---------- */
-      .arch { position: absolute; overflow: hidden; border-radius: 300px 300px 24px 24px; background: radial-gradient(ellipse at 50% 32%, #1a7a64 0%, #0b4a3c 45%, #062c24 100%); }
-      .arch-border { position: absolute; border-radius: 320px 320px 34px 34px; border: 4px solid var(--gold); box-shadow: 0 0 40px rgba(226, 189, 91, 0.35), inset 0 0 0 10px rgba(4, 33, 27, 0.9), inset 0 0 0 12px rgba(226, 189, 91, 0.6); }
-      .arch img { position: absolute; }
-      .arch .halo { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(247, 220, 142, 0.45), transparent 62%); }
-      .arch .fadebot { position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: linear-gradient(180deg, transparent, rgba(4, 33, 27, 0.95)); }
+      /* ---------- round portrait ---------- */
+      .ring-wrap { position: absolute; }
+      .ring-glow { position: absolute; inset: -60px; border-radius: 50%; background: radial-gradient(circle, rgba(247, 220, 142, 0.38), transparent 66%); }
+      .ring-deco { position: absolute; inset: -30px; border-radius: 50%; border: 3px dashed rgba(226, 189, 91, 0.6); }
+      .ring-deco2 { position: absolute; inset: -14px; border-radius: 50%; border: 2px solid rgba(226, 189, 91, 0.45); }
+      .ring { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 8px solid var(--gold); box-shadow: 0 0 50px rgba(226, 189, 91, 0.45), 0 30px 60px rgba(0, 0, 0, 0.5); background: #0b4a3c; }
+      .ring img { position: absolute; inset: 0; width: 100%; height: 100%; }
       .plaque { position: absolute; padding: 20px 48px; border-radius: 18px; text-align: center; white-space: nowrap; background: linear-gradient(180deg, #f7dc8e, #c99a3a); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       .plaque .nm { font: 900 40px var(--font-body); color: #1d1406; letter-spacing: 0.02em; }
       .plaque .rl { font: 700 26px var(--font-body); color: #3b2a0a; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
@@ -174,21 +175,19 @@
       </div>
 
       <!-- ================= S1 TITLE + SPEAKER 3.0-7.05 ================= -->
-      <div id="s1" class="clip" data-start="3" data-duration="4.05">
+      <div id="s1" class="clip" data-start="3" data-duration="5.48">
         <div class="abs center" style="left: 0; right: 0; top: 190px">
           <div id="s1-k" class="orn"><i></i><span class="kicker">Perkongsian Kehidupan</span><i></i></div>
           <div id="s1-t1" class="h-display" style="font-size: 88px; margin-top: 26px">Hidup Ibarat</div>
           <div id="s1-t2" class="h-display gold-text shadow" style="font-size: 108px">Kapal Terbang</div>
         </div>
-        <div id="s1-arch-wrap" class="abs" style="left: 240px; top: 560px; width: 600px; height: 700px">
-          <div class="arch-border" style="left: -14px; top: -14px; width: 628px; height: 728px"></div>
-          <div class="arch" style="left: 0; top: 0; width: 600px; height: 700px">
-            <div class="halo" style="left: 50px; top: -20px; width: 500px; height: 500px"></div>
-            <img id="s1-img" src="assets/img/nabil_cutout.png" style="width: 690px; left: -45px; top: 46px" alt="" />
-            <div class="fadebot"></div>
-          </div>
+        <div id="s1-arch-wrap" class="ring-wrap" style="left: 230px; top: 570px; width: 620px; height: 620px">
+          <div class="ring-glow"></div>
+          <div id="s1-deco" class="ring-deco"></div>
+          <div class="ring-deco2"></div>
+          <div class="ring"><img id="s1-img" src="assets/img/nabil_round.jpg" alt="" /></div>
         </div>
-        <div id="s1-plaque" class="plaque cx" style="top: 1190px">
+        <div id="s1-plaque" class="plaque cx" style="top: 1150px">
           <div class="nm">MUHAMMAD NABIL AHNAF</div>
           <div class="rl">Founder · Salam Automobile</div>
         </div>
@@ -196,7 +195,7 @@
       </div>
 
       <!-- ================= S2 FLIGHT PATH 7.0-11.8 ================= -->
-      <div id="s2" class="clip" data-start="7" data-duration="4.8">
+      <div id="s2" class="clip" data-start="8.44" data-duration="3.36">
         <div class="abs center" style="left: 0; right: 0; top: 330px">
           <div id="s2-k" class="kicker">✈ Perjalanan Sebuah Kapal Terbang</div>
           <div id="s2-t" class="h-display" style="font-size: 76px; margin-top: 18px">Ada <span class="gold-text">Naik</span>, Ada <span style="color: var(--rose)">Turun</span></div>
@@ -384,22 +383,20 @@
         <div class="abs center" style="left: 0; right: 0; top: 190px">
           <div id="o-k" class="orn"><i></i><span class="kicker">Semoga Bermanfaat</span><i></i></div>
         </div>
-        <div id="o-arch" class="abs" style="left: 265px; top: 300px; width: 550px; height: 650px">
-          <div class="arch-border" style="left: -14px; top: -14px; width: 578px; height: 678px"></div>
-          <div class="arch" style="left: 0; top: 0; width: 550px; height: 650px">
-            <div class="halo" style="left: 40px; top: -20px; width: 470px; height: 470px"></div>
-            <img src="assets/img/nabil_cutout.png" style="width: 640px; left: -46px; top: 44px" alt="" />
-            <div class="fadebot"></div>
-          </div>
+        <div id="o-arch" class="ring-wrap" style="left: 270px; top: 320px; width: 540px; height: 540px">
+          <div class="ring-glow"></div>
+          <div id="o-deco" class="ring-deco"></div>
+          <div class="ring-deco2"></div>
+          <div class="ring"><img src="assets/img/nabil_round.jpg" alt="" /></div>
         </div>
-        <div id="o-plaque" class="plaque cx" style="top: 890px">
+        <div id="o-plaque" class="plaque cx" style="top: 830px">
           <div class="nm">MUHAMMAD NABIL AHNAF</div>
           <div class="rl">Founder · Salam Automobile</div>
         </div>
-        <div id="o-msg" class="abs center" style="left: 0; right: 0; top: 1080px">
+        <div id="o-msg" class="abs center" style="left: 0; right: 0; top: 1030px">
           <div style="font: 400 52px/1.3 AmiriLat, serif; font-style: italic; color: var(--ink)">Sebarkan kebaikan,<br /><span style="color: var(--gold-hi)">moga jadi saham akhirat.</span></div>
         </div>
-        <div class="abs" style="left: 0; right: 0; top: 1300px; display: flex; justify-content: center; gap: 20px">
+        <div class="abs" style="left: 0; right: 0; top: 1250px; display: flex; justify-content: center; gap: 20px">
           <div id="o-c1" class="chip" style="background: rgba(248,241,222,0.12); border: 2px solid rgba(226,189,91,0.6)">♥ LIKE</div>
           <div id="o-c2" class="chip" style="background: rgba(248,241,222,0.12); border: 2px solid rgba(226,189,91,0.6)">↗ KONGSI</div>
           <div id="o-c3" class="chip" style="background: var(--gold); color: #1d1406">＋ FOLLOW</div>
@@ -407,9 +404,9 @@
       </div>
 
       <!-- ================= OVERLAYS ================= -->
-      <div id="ov-badge" class="clip" data-start="7" data-duration="52.5">
+      <div id="ov-badge" class="clip" data-start="8.44" data-duration="51.06">
         <div id="badge">
-          <div class="mini-arch"><img src="assets/img/nabil_cutout.png" alt="" /></div>
+          <div class="mini-arch"><img src="assets/img/nabil_round.jpg" alt="" /></div>
           <div><div class="nm">MUHAMMAD NABIL AHNAF</div><div class="rl">Founder · Salam Automobile</div></div>
         </div>
       </div>
@@ -474,23 +471,24 @@
       tl.fromTo("#s1-t1", { opacity: 0, y: 40, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: E }, 3.1);
       tl.fromTo("#s1-t2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, 5.4);
       tl.fromTo("#s1-arch-wrap", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: E }, 3.2);
-      tl.fromTo("#s1-img", { y: 60 }, { y: 0, duration: 3.8, ease: "power2.out" }, 3.2);
+      tl.fromTo("#s1-img", { scale: 1.12 }, { scale: 1, duration: 3.8, ease: "power2.out" }, 3.2);
+      tl.fromTo("#s1-deco", { rotation: 0 }, { rotation: 60, duration: 4, ease: "none" }, 3.0);
       tl.fromTo("#s1-plaque", { opacity: 0, y: 40, xPercent: 0 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 3.7);
-      tl.fromTo("#s1-plane", { x: 0, y: 0, rotation: 80 }, { x: 1400, y: -200, rotation: 80, duration: 1.6, ease: "power1.inOut" }, 5.2);
-      out("#s1 > div:not(#s1-plane)", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 6.75);
+      tl.fromTo("#s1-plane", { x: 0, y: 0, rotation: 80 }, { x: 1400, y: -200, rotation: 80, duration: 1.3, ease: "power1.inOut" }, 4.9);
+      out("#s1 > div:not(#s1-plane)", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 8.16);
 
       /* ---------------- S2 FLIGHT ---------------- */
-      tl.fromTo("#s2-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 7.0);
-      tl.fromTo("#s2-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 7.1);
+      tl.fromTo("#s2-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 8.46);
+      tl.fromTo("#s2-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 8.56);
       const p2 = document.getElementById("s2-path");
       const L2 = p2.getTotalLength();
-      tl.fromTo(p2, { strokeDasharray: L2, strokeDashoffset: L2 }, { strokeDashoffset: 0, duration: 4.2, ease: "none" }, 7.2);
-      tl.fromTo("#s2-clouds", { x: 40 }, { x: -60, duration: 4.8, ease: "none" }, 7.0);
-      tl.fromTo("#s2-plane", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 7.2);
-      tl.to("#s2-plane", { motionPath: { path: "#s2-path", align: "#s2-path", alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 4.2, ease: "none", immediateRender: true }, 7.2);
-      tl.fromTo(["#s2-pk", "#s2-lbl-up"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 8.6);
-      tl.fromTo(["#s2-tr", "#s2-lbl-dn"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 10.1);
-      out("#s2 > *", { opacity: 0, duration: 0.3, ease: "power2.in" }, 11.5);
+      tl.fromTo(p2, { strokeDasharray: L2, strokeDashoffset: L2 }, { strokeDashoffset: 0, duration: 2.75, ease: "none" }, 8.61);
+      tl.fromTo("#s2-clouds", { x: 40 }, { x: -60, duration: 3.2, ease: "none" }, 8.44);
+      tl.fromTo("#s2-plane", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 8.61);
+      tl.to("#s2-plane", { motionPath: { path: "#s2-path", align: "#s2-path", alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 2.75, ease: "none", immediateRender: true }, 8.61);
+      tl.fromTo(["#s2-pk", "#s2-lbl-up"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 9.46);
+      tl.fromTo(["#s2-tr", "#s2-lbl-dn"], { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" }, 10.71);
+      out("#s2 > *", { opacity: 0, duration: 0.3, ease: "power2.in" }, 11.26);
 
       /* ---------------- S3 ALTIMETER ---------------- */
       tl.fromTo("#s3-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 11.8);
@@ -584,6 +582,7 @@
 
       /* ---------------- S10 OUTRO ---------------- */
       tl.fromTo("#o-k", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 63.3);
+      tl.fromTo("#o-deco", { rotation: 0 }, { rotation: 60, duration: 5.3, ease: "none" }, 63.2);
       tl.fromTo("#o-arch", { opacity: 0, y: 100, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: E }, 63.3);
       tl.fromTo("#o-plaque", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 63.8);
       tl.fromTo("#o-msg", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 64.3);
@@ -592,7 +591,7 @@
       tl.to("#ov-fade", { opacity: 1, duration: 1.0, ease: "power1.in" }, 67.5);
 
       /* ---------------- BADGE ---------------- */
-      tl.fromTo("#badge", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 7.05);
+      tl.fromTo("#badge", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 8.5);
       out("#badge", { opacity: 0, y: -30, duration: 0.35 }, 59.1);
 
       /* ---------------- CAPTIONS ---------------- */

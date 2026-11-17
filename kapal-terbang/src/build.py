@@ -1,9 +1,11 @@
 """Expand index.src.html -> index.html (plane icons, SFX clips, gauge ticks, corners, captions)."""
-import json, pathlib, wave
+import json, pathlib, re, sys, wave
 
 HERE = pathlib.Path(__file__).parent.parent
+sys.path.insert(0, str(HERE / "src"))
+from edit import CUTS, M, src_to_new  # noqa: E402
+
 src = (HERE / "src/index.tpl").read_text()
-caps = json.loads((HERE / "src/captions.json").read_text())
 
 PLANE_D = ("M50 4 C54 4 56 10 56 16 L56 38 L95 60 L95 68 L56 57 L56 80 L67 89 L67 95 "
            "L50 90 L33 95 L33 89 L44 80 L44 57 L5 68 L5 60 L44 38 L44 16 C44 10 46 4 50 4 Z")
@@ -16,7 +18,7 @@ plane_r = (f'<svg width="100%" height="100%" viewBox="0 0 100 100"><g transform=
 SFX = [
     ("impact", 0.28, 0.55), ("whoosh", 0.0, 0.35), ("whoosh", 1.0, 0.3), ("shimmer", 1.7, 0.22),
     ("riser", 1.05, 0.3), ("impact", 3.0, 0.3), ("shimmer", 3.05, 0.25), ("flyby", 4.6, 0.32),
-    ("whoosh", 6.85, 0.3), ("pop", 8.6, 0.4), ("pop", 10.1, 0.4), ("whoosh_down", 11.6, 0.3),
+    ("whoosh", 8.3, 0.3), ("pop", 9.46, 0.4), ("pop", 10.71, 0.4), ("whoosh_down", 11.6, 0.3),
     ("whoosh_down", 13.7, 0.25), ("tick", 14.4, 0.45), ("whoosh", 16.9, 0.3), ("shimmer", 17.7, 0.28),
     ("impact", 20.38, 0.45), ("pop", 21.0, 0.4), ("whoosh", 21.6, 0.3), ("tick", 22.2, 0.35),
     ("tick", 22.75, 0.35), ("tick", 23.3, 0.35), ("tick", 23.85, 0.35), ("bell", 25.9, 0.35),
@@ -52,8 +54,48 @@ corners = "".join(
     for pos, tr in [("left: 26px; top: 26px", "none"), ("right: 26px; top: 26px", "scaleX(-1)"),
                     ("left: 26px; bottom: 26px", "scaleY(-1)"), ("right: 26px; bottom: 26px", "scale(-1,-1)")])
 
+# ---------------- captions from the raw transcript, mapped through the edit
+FIX = {"redor": "redha", "nyamat": "nikmat", "taqnata": "taqnaṭū", "La": "Lā"}
+HL = {"kapal", "terbang", "atas", "bawah", "titik", "terendah", "puncak", "kejayaan", "Allah", "SWT", "takdir",
+      "terbaik", "redha", "bersyukur", "nikmat", "Syukur", "syukur", "sikap", "putus", "asa", "Lā", "taqnaṭū",
+      "min", "raḥmatillāh", "diatur", "aturkan", "benda", "bukan", "posisi", "ingat"}
+PLAN = (HERE / "src/caption_lines.txt").read_text().strip().split("\n")
+raw = json.loads((HERE / "src/transcript_raw.json").read_text())
+words = []
+for seg in raw["segments"]:
+    for w in seg["words"]:
+        t, a, b = w["word"].strip(), w["start"], w["end"]
+        mid = (a + b) / 2
+        if any(x <= mid < y and a >= x - 0.05 for x, y in CUTS):
+            continue
+        a2, b2 = src_to_new(max(a, 0)), src_to_new(b)
+        if t.startswith("-") and words:
+            words[-1][0] += t; words[-1][2] = b2; continue
+        if t == "mirrahmatillah.":
+            words += [["min", a2, a2 + 0.25], ["raḥmatillāh.", a2 + 0.25, b2]]; continue
+        words.append([FIX.get(t, t), a2, b2])
+caps, i = [], 0
+for line in PLAN:
+    n = len(line.split()); ws = words[i:i + n]; i += n
+    got = [w[0].rstrip(".,") for w in ws]
+    assert got == line.split(), (line, got)
+    caps.append({"s": round(ws[0][1], 2), "e": round(ws[-1][2], 2),
+                 "w": [[w[0].rstrip(".,"), round(w[1], 2), round(w[2], 2), int(w[0].rstrip(".,") in HL)] for w in ws]})
+assert i == len(words), (i, len(words))
+for k in range(len(caps) - 1):
+    caps[k]["e"] = min(round(caps[k + 1]["s"] - 0.02, 2), round(caps[k]["e"] + 0.7, 2))
+caps[-1]["e"] = round(caps[-1]["e"] + 0.4, 2)
+
+# ---------------- remap authored (old) times to the edited timeline
+src = re.sub(r'data-start="([\d.]+)" data-duration="([\d.]+)"',
+             lambda m: (lambda a, d: f'data-start="{M(a):g}" data-duration="{round(M(a + d) - M(a), 3):g}"')(float(m[1]), float(m[2])), src)
+src = re.sub(r"\}, ([\d.]+)\);", lambda m: f"}}, {M(float(m[1])):g});", src)
+src = re.sub(r"([\d.]+) \+ i \* ", lambda m: f"{M(float(m[1])):g} + i * ", src)
+SFX = [(n, M(t), v) for n, t, v in SFX]
+
 out = (src.replace("__PLANE_R__", plane_r).replace("__PLANE__", plane).replace("__SFX__", sfx_html)
        .replace("__TICKS__", ticks).replace("__CORNERS__", corners)
        .replace("__CAPS__", json.dumps(caps, ensure_ascii=False, separators=(",", ":"))))
+out = re.sub(r'(id="a-voice" src="assets/audio/voice.wav" data-start="3" data-duration=")[\d.]+"', lambda m: m[1] + f'{dur("voice")}"', out)
 (HERE / "index.html").write_text(out)
 print("index.html written", len(out))
