@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <link rel="stylesheet" href="assets/fonts.css" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #04130e;
+        --ground-2: #0a2a1f;
+        --emerald: #0f5a3f;
+        --gold: #e8c26a;
+        --gold-2: #f6e3a8;
+        --gold-deep: #b8892f;
+        --ink: #f7f3e8;
+        --muted: #b9c9bf;
+        --red: #d23b3b;
+        --pal-green: #149954;
+        --font-display: "Montserrat", sans-serif;
+        --font-serif: "Cinzel", serif;
+        --font-arabic: "Amiri", serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: var(--font-display); color: var(--ink); background: var(--ground); }
+      .clip { position: absolute; inset: 0; }
+      .abs { position: absolute; }
+      .center-x { left: 100px; right: 140px; text-align: center; }
+
+      /* ---------- background ---------- */
+      #bg { background: radial-gradient(120% 70% at 50% 38%, #0f3a2b 0%, #08241a 45%, #030d09 100%); }
+      #bg-pattern { position: absolute; left: -540px; top: -540px; width: 2160px; height: 3000px; opacity: 0.09; }
+      #bg-red { position: absolute; inset: 0; background: radial-gradient(110% 70% at 50% 40%, #3a0d0d 0%, #1a0606 55%, #070202 100%); opacity: 0; }
+      #bg-glow { position: absolute; left: 140px; top: 520px; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(232,194,106,0.22) 0%, rgba(232,194,106,0) 65%); }
+      .particle { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 12px 3px rgba(246,227,168,0.55); }
+      #skyline { position: absolute; left: 0; bottom: 12px; width: 1080px; height: 360px; }
+      #vignette { position: absolute; inset: 0; background: radial-gradient(90% 60% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 100%); }
+      #frame { position: absolute; inset: 28px; border: 2px solid rgba(232,194,106,0.35); border-radius: 28px; }
+      #frame::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(232,194,106,0.15); border-radius: 22px; }
+      #flagbar { position: absolute; left: 0; right: 0; bottom: 0; height: 12px; display: flex; }
+      #flagbar i { flex: 1; display: block; }
+
+      /* ---------- shared bits ---------- */
+      .gold-text { background: linear-gradient(180deg, #fff3c9 0%, #e8c26a 45%, #b8892f 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .kicker { font-weight: 800; letter-spacing: 0.32em; font-size: 28px; color: var(--gold); text-transform: uppercase; }
+      .rule { height: 3px; background: linear-gradient(90deg, rgba(232,194,106,0), var(--gold), rgba(232,194,106,0)); }
+
+      /* speaker chip */
+      #chip { left: 0; right: 0; top: 248px; height: 84px; display: flex; justify-content: center; }
+      .chip-in { display: flex; align-items: center; gap: 16px; padding: 8px 28px 8px 8px; border-radius: 60px; background: rgba(4,19,14,0.72); border: 2px solid rgba(232,194,106,0.55); }
+      .chip-in .ph { width: 68px; height: 68px; border-radius: 50%; overflow: hidden; background: linear-gradient(160deg, #1d6b4c, #0a2a1f); border: 2px solid var(--gold); }
+      .chip-in .ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .chip-in .nm { font-weight: 800; font-size: 30px; line-height: 1.05; }
+      .chip-in .rl { font-weight: 700; font-size: 28px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
+      .live { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #3ddc84; margin-right: 8px; box-shadow: 0 0 10px #3ddc84; }
+
+      /* chapter header */
+      .chap { left: 100px; right: 140px; top: 352px; text-align: center; }
+      .chap .num { font-family: var(--font-serif); font-weight: 800; font-size: 38px; color: var(--gold); letter-spacing: 0.1em; }
+      .chap .ttl { font-weight: 900; font-size: 58px; line-height: 1.04; letter-spacing: -0.01em; margin-top: 6px; }
+      .chap .rule { width: 460px; margin: 14px auto 0; }
+
+      /* captions */
+      #caps { left: 110px; right: 150px; top: 1300px; height: 200px; }
+      .cap { position: absolute; left: 0; right: 0; top: 0; text-align: center; font-weight: 900; font-size: 56px; line-height: 1.12; text-transform: uppercase; letter-spacing: 0.01em; opacity: 0; }
+      .cap span { display: inline-block; margin: 0 8px; color: rgba(247,243,232,0.45); text-shadow: 0 4px 18px rgba(0,0,0,0.8); }
+      .cap span.on { color: #fff; }
+      .cap span.kw.on { color: var(--gold); }
+      #caps-bg { position: absolute; left: -24px; right: -24px; top: -22px; height: 172px; border-radius: 30px; background: rgba(2,10,7,0.55); border: 1px solid rgba(232,194,106,0.18); }
+
+      /* hook */
+      .hook-line { left: 0; right: 0; text-align: center; font-weight: 900; text-transform: uppercase; }
+      #h1 { top: 560px; font-size: 84px; line-height: 1; }
+      #h2 { top: 664px; font-size: 104px; line-height: 1; }
+      #h-strike { position: absolute; left: 200px; top: 710px; width: 680px; height: 12px; background: var(--red); border-radius: 6px; transform-origin: left center; }
+      #h3 { top: 900px; font-size: 84px; }
+      #h4 { top: 1000px; font-size: 104px; letter-spacing: -0.02em; }
+      #h-tag { top: 400px; }
+      .tag-pill { display: inline-block; padding: 12px 30px; border: 2px solid var(--gold); border-radius: 40px; font-weight: 800; letter-spacing: 0.24em; font-size: 30px; color: var(--gold); }
+
+      /* title card */
+      #t-mosque { position: absolute; left: 260px; top: 260px; width: 560px; height: 448px; }
+      #t-title { top: 820px; font-family: var(--font-serif); font-weight: 800; font-size: 150px; letter-spacing: 0.04em; line-height: 1; }
+      #t-sub { top: 990px; font-weight: 800; font-size: 46px; line-height: 1.2; }
+      #t-sub b { color: var(--gold); }
+      #t-ar { top: 712px; font-family: var(--font-arabic); font-size: 68px; color: var(--gold-2); direction: rtl; }
+      #t-by { position: absolute; left: 0; right: 0; top: 1150px; display: flex; justify-content: center; }
+
+      /* ch1 timeline */
+      #tl-line { left: 160px; top: 615px; width: 6px; height: 530px; background: rgba(232,194,106,0.25); border-radius: 3px; }
+      #tl-fill { left: 160px; top: 615px; width: 6px; height: 530px; background: linear-gradient(180deg, var(--gold-2), var(--gold-deep)); border-radius: 3px; transform-origin: top center; }
+      .tl-node { left: 130px; width: 800px; height: 140px; display: flex; align-items: center; gap: 34px; }
+      .tl-dot { width: 66px; height: 66px; border-radius: 50%; background: var(--ground); border: 5px solid var(--gold); display: flex; align-items: center; justify-content: center; flex: none; }
+      .tl-dot i { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: block; }
+      .tl-yr { font-family: var(--font-serif); font-weight: 800; font-size: 56px; color: var(--gold); width: 190px; flex: none; }
+      .tl-tx { font-weight: 800; font-size: 34px; line-height: 1.2; color: var(--ink); }
+      .tl-tx small { display: block; font-weight: 600; font-size: 28px; color: var(--muted); margin-top: 4px; }
+      #c1-count { left: 100px; right: 140px; top: 560px; text-align: center; }
+      #c1-count .big { font-family: var(--font-serif); font-weight: 800; font-size: 250px; line-height: 1; }
+      #c1-count .lbl { font-weight: 900; font-size: 56px; letter-spacing: 0.2em; margin-top: -10px; }
+      #c1-count .note { font-weight: 700; font-size: 32px; color: var(--muted); margin-top: 14px; }
+      #c1-bar { left: 150px; top: 1080px; width: 740px; height: 150px; }
+      .bar-track { position: absolute; left: 0; right: 0; top: 50px; height: 26px; border-radius: 13px; background: rgba(255,255,255,0.08); border: 1px solid rgba(232,194,106,0.3); overflow: hidden; }
+      .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2)); transform-origin: left center; }
+      .bar-lbl { position: absolute; top: 96px; font-weight: 800; font-size: 30px; color: var(--gold); }
+      .bar-you { position: absolute; top: 0; font-weight: 800; font-size: 30px; color: var(--ink); }
+
+      /* ch2 */
+      #c2-pin { position: absolute; left: 380px; top: 570px; width: 300px; height: 390px; }
+      #c2-q { left: 100px; right: 140px; top: 560px; text-align: center; font-family: var(--font-serif); font-weight: 800; font-size: 420px; line-height: 1; }
+      #c2-coord { top: 975px; font-weight: 700; font-size: 30px; letter-spacing: 0.25em; color: var(--muted); }
+      #c2-place { top: 1020px; font-weight: 900; font-size: 76px; }
+      #c2-place2 { top: 1110px; font-weight: 800; font-size: 40px; color: var(--gold); letter-spacing: 0.2em; }
+      #c2-mosque { position: absolute; left: 270px; top: 570px; width: 520px; height: 416px; }
+      #c2-verse { left: 110px; right: 150px; top: 800px; text-align: center; }
+      #c2-verse .ar { font-family: var(--font-arabic); font-size: 46px; line-height: 1.7; color: var(--gold-2); direction: rtl; }
+      #c2-verse .tr { font-weight: 600; font-size: 30px; line-height: 1.4; color: var(--ink); margin-top: 18px; font-style: italic; }
+      #c2-verse .ref { font-weight: 800; font-size: 28px; letter-spacing: 0.22em; color: var(--gold); margin-top: 16px; }
+
+      /* ch3 cards */
+      .card { left: 110px; width: 820px; height: 196px; border-radius: 30px; background: linear-gradient(135deg, rgba(15,90,63,0.55), rgba(4,19,14,0.8)); border: 2px solid rgba(232,194,106,0.45); display: flex; align-items: center; gap: 34px; padding: 0 40px; }
+      .card .ic { width: 116px; height: 116px; border-radius: 26px; background: rgba(232,194,106,0.12); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; flex: none; }
+      .card .n { font-family: var(--font-serif); font-weight: 800; font-size: 30px; color: var(--gold); letter-spacing: 0.1em; }
+      .card .h { font-weight: 900; font-size: 42px; line-height: 1.08; }
+      .card .s { font-weight: 600; font-size: 28px; color: var(--muted); margin-top: 6px; }
+      #c3-route { position: absolute; left: 100px; top: 545px; width: 840px; height: 720px; }
+      #c3-cap1 { top: 1240px; font-weight: 900; font-size: 54px; }
+      #c3-cap2 { top: 1320px; font-weight: 700; font-size: 32px; color: var(--muted); }
+
+      /* ch4 */
+      .tile { width: 380px; height: 310px; border-radius: 30px; background: rgba(20,4,4,0.6); border: 2px solid rgba(210,59,59,0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; }
+      .tile .t { font-weight: 800; font-size: 34px; line-height: 1.15; }
+      #c4-q { top: 1300px; font-weight: 900; font-size: 52px; line-height: 1.15; }
+      #c4-q b { color: var(--red); }
+
+      /* outro */
+      #o-l1 { top: 250px; font-weight: 900; font-size: 60px; line-height: 1.05; text-transform: uppercase; }
+      #o-l2 { top: 400px; font-weight: 900; font-size: 74px; text-transform: uppercase; }
+      #o-l3 { top: 318px; font-weight: 900; font-size: 116px; letter-spacing: -0.02em; text-transform: uppercase; }
+      #o-portrait { left: 340px; top: 640px; width: 380px; height: 380px; }
+      #o-portrait .ring { position: absolute; left: 0; top: 0; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #1d6b4c 0%, #0a2a1f 70%); border: 4px solid var(--gold); box-shadow: 0 0 60px rgba(232,194,106,0.35); }
+      #o-portrait .mask { position: absolute; left: 6px; top: 6px; width: 368px; height: 368px; overflow: hidden; border-radius: 50%; }
+      #o-portrait img { position: absolute; left: 0; top: 0; width: 368px; height: 368px; }
+      #o-name { top: 1045px; }
+      #o-name .n { font-weight: 900; font-size: 52px; }
+      #o-name .r { font-weight: 700; font-size: 28px; letter-spacing: 0.26em; color: var(--gold); margin-top: 8px; text-transform: uppercase; }
+      #o-doa { top: 1185px; }
+      #o-doa .ar { font-family: var(--font-arabic); font-size: 54px; color: var(--gold-2); direction: rtl; line-height: 1.4; }
+      #o-doa .tr { font-weight: 600; font-size: 30px; color: var(--ink); font-style: italic; margin-top: 6px; }
+      #o-cta { left: 100px; right: 140px; top: 1360px; display: flex; justify-content: center; gap: 22px; }
+      .cta { padding: 14px 26px; border-radius: 40px; font-weight: 800; font-size: 28px; letter-spacing: 0.08em; border: 2px solid var(--gold); color: var(--gold); }
+      .cta.fill { background: var(--gold); color: #102018; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="57.77" data-width="1080" data-height="1920">
+
+      <!-- ================= AUDIO (pre-mixed by tools/premix.py from tools/audio_layout.html) ================= -->
+      <audio id="a-mix" src="assets/mix.wav" data-start="0" data-duration="57.77" data-volume="1" data-track-index="10"></audio>
+
+      <!-- ================= BACKGROUND ================= -->
+      <div id="bg" class="clip" data-start="0" data-duration="57.77" data-track-index="0">
+        <div id="bg-red"></div>
+        <svg id="bg-pattern" viewBox="0 0 2160 3000" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="star" width="180" height="180" patternUnits="userSpaceOnUse">
+              <g fill="none" stroke="#e8c26a" stroke-width="2">
+                <rect x="45" y="45" width="90" height="90" />
+                <rect x="45" y="45" width="90" height="90" transform="rotate(45 90 90)" />
+                <circle cx="90" cy="90" r="22" />
+                <path d="M0 0 L45 45 M180 0 L135 45 M0 180 L45 135 M180 180 L135 135" />
+                <path d="M90 0 L90 26 M90 180 L90 154 M0 90 L26 90 M180 90 L154 90" />
+              </g>
+            </pattern>
+          </defs>
+          <rect width="2160" height="3000" fill="url(#star)" />
+        </svg>
+        <div id="bg-glow"></div>
+        <div id="particles"></div>
+        <svg id="skyline" viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" data-layout-ignore>
+          <defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c26a" stop-opacity=".22"/><stop offset="1" stop-color="#e8c26a" stop-opacity="0"/></linearGradient></defs>
+          <path fill="url(#skyG)" d="M0 360 V250 h60 v-30 h40 v30 h50 v-70 a6 6 0 0 1 12 0 v-40 h4 v40 a6 6 0 0 1 12 0 v70 h40 v-20 h70 v-40 h20 v-30 l10 -16 l10 16 v30 h20 v40 h60 C398 170 450 120 540 112 C630 120 682 170 682 240 h60 v-40 h20 v-30 l10 -16 l10 16 v30 h20 v40 h70 v20 h40 v-70 a6 6 0 0 1 12 0 v-40 h4 v40 a6 6 0 0 1 12 0 v70 h50 v-30 h40 v30 h60 V360Z"/>
+          <path d="M540 112 v-34" stroke="#e8c26a" stroke-opacity=".3" stroke-width="5"/>
+          <path d="M540 52 a16 16 0 1 0 12 27 a13 13 0 1 1 -12 -27z" fill="#e8c26a" fill-opacity=".35"/>
+        </svg>
+        <div id="vignette"></div>
+        <div id="frame"></div>
+        <div id="flagbar"><i style="background:#111"></i><i style="background:#f4f4f4"></i><i style="background:#149954"></i><i style="background:#d23b3b"></i></div>
+      </div>
+
+      <!-- ================= HOOK 0 – 5.4 ================= -->
+      <div id="s-hook" class="clip" data-start="0" data-duration="5.45" data-track-index="1">
+        <div id="h-tag" class="abs center-x"><span class="tag-pill">MINGGU PALESTIN</span></div>
+        <div id="h1" class="abs hook-line">Ini Bukan</div>
+        <div id="h2" class="abs hook-line">Soal Agama</div>
+        <div id="h-strike"></div>
+        <div id="h3" class="abs hook-line">Ini Soal</div>
+        <div id="h4" class="abs hook-line gold-text">Kemanusiaan</div>
+      </div>
+
+      <!-- ================= TITLE 5.23 – 8.75 ================= -->
+      <div id="s-title" class="clip" data-start="5.2" data-duration="3.6" data-track-index="2">
+        <svg id="t-mosque" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="dome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1c2"/><stop offset=".45" stop-color="#e8c26a"/><stop offset="1" stop-color="#9c6f22"/></linearGradient>
+            <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e7a58"/><stop offset="1" stop-color="#0b3a2a"/></linearGradient>
+          </defs>
+          <g class="m-ray" stroke="#e8c26a" stroke-opacity=".25" stroke-width="3">
+            <line x1="350" y1="200" x2="350" y2="-40"/><line x1="350" y1="200" x2="130" y2="0"/><line x1="350" y1="200" x2="570" y2="0"/><line x1="350" y1="200" x2="20" y2="120"/><line x1="350" y1="200" x2="680" y2="120"/>
+          </g>
+          <rect class="m-base" x="90" y="380" width="520" height="150" rx="6" fill="url(#wall)" stroke="#e8c26a" stroke-width="3"/>
+          <g class="m-base" fill="#04130e" stroke="#e8c26a" stroke-width="2">
+            <path d="M130 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M215 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M300 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M350 530 v-80 a25 25 0 0 1 50 0 v80z" opacity="0"/><path d="M385 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M470 530 v-80 a25 25 0 0 1 50 0 v80z"/>
+          </g>
+          <rect class="m-drum" x="200" y="300" width="300" height="80" rx="4" fill="url(#wall)" stroke="#e8c26a" stroke-width="3"/>
+          <g class="m-drum" fill="#e8c26a" opacity=".8"><rect x="225" y="320" width="18" height="40" rx="9"/><rect x="270" y="320" width="18" height="40" rx="9"/><rect x="315" y="320" width="18" height="40" rx="9"/><rect x="367" y="320" width="18" height="40" rx="9"/><rect x="412" y="320" width="18" height="40" rx="9"/><rect x="457" y="320" width="18" height="40" rx="9"/></g>
+          <path class="m-dome" d="M205 302 C205 170 280 110 350 100 C420 110 495 170 495 302 Z" fill="url(#dome)" stroke="#fff1c2" stroke-width="3"/>
+          <g class="m-fin"><line x1="350" y1="100" x2="350" y2="40" stroke="#e8c26a" stroke-width="6"/><path d="M350 8 a24 24 0 1 0 18 40 a19 19 0 1 1 -18 -40z" fill="#e8c26a"/></g>
+        </svg>
+        <div id="t-ar" class="abs center-x">الْمَسْجِدِ الْأَقْصَى</div>
+        <div id="t-title" class="abs center-x gold-text">AL-AQSA</div>
+        <div id="t-sub" class="abs center-x">Kenapa Palestin <b>Penting</b><br/>Bagi Setiap Muslim?</div>
+        <div id="t-by">
+          <div class="chip-in"><div class="ph"><img src="assets/img/ustaz_face.png" alt="" /></div><div><div class="rl">Perkongsian oleh</div><div class="nm">Muhammad Nabil Ahnaf</div></div></div>
+        </div>
+      </div>
+
+      <!-- ================= CH1 8.45 – 17.7 : KRISIS LAMA ================= -->
+      <div id="s-c1" class="clip" data-start="8.4" data-duration="9.35" data-track-index="3">
+        <div class="chap abs"><div class="num">01</div><div class="ttl">Krisis Yang<br/><span class="gold-text">Bukan Baru</span></div><div class="rule"></div></div>
+        <div id="c1-tl">
+          <div id="tl-line" class="abs"></div>
+          <div id="tl-fill" class="abs"></div>
+          <div class="tl-node abs" style="top:545px"><div class="tl-dot"><i></i></div><div class="tl-yr">1917</div><div class="tl-tx">Deklarasi Balfour<small>Titik mula konflik</small></div></div>
+          <div class="tl-node abs" style="top:710px"><div class="tl-dot"><i></i></div><div class="tl-yr">1948</div><div class="tl-tx">Peristiwa Nakbah<small>Rakyat Palestin diusir</small></div></div>
+          <div class="tl-node abs" style="top:875px"><div class="tl-dot"><i></i></div><div class="tl-yr">1967</div><div class="tl-tx">Al-Quds Diduduki<small>Al-Aqsa di bawah penjajahan</small></div></div>
+          <div class="tl-node abs" style="top:1040px"><div class="tl-dot"><i></i></div><div class="tl-yr">KINI</div><div class="tl-tx">Penderitaan Berterusan<small>Masih belum berakhir</small></div></div>
+        </div>
+        <div id="c1-count" class="abs">
+          <div class="big gold-text"><span id="c1-num">0</span>+</div>
+          <div class="lbl">TAHUN</div>
+          <div class="note">Sejak 1948 — lebih lama daripada<br/>usia kebanyakan kita</div>
+        </div>
+        <div id="c1-bar" class="abs">
+          <div class="bar-you" style="left:0">1948</div>
+          <div class="bar-you" style="right:0">2026</div>
+          <div class="bar-track"><div class="bar-fill" id="c1-fill"></div></div>
+          <div class="bar-lbl" style="left:0; right:0; text-align:center">SEBELUM KITA LAHIR LAGI</div>
+        </div>
+      </div>
+
+      <!-- ================= CH2 17.6 – 29.9 : TANAH PENTING ================= -->
+      <div id="s-c2" class="clip" data-start="17.55" data-duration="12.4" data-track-index="4">
+        <div class="chap abs"><div class="num">02</div><div class="ttl">Tanah Yang<br/><span class="gold-text">Diberkati</span></div><div class="rule"></div></div>
+        <svg id="c2-pin" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="pinG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1c2"/><stop offset="1" stop-color="#b8892f"/></linearGradient></defs>
+          <ellipse class="pin-ring" cx="200" cy="470" rx="150" ry="36" fill="none" stroke="#e8c26a" stroke-width="3" opacity=".6"/>
+          <ellipse class="pin-ring2" cx="200" cy="470" rx="90" ry="22" fill="none" stroke="#e8c26a" stroke-width="3" opacity=".8"/>
+          <path class="pin-body" d="M200 470 C140 360 60 300 60 200 A140 140 0 1 1 340 200 C340 300 260 360 200 470Z" fill="url(#pinG)" stroke="#fff1c2" stroke-width="4"/>
+          <g transform="translate(200 200)">
+            <circle r="78" fill="#04130e"/>
+            <g fill="#e8c26a"><path d="M-46 30 C-46 -12 -20 -36 0 -40 C20 -36 46 -12 46 30Z"/><rect x="-56" y="30" width="112" height="22" rx="3"/><rect x="-2" y="-62" width="4" height="22"/></g>
+          </g>
+        </svg>
+        <div id="c2-coord" class="abs center-x">31.77°N · 35.23°E</div>
+        <div id="c2-place" class="abs center-x">BUMI PALESTIN</div>
+        <div id="c2-place2" class="abs center-x">TANAH PENTING UMAT ISLAM</div>
+        <div id="c2-q" class="abs gold-text">?</div>
+        <svg id="c2-mosque" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#e8c26a" stroke-opacity=".25" stroke-width="3"><line x1="350" y1="200" x2="350" y2="-40"/><line x1="350" y1="200" x2="130" y2="0"/><line x1="350" y1="200" x2="570" y2="0"/></g>
+          <rect x="90" y="380" width="520" height="150" rx="6" fill="url(#wall)" stroke="#e8c26a" stroke-width="3"/>
+          <g fill="#04130e" stroke="#e8c26a" stroke-width="2"><path d="M130 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M215 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M300 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M385 530 v-80 a25 25 0 0 1 50 0 v80z"/><path d="M470 530 v-80 a25 25 0 0 1 50 0 v80z"/></g>
+          <rect x="200" y="300" width="300" height="80" rx="4" fill="url(#wall)" stroke="#e8c26a" stroke-width="3"/>
+          <path d="M205 302 C205 170 280 110 350 100 C420 110 495 170 495 302 Z" fill="url(#dome)" stroke="#fff1c2" stroke-width="3"/>
+          <line x1="350" y1="100" x2="350" y2="40" stroke="#e8c26a" stroke-width="6"/><path d="M350 8 a24 24 0 1 0 18 40 a19 19 0 1 1 -18 -40z" fill="#e8c26a"/>
+        </svg>
+        <div id="c2-verse" class="abs">
+          <div class="ar">سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى الَّذِي بَارَكْنَا حَوْلَهُ</div>
+          <div class="tr">"Maha Suci Allah yang telah memperjalankan hamba-Nya pada suatu malam dari Masjidil Haram ke Masjidil Aqsa yang Kami berkati sekelilingnya."</div>
+          <div class="ref">— SURAH AL-ISRA' : 1</div>
+        </div>
+      </div>
+
+      <!-- ================= CH3 29.8 – 43.5 : AL-AQSA ISTIMEWA ================= -->
+      <div id="s-c3" class="clip" data-start="29.75" data-duration="13.75" data-track-index="5">
+        <div class="chap abs"><div class="num">03</div><div class="ttl">Kenapa Al-Aqsa<br/><span class="gold-text">Istimewa?</span></div><div class="rule"></div></div>
+        <div id="c3-cards">
+          <div class="card abs" style="top:575px">
+            <div class="ic"><svg width="74" height="74" viewBox="0 0 74 74"><g fill="none" stroke="#e8c26a" stroke-width="4"><circle cx="37" cy="37" r="30"/><path d="M37 13 L45 37 L37 61 L29 37Z" fill="#e8c26a"/></g></svg></div>
+            <div><div class="n">01</div><div class="h">Kiblat Pertama</div><div class="s">Arah solat umat Islam sebelum Kaabah</div></div>
+          </div>
+          <div class="card abs" style="top:800px">
+            <div class="ic"><svg width="74" height="74" viewBox="0 0 74 74"><g fill="#e8c26a"><path d="M14 58 C14 36 26 24 37 22 C48 24 60 36 60 58Z"/><rect x="8" y="58" width="58" height="8" rx="2"/><rect x="35" y="8" width="4" height="14"/></g></svg></div>
+            <div><div class="n">02</div><div class="h">Masjid Ketiga Termulia</div><div class="s">Selepas Masjidil Haram &amp; Masjid Nabawi</div></div>
+          </div>
+          <div class="card abs" id="c3-card3" style="top:1025px">
+            <div class="ic"><svg width="74" height="74" viewBox="0 0 74 74"><g fill="#e8c26a"><path d="M44 10 a24 24 0 1 0 20 38 a19 19 0 1 1 -20 -38z"/><path d="M20 14 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/></g></svg></div>
+            <div><div class="n">03</div><div class="h">Tempat Bersejarah</div><div class="s">Bumi para Nabi &amp; peristiwa Israk Mikraj</div></div>
+          </div>
+        </div>
+        <svg id="c3-route" viewBox="40 20 920 1000" xmlns="http://www.w3.org/2000/svg">
+          <g class="r-stars" fill="#f6e3a8">
+            <circle cx="120" cy="120" r="3"/><circle cx="820" cy="90" r="4"/><circle cx="640" cy="40" r="3"/><circle cx="300" cy="60" r="2.5"/><circle cx="900" cy="260" r="3"/><circle cx="60" cy="330" r="2.5"/><circle cx="520" cy="150" r="2.5"/><circle cx="760" cy="200" r="2"/>
+          </g>
+          <!-- Mikraj vertical path -->
+          <line class="r-up" x1="700" y1="560" x2="700" y2="130" stroke="#f6e3a8" stroke-width="6" stroke-linecap="round" stroke-dasharray="430" stroke-dashoffset="430"/>
+          <g class="r-sky" transform="translate(700 90)">
+            <circle r="56" fill="rgba(246,227,168,.15)" stroke="#f6e3a8" stroke-width="3"/>
+            <path d="M0 -30 l8 20 22 2 -17 14 6 22 -19 -12 -19 12 6 -22 -17 -14 22 -2z" fill="#f6e3a8"/>
+          </g>
+          <text class="r-sky" x="626" y="100" text-anchor="end" fill="#f6e3a8" font-family="Montserrat" font-weight="800" font-size="30" letter-spacing="3">SIDRATUL MUNTAHA</text>
+          <text class="r-upl" x="560" y="400" text-anchor="end" fill="#e8c26a" font-family="Cinzel" font-weight="800" font-size="44">MIKRAJ</text>
+          <!-- Israk arc -->
+          <path class="r-arc" d="M200 860 C240 560 520 520 700 600" fill="none" stroke="#e8c26a" stroke-width="7" stroke-linecap="round" stroke-dasharray="680" stroke-dashoffset="680"/>
+          <text class="r-arcl" x="150" y="600" fill="#e8c26a" font-family="Cinzel" font-weight="800" font-size="44">ISRAK</text>
+          <text class="r-arcl" x="150" y="642" fill="#b9c9bf" font-family="Montserrat" font-weight="700" font-size="28">± 1,200 KM · SATU MALAM</text>
+          <g class="r-a" transform="translate(200 860)"><circle r="40" fill="#04130e" stroke="#e8c26a" stroke-width="5"/><rect x="-16" y="-16" width="32" height="32" fill="#e8c26a"/><rect x="-16" y="-8" width="32" height="5" fill="#04130e"/></g>
+          <text class="r-a" x="200" y="945" fill="#f7f3e8" font-family="Montserrat" font-weight="900" font-size="36" text-anchor="middle">MASJIDIL HARAM</text>
+          <text class="r-a" x="200" y="985" fill="#b9c9bf" font-family="Montserrat" font-weight="700" font-size="28" text-anchor="middle">MAKKAH</text>
+          <g class="r-b" transform="translate(700 600)"><circle r="40" fill="#04130e" stroke="#e8c26a" stroke-width="5"/><path d="M-20 12 C-20 -6 -9 -16 0 -18 C9 -16 20 -6 20 12Z" fill="#e8c26a"/><rect x="-24" y="12" width="48" height="8" fill="#e8c26a"/></g>
+          <text class="r-b" x="700" y="685" fill="#f7f3e8" font-family="Montserrat" font-weight="900" font-size="36" text-anchor="middle">MASJIDIL AQSA</text>
+          <text class="r-b" x="700" y="725" fill="#b9c9bf" font-family="Montserrat" font-weight="700" font-size="28" text-anchor="middle">BAITULMAQDIS</text>
+        </svg>
+      </div>
+
+      <!-- ================= CH4 43.4 – 50.9 : HARI INI ================= -->
+      <div id="s-c4" class="clip" data-start="43.4" data-duration="7.55" data-track-index="6">
+        <div class="chap abs"><div class="num" style="color:#e66">04</div><div class="ttl">Realiti<br/><span style="color:#ff6b6b">Hari Ini</span></div><div class="rule" style="background:linear-gradient(90deg,rgba(210,59,59,0),#d23b3b,rgba(210,59,59,0))"></div></div>
+        <div class="tile abs" style="left:130px; top:575px">
+          <svg width="110" height="110" viewBox="0 0 110 110"><g fill="none" stroke="#ff6b6b" stroke-width="6" stroke-linejoin="round"><path d="M15 55 L55 18 L95 55"/><path d="M25 48 V95 H85 V48"/><path d="M48 95 V70 L60 62 L56 78 L66 95"/></g></svg>
+          <div class="t">Rumah<br/>Dimusnahkan</div>
+        </div>
+        <div class="tile abs" style="left:530px; top:575px">
+          <svg width="110" height="110" viewBox="0 0 110 110"><g fill="none" stroke="#ff6b6b" stroke-width="6"><circle cx="38" cy="32" r="12"/><circle cx="74" cy="38" r="10"/><path d="M16 92 C16 64 60 64 60 92"/><path d="M58 70 C66 60 94 62 94 92"/></g></svg>
+          <div class="t">Keluarga<br/>Terkorban</div>
+        </div>
+        <div class="tile abs" style="left:130px; top:905px">
+          <svg width="110" height="110" viewBox="0 0 110 110"><g fill="none" stroke="#ff6b6b" stroke-width="6" stroke-linecap="round"><path d="M20 60 H90 C90 82 74 94 55 94 C36 94 20 82 20 60Z"/><path d="M40 46 C36 38 44 32 40 22 M58 46 C54 38 62 32 58 22 M76 46 C72 38 80 32 76 22"/></g></svg>
+          <div class="t">Kebuluran<br/>&amp; Sekatan</div>
+        </div>
+        <div class="tile abs" style="left:530px; top:905px">
+          <svg width="110" height="110" viewBox="0 0 110 110"><g fill="none" stroke="#ff6b6b" stroke-width="6" stroke-linejoin="round"><path d="M10 88 L40 30 L70 88Z"/><path d="M52 88 L76 44 L100 88Z"/><path d="M40 88 V70"/></g></svg>
+          <div class="t">Hidup Sebagai<br/>Pelarian</div>
+        </div>
+      </div>
+
+      <!-- ================= OUTRO 50.7 – 57.77 ================= -->
+      <div id="s-out" class="clip" data-start="50.7" data-duration="7.07" data-track-index="7">
+        <div id="o-l1" class="abs center-x">Ini bukan</div>
+        <div id="o-l3" class="abs center-x"><span style="color:var(--muted); font-size:60px">soal agama.</span></div>
+        <div id="o-l4" class="abs center-x" style="top:420px; font-weight:900; font-size:96px; text-transform:uppercase; letter-spacing:-0.02em"><span style="font-size:56px; color:var(--ink)">Ini soal</span><br/><span class="gold-text">Kemanusiaan</span></div>
+        <div id="o-portrait" class="abs">
+          <div class="ring"></div>
+          <div class="mask"><img src="assets/img/ustaz_bust.png" alt="Muhammad Nabil Ahnaf" /></div>
+        </div>
+        <div id="o-name" class="abs center-x"><div class="n">Muhammad Nabil Ahnaf</div><div class="r">Perkongsian Minggu Palestin</div></div>
+        <div id="o-doa" class="abs center-x"><div class="ar">اللَّهُمَّ انْصُرْ إِخْوَانَنَا فِي فِلَسْطِين</div><div class="tr">"Ya Allah, bantulah saudara-saudara kami di Palestin"</div></div>
+        <div id="o-cta" class="abs"><div class="cta fill">DOAKAN</div><div class="cta">KONGSIKAN</div></div>
+      </div>
+
+      <!-- ================= OVERLAYS: speaker chip + captions ================= -->
+      <div id="s-chip" class="clip" data-start="8.4" data-duration="42.4" data-track-index="8">
+        <div id="chip" class="abs"><div class="chip-in"><div class="ph"><img src="assets/img/ustaz_face.png" alt="" /></div><div><div class="rl"><span class="live"></span>Perkongsian</div><div class="nm">Muhammad Nabil Ahnaf</div></div></div></div>
+        <div id="caps" class="abs"><div id="caps-bg"></div></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
+      const TOTAL = 57.77;
+
+      // ---------- deterministic particles ----------
+      let seed = 1337;
+      const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const pWrap = $("#particles");
+      for (let i = 0; i < 34; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        const s = 3 + rnd() * 6;
+        p.style.width = p.style.height = s + "px";
+        p.style.left = (40 + rnd() * 1000) + "px";
+        p.style.top = (rnd() * 1920) + "px";
+        p.style.opacity = (0.25 + rnd() * 0.6).toFixed(2);
+        pWrap.appendChild(p);
+        tl.fromTo(p, { y: 0, x: 0 }, { y: -(260 + rnd() * 520), x: (rnd() - 0.5) * 120, duration: TOTAL, ease: "none" }, 0);
+      }
+      tl.fromTo("#bg-pattern", { rotation: 0, y: 0 }, { rotation: 8, y: -260, duration: TOTAL, ease: "none" }, 0);
+      tl.fromTo("#bg-glow", { scale: 0.9, opacity: 0.6 }, { scale: 1.25, opacity: 1, duration: 4, ease: "sine.inOut", yoyo: true, repeat: 13 }, 0);
+      tl.to("#bg-red", { opacity: 1, duration: 0.8, ease: "power2.out" }, 43.45);
+      tl.to("#bg-red", { opacity: 0, duration: 1.0, ease: "power2.inOut" }, 50.6);
+
+      // ---------- HOOK ----------
+      tl.fromTo("#h1", { scale: 1 }, { scale: 1.06, duration: 0.4, ease: "power2.out" }, 0.4);
+      tl.from("#h2", { opacity: 0, scale: 1.5, filter: "blur(14px)", duration: 0.45, ease: "power4.out" }, 0.75);
+      tl.fromTo("#h-strike", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.inOut" }, 1.7);
+      tl.to(["#h1", "#h2", "#h-strike"], { opacity: 0.32, duration: 0.4 }, 2.4);
+      tl.from("#h3", { opacity: 0, y: 60, duration: 0.35, ease: "power3.out" }, 2.75);
+      tl.from("#h4", { opacity: 0, scale: 0.4, filter: "blur(16px)", duration: 0.6, ease: "back.out(1.6)" }, 3.85);
+      tl.to("#h4", { scale: 1.06, duration: 1.2, ease: "sine.inOut" }, 4.45);
+      tl.to("#s-hook", { opacity: 0, scale: 1.15, filter: "blur(12px)", duration: 0.3, ease: "power2.in" }, 5.12);
+
+      // ---------- TITLE ----------
+      tl.from("#t-mosque .m-base", { y: 80, opacity: 0, duration: 0.5, ease: "power3.out", stagger: 0.04 }, 5.25);
+      tl.from("#t-mosque .m-drum", { y: 60, opacity: 0, duration: 0.45, ease: "power3.out" }, 5.4);
+      tl.from("#t-mosque .m-dome", { scaleY: 0, transformOrigin: "50% 100%", duration: 0.6, ease: "back.out(1.4)" }, 5.5);
+      tl.from("#t-mosque .m-fin", { y: 40, opacity: 0, duration: 0.4, ease: "power3.out" }, 5.85);
+      tl.fromTo("#t-mosque .m-ray", { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power2.out" }, 5.7);
+      tl.from("#t-ar", { opacity: 0, y: 20, duration: 0.5 }, 5.8);
+      tl.from("#t-title", { opacity: 0, scale: 1.35, filter: "blur(10px)", duration: 0.7, ease: "power3.out" }, 5.3);
+      tl.from("#t-sub", { opacity: 0, y: 40, duration: 0.5, ease: "power3.out" }, 6.2);
+      tl.from("#t-by", { opacity: 0, y: 40, scale: 0.9, duration: 0.5, ease: "back.out(1.6)" }, 7.0);
+      tl.to("#s-title", { opacity: 0, y: -60, duration: 0.35, ease: "power2.in" }, 8.4);
+
+      // ---------- chip + captions ----------
+      tl.from("#chip", { opacity: 0, y: -40, duration: 0.5, ease: "power3.out" }, 8.45);
+      tl.fromTo(".live", { opacity: 1 }, { opacity: 0.25, duration: 0.6, yoyo: true, repeat: 69, ease: "sine.inOut" }, 8.5);
+      tl.from("#caps-bg", { opacity: 0, scaleX: 0.7, duration: 0.4 }, 8.6);
+      tl.to("#s-chip", { opacity: 0, duration: 0.3 }, 50.45);
+
+      const KW = ["palestin", "krisis", "baru", "lahir", "islam", "apa?", "masjid", "al-aqsa", "bersejarah", "israk", "mikraj", "muhammad", "ﷺ", "ditanggung", "ini?", "lama?", "penting", "tanah", "itulah", "nabi", "baginda", "hari"];
+      const CAPS = [
+        ["Kita perlu faham", 8.85, 10.05],
+        ["krisis yang berlaku di Palestin", 10.10, 11.77],
+        ["ini bukan krisis yang baru", 11.79, 13.45],
+        ["Krisis ini telah lama berlaku", 13.55, 15.45],
+        ["sebelum daripada kita lahir lagi", 15.49, 17.4],
+        ["Palestin ini adalah tanah", 18.07, 19.8],
+        ["yang penting bagi umat Islam", 19.83, 21.05],
+        ["Kerana apa?", 21.09, 22.4],
+        ["Kerana terletaknya", 23.5, 24.8],
+        ["Masjid Al-Aqsa", 24.84, 25.6],
+        ["tanah yang berada", 25.64, 26.8],
+        ["di bumi Palestin", 26.82, 29.6],
+        ["Kita kena ingat", 30.25, 31.55],
+        ["Masjid Al-Aqsa itulah", 31.64, 33.78],
+        ["antara salah satu tempat", 33.82, 35.15],
+        ["bersejarah bagi umat Islam", 35.2, 36.95],
+        ["peristiwa Israk dan", 37.21, 39.1],
+        ["Mikraj Baginda Nabi", 39.15, 41.4],
+        ["Muhammad ﷺ", 41.47, 43.1],
+        ["Tapi apa yang berlaku", 43.8, 45.85],
+        ["pada hari ini?", 45.89, 46.85],
+        ["Apa yang telah ditanggung", 46.89, 48.4],
+        ["oleh rakyat Palestin", 48.43, 49.45],
+        ["sejak sekian lama?", 49.49, 50.4],
+      ];
+      const capWrap = $("#caps");
+      CAPS.forEach(([text, s, e], ci) => {
+        const d = document.createElement("div");
+        d.className = "cap";
+        const words = text.split(" ");
+        const spans = words.map((w) => {
+          const sp = document.createElement("span");
+          sp.textContent = w;
+          if (KW.includes(w.toLowerCase())) sp.classList.add("kw");
+          d.appendChild(sp);
+          return sp;
+        });
+        capWrap.appendChild(d);
+        tl.fromTo(d, { opacity: 0, y: 22, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: "power2.out" }, Math.max(s - 0.04, (CAPS[ci - 1] ? CAPS[ci - 1][2] : 0) - 0.03));
+        // word-by-word highlight, weighted by length
+        const lens = words.map((w) => Math.max(2, w.length));
+        const sum = lens.reduce((a, b) => a + b, 0);
+        let acc = s;
+        const span = Math.max(0.3, (e - s) * 0.85);
+        spans.forEach((sp, i) => {
+          tl.set(sp, { color: sp.classList.contains("kw") ? "#e8c26a" : "#ffffff" }, acc);
+          tl.fromTo(sp, { y: 6 }, { y: 0, duration: 0.14, ease: "power2.out" }, acc);
+          acc += (lens[i] / sum) * span;
+        });
+        const next = CAPS[ci + 1];
+        const out = next && next[1] - e < 0.3 ? next[1] - 0.1 : e;
+        tl.to(d, { opacity: 0, y: -10, duration: 0.06, ease: "power1.in" }, out);
+      });
+
+      // ---------- CH1 ----------
+      const chapIn = (sel, t) => {
+        tl.from(sel + " .chap .num", { opacity: 0, y: -30, duration: 0.4, ease: "power3.out" }, t);
+        tl.from(sel + " .chap .ttl", { opacity: 0, y: 40, filter: "blur(8px)", duration: 0.5, ease: "power3.out" }, t + 0.1);
+        tl.from(sel + " .chap .rule", { scaleX: 0, duration: 0.6, ease: "power2.out" }, t + 0.25);
+      };
+      chapIn("#s-c1", 8.45);
+      tl.from("#tl-line", { scaleY: 0, transformOrigin: "top center", duration: 0.6 }, 8.7);
+      tl.fromTo("#tl-fill", { scaleY: 0 }, { scaleY: 1, duration: 3.6, ease: "none" }, 9.0);
+      $$("#c1-tl .tl-node").forEach((n, i) => {
+        const t = 9.15 + i * 0.9;
+        tl.from(n.querySelector(".tl-dot"), { scale: 0, duration: 0.4, ease: "back.out(2)" }, t);
+        tl.from(n.querySelector(".tl-yr"), { opacity: 0, x: -40, duration: 0.4, ease: "power3.out" }, t + 0.05);
+        tl.from(n.querySelector(".tl-tx"), { opacity: 0, x: 40, duration: 0.45, ease: "power3.out" }, t + 0.12);
+      });
+      tl.to("#c1-tl", { opacity: 0, x: -120, duration: 0.4, ease: "power2.in" }, 13.25);
+      tl.from("#c1-count", { opacity: 0, scale: 0.6, duration: 0.5, ease: "back.out(1.5)" }, 13.6);
+      const cnt = { v: 0 };
+      tl.to(cnt, { v: 78, duration: 1.6, ease: "power2.out", onUpdate: () => { $("#c1-num").textContent = Math.round(cnt.v); } }, 13.7);
+      tl.from("#c1-bar", { opacity: 0, y: 40, duration: 0.4 }, 14.6);
+      tl.fromTo("#c1-fill", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "power2.inOut" }, 14.8);
+      tl.from("#c1-bar .bar-lbl", { opacity: 0, y: 20, duration: 0.4 }, 15.45);
+      tl.to("#s-c1", { opacity: 0, x: -200, duration: 0.35, ease: "power2.in" }, 17.4);
+
+      // ---------- CH2 ----------
+      chapIn("#s-c2", 17.65);
+      tl.from("#c2-pin .pin-body", { y: -300, opacity: 0, duration: 0.6, ease: "bounce.out" }, 18.1);
+      tl.from("#c2-pin .pin-ring, #c2-pin .pin-ring2", { scale: 0, transformOrigin: "50% 50%", opacity: 0, duration: 0.6, stagger: 0.12 }, 18.6);
+      tl.to("#c2-pin .pin-ring", { scale: 1.25, opacity: 0, transformOrigin: "50% 50%", duration: 1.2, repeat: 1, ease: "power1.out" }, 19.2);
+      tl.from("#c2-coord", { opacity: 0, duration: 0.4 }, 18.6);
+      tl.from("#c2-place", { opacity: 0, y: 40, duration: 0.45, ease: "power3.out" }, 18.75);
+      tl.from("#c2-place2", { opacity: 0, scale: 1.2, duration: 0.5 }, 19.25);
+      tl.to(["#c2-pin", "#c2-coord", "#c2-place", "#c2-place2"], { opacity: 0, scale: 0.85, duration: 0.3, ease: "power2.in" }, 20.95);
+      tl.fromTo("#c2-q", { opacity: 0, scale: 2.2, rotation: -12 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.8)" }, 21.08);
+      tl.to("#c2-q", { rotation: 8, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 2 }, 21.55);
+      tl.to("#c2-q", { opacity: 0, scale: 0.3, duration: 0.3, ease: "power2.in" }, 23.25);
+      tl.from("#c2-mosque", { opacity: 0, y: 120, duration: 0.8, ease: "power3.out" }, 23.45);
+      tl.to("#c2-mosque", { y: -20, scale: 0.5, transformOrigin: "50% 0%", duration: 0.6, ease: "power2.inOut" }, 24.3);
+      tl.from("#c2-verse .ar", { opacity: 0, y: 30, filter: "blur(8px)", duration: 0.8, ease: "power2.out" }, 24.3);
+      tl.from("#c2-verse .tr", { opacity: 0, y: 20, duration: 0.6 }, 24.8);
+      tl.from("#c2-verse .ref", { opacity: 0, duration: 0.5 }, 25.3);
+      tl.to("#s-c2", { opacity: 0, x: -200, duration: 0.35, ease: "power2.in" }, 29.6);
+
+      // ---------- CH3 ----------
+      chapIn("#s-c3", 29.85);
+      $$("#c3-cards .card").forEach((c, i) => {
+        const t = [31.6, 33.75, 35.15][i];
+        tl.from(c, { opacity: 0, x: i % 2 ? 300 : -300, duration: 0.5, ease: "power3.out" }, t);
+        tl.from(c.querySelector(".ic"), { rotation: -90, scale: 0, duration: 0.5, ease: "back.out(1.8)" }, t + 0.15);
+      });
+      tl.to("#c3-card3", { borderColor: "#f6e3a8", boxShadow: "0 0 40px rgba(232,194,106,.45)", duration: 0.4 }, 35.6);
+      tl.to("#c3-cards", { opacity: 0, y: -80, duration: 0.4, ease: "power2.in" }, 36.85);
+      tl.from("#c3-route .r-stars circle", { opacity: 0, scale: 0, transformOrigin: "50% 50%", duration: 0.4, stagger: 0.05 }, 37.1);
+      tl.from("#c3-route .r-a", { opacity: 0, y: 30, duration: 0.4, ease: "power3.out" }, 37.2);
+      tl.to("#c3-route .r-arc", { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 37.6);
+      tl.from("#c3-route .r-arcl", { opacity: 0, y: 20, duration: 0.4, stagger: 0.12 }, 37.7);
+      tl.from("#c3-route .r-b", { opacity: 0, scale: 0.5, svgOrigin: "700 600", duration: 0.45, ease: "back.out(2)" }, 38.85);
+      tl.to("#c3-route .r-up", { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 39.3);
+      tl.from("#c3-route .r-upl", { opacity: 0, x: 30, duration: 0.4 }, 39.5);
+      tl.from("#c3-route .r-sky", { opacity: 0, scale: 0.3, svgOrigin: "700 90", duration: 0.6, ease: "back.out(1.8)", stagger: 0.1 }, 40.2);
+      tl.to("#c3-route .r-stars circle", { opacity: 0.3, duration: 0.5, yoyo: true, repeat: 5, stagger: 0.08 }, 38.0);
+      tl.to("#s-c3", { opacity: 0, scale: 0.92, duration: 0.35, ease: "power2.in" }, 43.2);
+
+      // ---------- CH4 ----------
+      chapIn("#s-c4", 43.5);
+      $$("#s-c4 .tile").forEach((t, i) => {
+        tl.from(t, { opacity: 0, scale: 0.6, y: 60, duration: 0.45, ease: "back.out(1.6)" }, 45.55 + i * 0.4);
+        tl.from(t.querySelector("svg"), { scale: 0, rotation: -30, duration: 0.45, ease: "back.out(2)" }, 45.7 + i * 0.4);
+      });
+      tl.to("#s-c4 .tile", { borderColor: "#ff6b6b", duration: 0.5, yoyo: true, repeat: 3 }, 47.4);
+      tl.to("#s-c4", { opacity: 0, duration: 0.4, ease: "power2.in" }, 50.5);
+
+      // ---------- OUTRO ----------
+      tl.from("#o-l1", { opacity: 0, y: 40, duration: 0.4, ease: "power3.out" }, 50.85);
+      tl.from("#o-l3", { opacity: 0, y: 30, duration: 0.4, ease: "power3.out" }, 51.15);
+      tl.from("#o-l4", { opacity: 0, scale: 0.5, filter: "blur(14px)", duration: 0.6, ease: "back.out(1.5)" }, 51.7);
+      tl.from("#o-portrait .ring", { scale: 0, opacity: 0, transformOrigin: "50% 50%", duration: 0.6, ease: "back.out(1.6)" }, 52.6);
+      tl.from("#o-portrait img", { y: 200, opacity: 0, duration: 0.7, ease: "power3.out" }, 52.75);
+      tl.to("#o-portrait .ring", { boxShadow: "0 0 110px rgba(232,194,106,.6)", duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 53.4);
+      tl.from("#o-name", { opacity: 0, y: 30, duration: 0.5, ease: "power3.out" }, 53.3);
+      tl.from("#o-doa .ar", { opacity: 0, y: 20, filter: "blur(8px)", duration: 0.7 }, 53.9);
+      tl.from("#o-doa .tr", { opacity: 0, duration: 0.5 }, 54.4);
+      tl.from("#o-cta .cta", { opacity: 0, y: 30, duration: 0.4, stagger: 0.15, ease: "back.out(1.8)" }, 54.2);
+      tl.to("#s-out", { opacity: 0, duration: 0.9, ease: "power1.in" }, 56.85);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
