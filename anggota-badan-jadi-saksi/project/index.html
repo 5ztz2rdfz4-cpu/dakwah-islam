@@ -14,118 +14,98 @@
 @font-face{font-family:"Amiri";font-weight:700;src:url(assets/fonts/amiri-arabic-700-normal.woff2) format("woff2"),url(assets/fonts/amiri-latin-700-normal.woff2) format("woff2")}
 @font-face{font-family:"AmiriI";font-style:italic;font-weight:400;src:url(assets/fonts/amiri-latin-400-italic.woff2) format("woff2")}
 
-:root{
-  --ground:#04201a; --emerald:#0b3d31; --emerald2:#0f5141;
-  --gold:#e3c06a; --gold2:#b8892f; --goldhi:#fff1c4; --ink:#fbf7ec; --red:#e0573f;
-}
+:root{--ground:#04201a;--gold:#e3c06a;--goldhi:#fff1c4;--ink:#fbf7ec;--red:#ff6b4f;--card:rgba(3,28,22,.72);--line:rgba(227,192,106,.55)}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ground)}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:"Montserrat",sans-serif;color:var(--ink);
-  background:radial-gradient(120% 70% at 50% 38%, #0f4a3b 0%, #072c23 45%, #031712 100%)}
+  background:radial-gradient(120% 70% at 50% 40%,#0f4a3b 0%,#072c23 45%,#031712 100%)}
 .abs{position:absolute}
 .gold-text{background:linear-gradient(180deg,#fff3c9 0%,#f0cf7a 45%,#b8862c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.center{left:0;right:0;text-align:center}
 
-/* background */
-#pattern{left:-270px;top:-240px;width:1620px;height:2400px;opacity:.10}
-#glow{left:90px;top:300px;width:900px;height:1000px;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(227,192,106,.30),rgba(227,192,106,.08) 55%,rgba(227,192,106,0) 100%)}
-#rays{left:-460px;top:-700px;width:2000px;height:2000px;opacity:.10;
-  background:repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,232,170,.55) 0deg 4deg, rgba(255,232,170,0) 4deg 18deg);
+#pattern{left:-270px;top:-240px;width:1620px;height:2400px;opacity:.09}
+#glow{left:90px;top:380px;width:900px;height:900px;border-radius:50%;background:radial-gradient(closest-side,rgba(227,192,106,.26),rgba(227,192,106,.06) 60%,rgba(227,192,106,0) 100%)}
+#rays{left:-460px;top:-160px;width:2000px;height:2000px;opacity:.09;
+  background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,232,170,.55) 0deg 4deg,rgba(255,232,170,0) 4deg 18deg);
   -webkit-mask:radial-gradient(closest-side,#000 0%,transparent 75%);mask:radial-gradient(closest-side,#000 0%,transparent 75%)}
 .dust{width:6px;height:6px;border-radius:50%;background:#ffe7a8;box-shadow:0 0 12px 3px rgba(255,220,140,.55)}
-#vignette{inset:0;background:radial-gradient(130% 90% at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.65) 100%);pointer-events:none}
-.frame-line{left:40px;right:40px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.55}
+#vignette{inset:0;background:radial-gradient(130% 90% at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.6) 100%)}
+.frame-line{left:60px;right:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
 
-/* ---------- HOOK ---------- */
 #hook{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 #hook .h1{font-family:"AmiriI";font-style:italic;font-size:70px;line-height:1.15;color:#f6ecd2;text-shadow:0 4px 30px rgba(0,0,0,.7)}
 #hook .h2{font-family:"Cinzel";font-weight:800;font-size:132px;line-height:1.02;letter-spacing:2px;margin-top:40px;filter:drop-shadow(0 6px 30px rgba(227,192,106,.45))}
-#hook .h3{font-family:"Montserrat";font-weight:700;font-size:30px;letter-spacing:10px;color:var(--gold);margin-top:44px}
 #hookline{width:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:36px auto 0}
 
-/* ---------- MAIN ---------- */
-#main{inset:0}
-#chip{left:50%;top:150px;padding:10px 30px;border:2px solid rgba(227,192,106,.7);border-radius:40px;
-  font-weight:700;font-size:26px;letter-spacing:8px;color:var(--gold);background:rgba(4,32,26,.6);white-space:nowrap}
-#title1{left:0;right:0;top:212px;text-align:center;font-family:"Cinzel";font-weight:800;font-size:60px;letter-spacing:6px;color:var(--ink);text-shadow:0 4px 20px rgba(0,0,0,.6)}
-#title2{left:0;right:0;top:274px;text-align:center;font-family:"Cinzel";font-weight:800;font-size:96px;letter-spacing:4px;line-height:1.05;filter:drop-shadow(0 4px 18px rgba(227,192,106,.35))}
-#arch{left:290px;top:400px;width:500px;height:669px}
-#archclip{position:absolute;inset:0;border-radius:250px 250px 24px 24px;overflow:hidden;background:#000;
-  box-shadow:0 30px 70px rgba(0,0,0,.6)}
-#archvid{position:absolute;left:0;top:0;width:500px;height:669px;object-fit:cover;transform-origin:50% 38%}
-#archphoto{position:absolute;inset:0;background:url(assets/ustaz_arch.jpg) center top/100% auto no-repeat;transform-origin:50% 45%}
-#archshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(3,22,17,.85) 100%)}
-#archframe{position:absolute;left:-20px;top:-20px;width:540px;height:709px;overflow:visible}
-#speaker{left:50%;top:990px;opacity:0;display:flex;align-items:center;gap:18px;padding:10px 30px 10px 10px;
-  border-radius:60px;background:linear-gradient(90deg,rgba(6,40,32,.95),rgba(11,61,49,.95));border:2px solid var(--gold);white-space:nowrap;
-  box-shadow:0 10px 30px rgba(0,0,0,.5)}
-#speaker .ph{width:78px;height:78px;border-radius:50%;background:url(assets/ustaz_circle.jpg) center 30%/cover;border:3px solid var(--gold)}
-#speaker .t1{font-size:22px;font-weight:700;letter-spacing:4px;color:var(--gold)}
-#speaker .t2{font-family:"Cinzel";font-weight:800;font-size:30px;color:var(--ink);letter-spacing:1px}
+#main{inset:0;opacity:0}
+#chip{left:50%;top:160px;padding:10px 30px;border:2px solid rgba(227,192,106,.7);border-radius:40px;font-weight:700;font-size:28px;letter-spacing:8px;color:var(--gold);background:rgba(4,32,26,.6);white-space:nowrap}
+#title1{top:222px;font-family:"Cinzel";font-weight:800;font-size:50px;letter-spacing:6px;color:var(--ink)}
+#title2{top:274px;font-family:"Cinzel";font-weight:800;font-size:84px;letter-spacing:4px;line-height:1.05;filter:drop-shadow(0 4px 18px rgba(227,192,106,.35))}
+#divider{left:340px;width:400px;top:378px;height:24px}
 
-#caps{left:90px;right:90px;top:1092px;height:100px}
-.cap{position:absolute;left:0;right:0;top:0;text-align:center;font-weight:900;font-size:60px;line-height:1.1;letter-spacing:.5px;
-  text-transform:uppercase;color:#fff;visibility:hidden;
-  text-shadow:0 0 2px #000,0 4px 0 rgba(0,0,0,.55),0 8px 24px rgba(0,0,0,.7)}
-.cap span{display:inline-block;margin:0 15px}
-.cap.small{font-size:46px}
-
-/* info panel */
-#panel{left:70px;top:1190px;width:940px;height:280px;border-radius:30px;
-  background:linear-gradient(180deg,rgba(15,81,65,.78),rgba(5,36,29,.88));border:2px solid rgba(227,192,106,.75);
-  box-shadow:0 20px 60px rgba(0,0,0,.55), inset 0 0 60px rgba(227,192,106,.08);overflow:hidden}
-#panel .corner{position:absolute;width:46px;height:46px;border:3px solid var(--gold);opacity:.9}
+#stageWrap{left:96px;top:436px;width:888px;height:703px}
+#stage{left:0;top:0;width:960px;height:760px;transform-origin:0 0}
 .scene{position:absolute;inset:0;visibility:hidden}
-.lbl{position:absolute;left:0;right:0;text-align:center;font-weight:800;letter-spacing:6px;color:var(--gold);font-size:28px}
+.card{position:absolute;border-radius:26px;background:var(--card);border:2px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.45)}
+.lbl{font-weight:800;letter-spacing:6px;color:var(--gold);font-size:30px}
+.big{font-family:"Cinzel";font-weight:800;line-height:1.04;letter-spacing:2px}
+.subt{font-family:"AmiriI";font-style:italic;font-size:44px;color:var(--goldhi)}
 
-/* scene A: 3 witnesses */
-.wit{position:absolute;top:30px;width:250px;height:190px;border-radius:24px;background:rgba(3,25,20,.55);border:2px solid rgba(227,192,106,.45);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.wit svg{width:104px;height:104px}
-.wit .n{font-family:"Cinzel";font-weight:800;font-size:38px;color:var(--ink);letter-spacing:3px}
-.wit .s{font-size:22px;font-weight:700;letter-spacing:5px;color:var(--gold)}
-#aStrip{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:"AmiriI";font-style:italic;font-size:34px;color:var(--goldhi)}
-/* scene B: ayat */
-#ayat{position:absolute;left:30px;right:30px;top:18px;text-align:center;direction:rtl;font-family:"Amiri";font-weight:700;font-size:44px;line-height:1.55;color:var(--goldhi)}
-#ayatTr{position:absolute;left:40px;right:40px;top:156px;text-align:center;font-family:"AmiriI";font-style:italic;font-size:27px;line-height:1.25;color:#efe7d0}
-#ayatRef{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-weight:800;font-size:24px;letter-spacing:6px;color:var(--gold)}
-/* generic big statement */
-.badge{position:absolute;width:200px;height:200px}
-.badge svg{position:absolute;inset:0;width:200px;height:200px}
-.badge .g{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Cinzel";font-weight:800;font-size:100px;color:var(--ink)}
-.big{position:absolute;font-family:"Cinzel";font-weight:800;line-height:1.02;letter-spacing:2px}
-.sub{position:absolute;font-weight:700;font-size:26px;letter-spacing:3px;color:#e9e1c9}
-/* scene D list */
-.item{position:absolute;width:420px;height:82px;border-radius:18px;background:rgba(3,25,20,.6);border:2px solid rgba(227,192,106,.5);
-  display:flex;align-items:center;gap:18px;padding-left:16px}
-.item .num{width:52px;height:52px;flex:none;position:relative}
-.item .num svg{position:absolute;inset:0;width:52px;height:52px}
-.item .num b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Cinzel";font-weight:800;font-size:24px;color:#2a1c05}
-.item .tx{font-family:"Cinzel";font-weight:800;font-size:34px;letter-spacing:1px;color:var(--ink)}
-#dHead{top:22px}
-#dStamp{position:absolute;left:50%;top:150px;padding:12px 34px;border:5px solid var(--red);border-radius:14px;
-  font-family:"Cinzel";font-weight:800;font-size:58px;color:var(--red);letter-spacing:4px;background:rgba(20,6,4,.82);white-space:nowrap;visibility:hidden}
+#caps{left:110px;right:110px;top:1160px;height:90px}
+.cap{position:absolute;left:0;right:0;top:0;text-align:center;font-weight:900;font-size:56px;line-height:1.1;text-transform:uppercase;color:#fff;visibility:hidden;
+  text-shadow:0 0 2px #000,0 4px 0 rgba(0,0,0,.55),0 8px 24px rgba(0,0,0,.7)}
+.cap span{display:inline-block;margin:0 14px}
+.cap.small{font-size:42px}
+#speaker{left:50%;top:1266px;display:flex;align-items:center;gap:20px;padding:12px 34px 12px 12px;border-radius:70px;opacity:0;
+  background:linear-gradient(90deg,rgba(6,40,32,.95),rgba(11,61,49,.95));border:2px solid var(--gold);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#speaker .ph{width:96px;height:96px;border-radius:50%;background:url(assets/ustaz_circle.jpg) center 30%/cover;border:3px solid var(--gold);flex:none}
+#speaker .t1{font-size:22px;font-weight:700;letter-spacing:5px;color:var(--gold)}
+#speaker .t2{font-family:"Cinzel";font-weight:800;font-size:32px;color:var(--ink)}
+#wave{display:flex;align-items:center;gap:6px;height:64px;margin-left:10px}
+#wave i{display:block;width:7px;height:60px;border-radius:4px;background:linear-gradient(180deg,#fff1c4,#e3c06a);transform:scaleY(.1)}
 
-/* outro */
+#fig{position:absolute;left:300px;top:20px;width:360px;height:540px}
+.part{fill:#1d6b56;stroke:#e3c06a;stroke-width:3}
+.limb{stroke:#1d6b56;stroke-linecap:round}
+.callout{position:absolute;width:250px;padding:18px 0;text-align:center}
+.callout .n{font-family:"Cinzel";font-weight:800;font-size:44px;color:var(--ink);letter-spacing:2px}
+.callout .s{font-weight:800;font-size:28px;letter-spacing:5px;color:var(--gold);margin-top:4px}
+.callout svg{width:70px;height:70px;display:block;margin:0 auto 6px}
+#aBottom{position:absolute;left:0;right:0;top:600px;text-align:center}
+
+.med{position:absolute;width:250px;text-align:center}
+.med .c{width:150px;height:150px;margin:0 auto;border-radius:50%;border:3px solid var(--gold);background:radial-gradient(circle,rgba(227,192,106,.18),rgba(3,28,22,.8));display:flex;align-items:center;justify-content:center}
+.med .c svg{width:88px;height:88px}
+.med .t{margin-top:14px;font-weight:800;font-size:28px;letter-spacing:3px;color:var(--ink);line-height:1.2}
+#ayat{position:absolute;left:30px;right:30px;top:36px;text-align:center;direction:rtl;font-family:"Amiri";font-weight:700;font-size:52px;line-height:1.6;color:var(--goldhi)}
+#ayatTr{position:absolute;left:44px;right:44px;top:222px;text-align:center;font-family:"AmiriI";font-style:italic;font-size:34px;line-height:1.3;color:#efe7d0}
+#ayatRef{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-weight:800;font-size:28px;letter-spacing:7px;color:var(--gold)}
+
+.row{position:absolute;left:30px;width:900px;height:116px;display:flex;align-items:center;gap:28px;padding-left:22px}
+.row .ic{width:80px;height:80px;flex:none;border-radius:20px;background:rgba(227,192,106,.12);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center}
+.row .ic svg{width:54px;height:54px}
+.row .tx{font-family:"Cinzel";font-weight:800;font-size:52px;letter-spacing:2px;color:var(--ink)}
+.row .no{margin-left:auto;margin-right:34px;font-family:"Cinzel";font-weight:800;font-size:40px;color:rgba(227,192,106,.6)}
+#dBanner{left:80px;width:800px;top:640px;height:96px;white-space:nowrap;border-radius:20px;border:4px solid var(--red);background:rgba(40,8,4,.75);display:flex;align-items:center;justify-content:center;
+  font-family:"Cinzel";font-weight:800;font-size:40px;letter-spacing:2px;color:var(--red)}
+
 #outro{inset:0}
-#oPhotoWrap{left:310px;top:420px;width:460px;height:460px}
-#oPhoto{position:absolute;inset:0;border-radius:50%;background:url(assets/ustaz_circle.jpg) center 34%/cover;border:6px solid var(--gold);
-  box-shadow:0 0 0 14px rgba(227,192,106,.15),0 30px 80px rgba(0,0,0,.6)}
-#oRing{position:absolute;left:-55px;top:-55px;width:570px;height:570px}
-#oSmall{left:0;right:0;top:990px;text-align:center;font-family:"AmiriI";font-style:italic;font-size:44px;color:var(--gold)}
-#oName{left:0;right:0;top:1062px;text-align:center;font-family:"Cinzel";font-weight:800;font-size:58px;letter-spacing:2px}
-#oLine{left:340px;width:400px;top:1150px;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-#oMsg{left:60px;right:60px;top:1180px;text-align:center;font-family:"AmiriI";font-style:italic;font-size:54px;line-height:1.25;color:var(--ink)}
-#oCta{left:0;right:0;top:1400px;display:flex;justify-content:center;gap:22px}
-#oCta div{padding:14px 30px;border-radius:40px;border:2px solid var(--gold);font-weight:800;font-size:26px;letter-spacing:4px;color:var(--gold);background:rgba(4,32,26,.7)}
-#oArabic{left:0;right:0;top:250px;text-align:center;font-family:"Amiri";font-weight:700;font-size:70px;color:var(--goldhi);direction:rtl}
+#oPhotoWrap{left:330px;top:380px;width:420px;height:420px}
+#oPhoto{position:absolute;inset:0;border-radius:50%;background:url(assets/ustaz_circle.jpg) center 34%/cover;border:6px solid var(--gold);box-shadow:0 0 0 14px rgba(227,192,106,.15),0 30px 80px rgba(0,0,0,.6)}
+#oRing{position:absolute;left:-50px;top:-50px;width:520px;height:520px}
+#oSmall{top:880px;font-family:"AmiriI";font-style:italic;font-size:44px;color:var(--gold)}
+#oName{top:942px;font-family:"Cinzel";font-weight:800;font-size:58px;letter-spacing:2px}
+#oLine{left:340px;width:400px;top:1030px;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#oMsg{left:60px;right:60px;top:1060px;text-align:center;font-family:"AmiriI";font-style:italic;font-size:54px;line-height:1.25}
+#oCta{left:0;right:0;top:1290px;display:flex;justify-content:center;gap:22px}
+#oCta div{padding:14px 30px;border-radius:40px;border:2px solid var(--gold);font-weight:800;font-size:28px;letter-spacing:4px;color:var(--gold);background:rgba(4,32,26,.7)}
+#oArabic{top:220px;font-family:"Amiri";font-weight:700;font-size:70px;color:var(--goldhi);direction:rtl}
 #flash{inset:0;background:#fff3cf;opacity:0;pointer-events:none}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="60.5" data-width="1080" data-height="1920">
 
-  <!-- background (whole film) -->
   <div id="bg" class="abs clip" data-start="0" data-duration="60.5" data-track-index="0" style="inset:0">
     <div id="rays" class="abs"></div>
     <svg id="pattern" class="abs" viewBox="0 0 1620 2400"><defs>
@@ -140,11 +120,22 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ground)}
     <div id="glow" class="abs"></div>
     <div id="dustLayer" class="abs" style="inset:0"></div>
     <div id="vignette" class="abs"></div>
-    <div class="abs frame-line" style="top:70px"></div>
-    <div class="abs frame-line" style="top:1850px"></div>
+    <div class="abs frame-line" style="top:90px"></div>
+    <svg id="mosque" class="abs" style="left:0;top:1560px;width:1080px;height:280px" viewBox="0 0 1080 280">
+      <defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3c06a" stop-opacity=".30"/><stop offset="1" stop-color="#e3c06a" stop-opacity=".04"/></linearGradient></defs>
+      <g fill="url(#mg)" stroke="#e3c06a" stroke-opacity=".45" stroke-width="2">
+        <path d="M80 270V92h34v178zM74 92l23-62 23 62z"/><rect x="70" y="140" width="54" height="10"/>
+        <path d="M966 270V92h34v178zM960 92l23-62 23 62z"/><rect x="956" y="140" width="54" height="10"/>
+        <path d="M170 270v-60q80-80 160 0v60z"/><path d="M750 270v-60q80-80 160 0v60z"/>
+        <path d="M360 270V170q180-190 360 0v100z"/>
+        <path d="M150 270v-40h780v40z"/>
+      </g>
+      <g fill="none" stroke="#e3c06a" stroke-opacity=".7" stroke-width="3"><path d="M540 74V44"/><path d="M548 30a12 12 0 1 1-8-16 9 9 0 1 0 8 16z" fill="#e3c06a" fill-opacity=".6"/></g>
+      <g fill="#04201a" stroke="#e3c06a" stroke-opacity=".5" stroke-width="2"><path d="M520 270v-60a20 20 0 0 1 40 0v60z"/><path d="M430 250v-34a12 12 0 0 1 24 0v34zM626 250v-34a12 12 0 0 1 24 0v34z"/></g>
+    </svg>
+    <div class="abs frame-line" style="top:1840px"></div>
   </div>
 
-  <!-- HOOK 0 - 2.6 -->
   <div id="hook" class="abs clip" data-start="0" data-duration="2.75" data-track-index="1">
     <div class="h1" id="h1a">Dosa yang kau buat</div>
     <div class="h1" id="h1b">dalam diam...</div>
@@ -152,118 +143,140 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ground)}
     <div id="hookline"></div>
   </div>
 
-  <!-- MAIN 2.6 - 54.3 -->
-  <div id="main" class="abs" style="opacity:0">
+  <div id="main" class="abs">
     <div id="chip" class="abs">PERINGATAN AKHIRAT</div>
-    <div id="title1" class="abs">ANGGOTA BADAN</div>
-    <div id="title2" class="abs gold-text">JADI SAKSI</div>
+    <div id="title1" class="abs center">ANGGOTA BADAN</div>
+    <div id="title2" class="abs center gold-text">JADI SAKSI</div>
+    <svg id="divider" class="abs" viewBox="0 0 400 24"><path d="M0 12H170M230 12H400" stroke="#e3c06a" stroke-width="2"/><g transform="translate(200 12)"><rect x="-9" y="-9" width="18" height="18" fill="#e3c06a"/><rect x="-9" y="-9" width="18" height="18" fill="#e3c06a" transform="rotate(45)"/><circle r="4" fill="#04201a"/></g></svg>
 
-    <div id="arch" class="abs">
-      <div id="archclip">
-        <video id="archvid" class="clip" src="assets/ceramah.mp4" data-start="2.6" data-duration="51.4" data-has-audio="true" data-volume="1" data-track-index="3" playsinline></video>
-        <div id="archphoto"></div>
-        <div id="archshade"></div>
-      </div>
-      <svg id="archframe" viewBox="0 0 540 709">
-        <defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0c0"/><stop offset=".5" stop-color="#e3c06a"/><stop offset="1" stop-color="#a87a25"/></linearGradient></defs>
-        <path id="archPath" d="M20 689 V270 A250 250 0 0 1 520 270 V689 Z" fill="none" stroke="url(#gg)" stroke-width="6" stroke-linejoin="round"/>
-        <path d="M7 702 V270 A263 263 0 0 1 533 270 V702 Z" fill="none" stroke="#e3c06a" stroke-opacity=".35" stroke-width="2"/>
-        <g transform="translate(270 7)"><rect x="-16" y="-16" width="32" height="32" fill="#e3c06a"/><rect x="-16" y="-16" width="32" height="32" fill="#e3c06a" transform="rotate(45)"/><circle r="8" fill="#04201a"/></g>
-      </svg>
-    </div>
+    <div id="stageWrap" class="abs"><div id="stage" class="abs">
 
-    <div id="speaker" class="abs"><div class="ph"></div><div><div class="t1">AL-FADHIL</div><div class="t2">Ustaz Abd Aziz Al-Qurowy</div></div></div>
-
-    <div id="caps" class="abs"></div>
-
-    <div id="panel" class="abs">
-      <div class="corner" style="left:14px;top:14px;border-right:none;border-bottom:none;border-radius:14px 0 0 0"></div>
-      <div class="corner" style="right:14px;top:14px;border-left:none;border-bottom:none;border-radius:0 14px 0 0"></div>
-      <div class="corner" style="left:14px;bottom:14px;border-right:none;border-top:none;border-radius:0 0 0 14px"></div>
-      <div class="corner" style="right:14px;bottom:14px;border-left:none;border-top:none;border-radius:0 0 14px 0"></div>
-
-      <!-- A: tiga saksi -->
       <div class="scene" id="sA">
-        <div class="wit" id="wA1" style="left:65px">
+        <svg id="fig" viewBox="0 0 400 600">
+          <defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1c4" stop-opacity="0"/><stop offset=".5" stop-color="#fff1c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff1c4" stop-opacity="0"/></linearGradient>
+          <clipPath id="bodyclip"><circle cx="200" cy="80" r="48"/><path d="M135 150Q200 128 265 150L274 335Q200 356 126 335Z"/><path d="M140 165L90 262L70 352L54 350L74 258L126 158Z"/><path d="M260 165L310 262L330 352L346 350L326 258L274 158Z"/><path d="M156 335L146 548H184L194 340Z"/><path d="M244 335L254 548H216L206 340Z"/></clipPath></defs>
+          <g id="body">
+            <path class="limb" d="M140 165L90 262L68 350" stroke-width="34" fill="none"/>
+            <path class="limb" d="M260 165L310 262L332 350" stroke-width="34" fill="none"/>
+            <path class="limb" d="M172 338L164 470L160 545" stroke-width="38" fill="none"/>
+            <path class="limb" d="M228 338L236 470L240 545" stroke-width="38" fill="none"/>
+            <path class="part" d="M135 150Q200 128 265 150L274 335Q200 356 126 335Z"/>
+            <circle class="part" cx="200" cy="80" r="48"/>
+          </g>
+          <g id="skinGlow" opacity="0" filter="url(#gl)" fill="none" stroke="#fff1c4" stroke-width="5">
+            <circle cx="200" cy="80" r="50"/><path d="M133 148Q200 126 267 148L276 337Q200 358 124 337Z"/>
+          </g>
+          <g clip-path="url(#bodyclip)"><rect id="scanbar" x="0" y="-80" width="400" height="80" fill="url(#scan)" opacity="0"/></g>
+          <g id="hands" filter="url(#gl)"><circle cx="66" cy="370" r="26" fill="#1d6b56" stroke="#e3c06a" stroke-width="3"/><circle cx="334" cy="370" r="26" fill="#1d6b56" stroke="#e3c06a" stroke-width="3"/></g>
+          <g id="feet" filter="url(#gl)"><ellipse cx="150" cy="566" rx="38" ry="17" fill="#1d6b56" stroke="#e3c06a" stroke-width="3"/><ellipse cx="250" cy="566" rx="38" ry="17" fill="#1d6b56" stroke="#e3c06a" stroke-width="3"/></g>
+        </svg>
+        <svg class="abs" style="left:0;top:0;width:960px;height:620px;overflow:visible" viewBox="0 0 960 620" fill="none" stroke="#e3c06a" stroke-width="3">
+          <path id="ln1" d="M272 352H330L356 352"/><circle id="dt1" cx="360" cy="352" r="7" fill="#e3c06a"/>
+          <path id="ln3" d="M688 170H610L560 210"/><circle id="dt3" cx="556" cy="214" r="7" fill="#e3c06a"/>
+          <path id="ln2" d="M688 500H620L590 535"/><circle id="dt2" cx="586" cy="540" r="7" fill="#e3c06a"/>
+        </svg>
+        <div class="card callout" id="co1" style="left:20px;top:250px">
           <svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 56V30a5 5 0 0 1 10 0v20M42 50V22a5 5 0 0 1 10 0v28M52 50V25a5 5 0 0 1 10 0v27M62 52V36a5 5 0 0 1 10 0v26c0 17-10 28-25 28-10 0-16-6-21-15l-10-17a5 5 0 0 1 8-6l8 9"/></svg>
           <div class="n">TANGAN</div><div class="s">BERSAKSI</div></div>
-        <div class="wit" id="wA2" style="left:345px">
-          <svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M42 38c-9 10-10 28-4 40 4 9 17 11 21 2 4-8-2-15 0-25 2-9 6-15 2-21-5-6-13-4-19 4z"/><circle cx="37" cy="24" r="5"/><circle cx="47" cy="17" r="4.5"/><circle cx="57" cy="17" r="4"/><circle cx="65" cy="22" r="3.5"/><circle cx="70" cy="30" r="3"/></svg>
-          <div class="n">KAKI</div><div class="s">BERSAKSI</div></div>
-        <div class="wit" id="wA3" style="left:625px">
+        <div class="card callout" id="co3" style="left:690px;top:70px">
           <svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="4.5" stroke-linecap="round"><path d="M28 70c-6-14-4-34 10-42 14-8 32-2 36 14 3 12 0 22-2 30"/><path d="M38 78c-6-12-6-28 4-34 10-6 22-2 24 10 2 10-2 20 0 28"/><path d="M48 84c-4-10-6-22 0-26 6-4 12 0 12 8 0 10-2 16 2 22"/><path d="M22 52c2-14 10-26 24-30M80 46c2 8 2 16 0 24"/></svg>
           <div class="n">KULIT</div><div class="s">BERSAKSI</div></div>
-        <div id="aStrip">atas setiap apa yang kita kerjakan</div>
+        <div class="card callout" id="co2" style="left:690px;top:400px">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M42 38c-9 10-10 28-4 40 4 9 17 11 21 2 4-8-2-15 0-25 2-9 6-15 2-21-5-6-13-4-19 4z"/><circle cx="37" cy="24" r="5"/><circle cx="47" cy="17" r="4.5"/><circle cx="57" cy="17" r="4"/><circle cx="65" cy="22" r="3.5"/><circle cx="70" cy="30" r="3"/></svg>
+          <div class="n">KAKI</div><div class="s">BERSAKSI</div></div>
+        <div id="aBottom"><div class="lbl" style="font-size:28px">SEMUANYA MENJADI SAKSI</div><div class="subt" style="margin-top:8px">atas setiap apa yang kita kerjakan</div></div>
       </div>
 
-      <!-- B: ayat Yasin 65 -->
       <div class="scene" id="sB">
-        <div id="ayat">ٱلْيَوْمَ نَخْتِمُ عَلَىٰٓ أَفْوَٰهِهِمْ وَتُكَلِّمُنَآ أَيْدِيهِمْ<br/>وَتَشْهَدُ أَرْجُلُهُم بِمَا كَانُوا۟ يَكْسِبُونَ</div>
-        <div id="ayatTr">"Pada hari ini Kami tutup mulut mereka; tangan mereka berkata-kata kepada Kami, dan kaki mereka menjadi saksi atas apa yang mereka usahakan."</div>
-        <div id="ayatRef">SURAH YASIN : 65</div>
+        <div class="med" id="m1" style="left:45px;top:0">
+          <div class="c"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 54c12-14 24-18 36-12 12-6 24-2 36 12-12 16-24 22-36 22S26 70 14 54z"/><path d="M14 54h72"/><rect x="58" y="12" width="30" height="24" rx="4" fill="#04201a"/><path d="M64 12V7a9 9 0 0 1 18 0v5"/></svg></div>
+          <div class="t">MULUT<br/>DIKUNCI</div></div>
+        <div class="med" id="m2" style="left:355px;top:0">
+          <div class="c"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 66V44a4 4 0 0 1 8 0v14M30 58V36a4 4 0 0 1 8 0v22M38 58V38a4 4 0 0 1 8 0v20M46 60V48a4 4 0 0 1 8 0v20c0 13-8 22-19 22-8 0-12-5-16-12l-7-12a4 4 0 0 1 6-5l5 6"/><path d="M58 14h30a6 6 0 0 1 6 6v16a6 6 0 0 1-6 6H74l-8 8v-8h-8a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z"/><path d="M64 26h18M64 32h12"/></svg></div>
+          <div class="t">TANGAN<br/>BERKATA</div></div>
+        <div class="med" id="m3" style="left:665px;top:0">
+          <div class="c"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M42 38c-9 10-10 28-4 40 4 9 17 11 21 2 4-8-2-15 0-25 2-9 6-15 2-21-5-6-13-4-19 4z"/><circle cx="37" cy="24" r="5"/><circle cx="47" cy="17" r="4.5"/><circle cx="57" cy="17" r="4"/><circle cx="65" cy="22" r="3.5"/><circle cx="70" cy="30" r="3"/></svg></div>
+          <div class="t">KAKI<br/>BERSAKSI</div></div>
+        <div class="card" id="ayatCard" style="left:0;top:276px;width:960px;height:470px">
+          <div id="ayat">ٱلْيَوْمَ نَخْتِمُ عَلَىٰٓ أَفْوَٰهِهِمْ وَتُكَلِّمُنَآ أَيْدِيهِمْ<br/>وَتَشْهَدُ أَرْجُلُهُم بِمَا كَانُوا۟ يَكْسِبُونَ</div>
+          <div id="ayatTr">"Pada hari ini Kami tutup mulut mereka; tangan mereka berkata-kata kepada Kami, dan kaki mereka menjadi saksi atas apa yang mereka usahakan."</div>
+          <div id="ayatRef">SURAH YASIN : 65</div>
+        </div>
       </div>
 
-      <!-- C: tidak terlepas dari persoalan -->
       <div class="scene" id="sC">
-        <div class="badge" id="cBadge" style="left:60px;top:50px"><svg viewBox="-100 -100 200 200" class="star8"></svg><div class="g">?</div></div>
-        <div class="big gold-text" id="cBig" style="left:300px;top:58px;font-size:64px">TIDAK AKAN<br/>TERLEPAS</div>
-        <div class="sub" id="cSub" style="left:304px;top:206px">DARIPADA PERSOALAN ALLAH SWT</div>
+        <div class="abs" id="cMed" style="left:300px;top:10px;width:360px;height:360px">
+          <svg id="cOrbit" viewBox="-180 -180 360 360" style="position:absolute;inset:0;width:360px;height:360px"></svg>
+          <svg id="cStar" viewBox="-100 -100 200 200" style="position:absolute;left:55px;top:55px;width:250px;height:250px" class="star8"></svg>
+          <div class="big gold-text" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:150px">?</div>
+        </div>
+        <div class="abs center big" id="cT1" style="top:410px;font-size:70px;color:var(--ink)">TIDAK AKAN</div>
+        <div class="abs center big gold-text" id="cT2" style="top:486px;font-size:118px">TERLEPAS</div>
+        <div class="abs center subt" id="cT3" style="top:640px">daripada persoalan Allah SWT</div>
       </div>
 
-      <!-- D: Allah dedahkan -->
       <div class="scene" id="sD">
-        <div class="lbl" id="dHead">ALLAH AKAN MENDEDAHKAN SEGALA</div>
-        <div class="item" id="d1" style="left:40px;top:70px"><div class="num"><svg viewBox="-100 -100 200 200" class="star8 solid"></svg><b>1</b></div><div class="tx">PEMBOHONGAN</div></div>
-        <div class="item" id="d2" style="left:480px;top:70px"><div class="num"><svg viewBox="-100 -100 200 200" class="star8 solid"></svg><b>2</b></div><div class="tx">PENIPUAN</div></div>
-        <div class="item" id="d3" style="left:40px;top:172px"><div class="num"><svg viewBox="-100 -100 200 200" class="star8 solid"></svg><b>3</b></div><div class="tx">KEKELIRUAN</div></div>
-        <div class="item" id="d4" style="left:480px;top:172px"><div class="num"><svg viewBox="-100 -100 200 200" class="star8 solid"></svg><b>4</b></div><div class="tx">KEMAKSIATAN</div></div>
-        <div id="dStamp" data-layout-allow-occlusion>SEMUA TERBONGKAR</div>
+        <div class="abs center lbl" id="dHead" style="top:0;font-size:32px">ALLAH AKAN MENDEDAHKAN SEGALA</div>
+        <div class="card row" id="d1" style="top:66px"><div class="ic"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18h72a6 6 0 0 1 6 6v40a6 6 0 0 1-6 6H44L26 86V70H14a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z"/><path d="M38 32l24 24M62 32L38 56"/></svg></div><div class="tx">PEMBOHONGAN</div><div class="no">01</div></div>
+        <div class="card row" id="d2" style="top:202px"><div class="ic"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 30c24-10 52-10 76 0 0 30-14 52-38 56C26 82 12 60 12 30z"/><path d="M26 44c6-5 14-5 18 0M56 44c4-5 12-5 18 0"/><path d="M38 66c8 4 16 4 24 0"/></svg></div><div class="tx">PENIPUAN</div><div class="no">02</div></div>
+        <div class="card row" id="d3" style="top:338px"><div class="ic"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M36 34a14 14 0 1 1 20 13c-5 3-6 6-6 11"/><circle cx="50" cy="72" r="3" fill="#e3c06a"/><path d="M14 50a36 36 0 0 1 60-27M86 50a36 36 0 0 1-60 27"/><path d="M74 12v12H62M26 88V76h12"/></svg></div><div class="tx">KEKELIRUAN</div><div class="no">03</div></div>
+        <div class="card row" id="d4" style="top:474px"><div class="ic"><svg viewBox="0 0 100 100" fill="none" stroke="#e3c06a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 86L16 52a20 20 0 0 1 34-24 20 20 0 0 1 34 24z"/><path d="M50 30l-8 16 12 8-8 18"/></svg></div><div class="tx">KEMAKSIATAN</div><div class="no">04</div></div>
+        <div class="abs" id="dBanner">SEMUANYA AKAN TERBONGKAR</div>
       </div>
 
-      <!-- E1: walaupun satu perkara -->
       <div class="scene" id="sE1">
-        <div class="badge" id="eBadge" style="left:60px;top:50px"><svg viewBox="-100 -100 200 200" class="star8"></svg><div class="g" id="eNum">0</div></div>
-        <div class="sub" id="eTop" style="left:304px;top:60px;color:#e3c06a">TIDAK AKAN TERLEPAS</div>
-        <div class="big" id="eBig" style="left:300px;top:104px;font-size:60px;color:#fbf7ec">WALAUPUN<br/><span class="gold-text">SATU PERKARA</span></div>
-      </div>
-      <!-- E2: dihakimi di akhirat -->
-      <div class="scene" id="sE2">
-        <svg id="mizan" viewBox="0 0 120 120" style="position:absolute;left:62px;top:46px;width:200px;height:200px" fill="none" stroke="#e3c06a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M60 22V100M38 100H82"/><circle cx="60" cy="18" r="5" fill="#e3c06a"/>
-          <g id="beam"><path d="M18 34H102"/><path d="M18 34L6 62H30Z M102 34L90 62H114Z"/></g>
-        </svg>
-        <div class="sub" style="left:304px;top:60px;color:#e3c06a">SEMUANYA AKAN</div>
-        <div class="big" id="e2Big" style="left:300px;top:104px;font-size:60px;color:#fbf7ec">DIHAKIMI<br/><span class="gold-text">DI AKHIRAT</span></div>
+        <div class="abs" id="eMed" style="left:290px;top:0;width:380px;height:380px">
+          <svg viewBox="-190 -190 380 380" style="position:absolute;inset:0;width:380px;height:380px">
+            <circle r="170" fill="rgba(3,28,22,.7)" stroke="rgba(227,192,106,.25)" stroke-width="14"/>
+            <circle id="eRing" r="170" fill="none" stroke="#e3c06a" stroke-width="14" stroke-linecap="round" transform="rotate(-90)" stroke-dasharray="1068" stroke-dashoffset="1068"/>
+          </svg>
+          <div class="big gold-text" id="eNum" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:200px">1</div>
+        </div>
+        <div class="abs center lbl" id="eT0" style="top:420px">TIDAK AKAN TERLEPAS</div>
+        <div class="abs center big" id="eT1" style="top:474px;font-size:76px;color:var(--ink)">WALAUPUN</div>
+        <div class="abs center big gold-text" id="eT2" style="top:556px;font-size:96px">SATU PERKARA</div>
       </div>
 
-      <!-- F: jangan rasa selamat -->
+      <div class="scene" id="sE2">
+        <svg id="mizan" viewBox="0 0 120 120" style="position:absolute;left:290px;top:0;width:380px;height:380px" fill="none" stroke="#e3c06a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="60" cy="60" r="57" stroke-opacity=".3" stroke-width="2"/>
+          <path d="M60 24V98M40 98H80M46 104H74"/><circle cx="60" cy="20" r="5" fill="#e3c06a"/>
+          <g id="beam"><path d="M20 34H100"/><path d="M20 34L10 62H30Z M100 34L90 62H110Z" fill="rgba(227,192,106,.15)"/></g>
+        </svg>
+        <div class="abs center lbl" style="top:420px">SEMUANYA AKAN</div>
+        <div class="abs center big" id="e2T1" style="top:474px;font-size:96px;color:var(--ink)">DIHAKIMI</div>
+        <div class="abs center big gold-text" id="e2T2" style="top:576px;font-size:86px">DI AKHIRAT</div>
+      </div>
+
       <div class="scene" id="sF">
-        <svg id="warn" viewBox="0 0 120 120" style="position:absolute;left:66px;top:56px;width:190px;height:190px" fill="none" stroke-linejoin="round">
-          <path d="M60 10L114 106H6Z" stroke="#e0573f" stroke-width="7" fill="rgba(224,87,63,.12)"/><path d="M60 44V74" stroke="#fbf7ec" stroke-width="9" stroke-linecap="round"/><circle cx="60" cy="90" r="6" fill="#fbf7ec"/></svg>
-        <div class="big" id="fBig" style="left:300px;top:62px;font-size:72px;color:#fbf7ec">JANGAN<br/><span style="color:#ff7a5e">RASA SELAMAT</span></div>
-        <div class="sub" style="left:304px;top:226px;font-size:22px">MUHASABAH DIRI SEBELUM DIHISAB</div>
+        <svg id="warn" viewBox="0 0 120 120" style="position:absolute;left:310px;top:10px;width:340px;height:340px" fill="none" stroke-linejoin="round">
+          <path d="M60 8L116 108H4Z" stroke="#ff6b4f" stroke-width="6" fill="rgba(255,107,79,.12)"/><path d="M60 42V74" stroke="#fbf7ec" stroke-width="9" stroke-linecap="round"/><circle cx="60" cy="90" r="6" fill="#fbf7ec"/></svg>
+        <div class="abs center big" id="fT1" style="top:400px;font-size:96px;color:var(--ink)">JANGAN</div>
+        <div class="abs center big" id="fT2" style="top:500px;font-size:96px;color:#ff7a5e">RASA SELAMAT</div>
+        <div class="abs center subt" id="fT3" style="top:640px">di atas dunia ini...</div>
       </div>
     </div>
+
+    </div>
+    <div id="caps" class="abs"></div>
+    <div id="speaker" class="abs"><div class="ph"></div><div><div class="t1">AL-FADHIL</div><div class="t2">Ustaz Abd Aziz Al-Qurowy</div></div><div id="wave"></div></div>
   </div>
 
-  <!-- OUTRO 54.1 - 60.5 -->
   <div id="outro" class="abs clip" data-start="54.1" data-duration="6.4" data-track-index="4">
-    <div id="oArabic" class="abs">حَاسِبُوا أَنْفُسَكُمْ قَبْلَ أَنْ تُحَاسَبُوا</div>
-    <div id="oPhotoWrap" class="abs">
-      <svg id="oRing" viewBox="-310 -310 620 620"></svg>
-      <div id="oPhoto"></div>
-    </div>
-    <div id="oSmall" class="abs">Al-Fadhil</div>
-    <div id="oName" class="abs gold-text">USTAZ ABD AZIZ AL-QUROWY</div>
+    <div id="oArabic" class="abs center">حَاسِبُوا أَنْفُسَكُمْ قَبْلَ أَنْ تُحَاسَبُوا</div>
+    <div id="oPhotoWrap" class="abs"><svg id="oRing" viewBox="-310 -310 620 620"></svg><div id="oPhoto"></div></div>
+    <div id="oSmall" class="abs center">Al-Fadhil</div>
+    <div id="oName" class="abs center gold-text">USTAZ ABD AZIZ AL-QUROWY</div>
     <div id="oLine" class="abs"></div>
-    <div id="oMsg" class="abs">"Hisablah diri kamu,<br/>sebelum kamu dihisab."<div style="font-family:Montserrat;font-style:normal;font-weight:700;font-size:22px;letter-spacing:4px;color:#e3c06a;margin-top:14px">— SAIDINA UMAR AL-KHATTAB R.A.</div></div>
+    <div id="oMsg" class="abs">"Hisablah diri kamu,<br/>sebelum kamu dihisab."<div style="font-family:Montserrat;font-style:normal;font-weight:700;font-size:24px;letter-spacing:4px;color:#e3c06a;margin-top:14px">— SAIDINA UMAR AL-KHATTAB R.A.</div></div>
     <div id="oCta" class="abs"><div>KONGSI</div><div>SIMPAN</div><div>IKUTI</div></div>
   </div>
 
   <div id="flash" data-layout-allow-occlusion class="abs clip" data-start="0" data-duration="60.5" data-track-index="6"></div>
 
-  <!-- AUDIO -->
-  <audio id="bgm" src="assets/sfx/bgm_mix.mp3" data-start="0" data-duration="60.5" data-volume="1" data-track-index="10"></audio>
+  <audio id="speech" src="assets/speech_clean.wav" data-start="2.6" data-duration="51.47" data-volume="1" data-track-index="9"></audio>
+  <audio id="bgm" src="assets/sfx/bgm_mix.mp3" data-start="0" data-duration="60.5" data-volume="0.9" data-track-index="10"></audio>
   <audio id="sx1" src="assets/sfx/whoosh.mp3" data-start="0.05" data-duration="0.9" data-volume="0.45" data-track-index="11"></audio>
   <audio id="sx2" src="assets/sfx/impact.mp3" data-start="1.2" data-duration="2.2" data-volume="0.9" data-track-index="12"></audio>
   <audio id="sx3" src="assets/sfx/whoosh.mp3" data-start="2.2" data-duration="0.9" data-volume="0.6" data-track-index="11"></audio>
@@ -294,167 +307,147 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ground)}
 
 <script>
 (function(){
-  const CAPS = [{"s": 2.54, "e": 3.88, "w": [["Kerana", 2.6], ["tangan-tangan", 3.1]]}, {"s": 3.88, "e": 5.42, "w": [["akan", 3.94], ["menjadi", 4.26], ["saksi", 4.68]]}, {"s": 5.42, "e": 6.34, "w": [["Tangan,", 5.48], ["kaki", 5.94]]}, {"s": 6.34, "e": 7.94, "w": [["akan", 6.4], ["menjadi", 6.76], ["saksi", 7.14]]}, {"s": 7.94, "e": 9.28, "w": [["Segala", 8.0], ["kulit-kulit", 8.26], ["kita", 9.04]]}, {"s": 9.28, "e": 10.76, "w": [["akan", 9.34], ["menjadi", 9.9], ["saksi", 10.26]]}, {"s": 10.76, "e": 11.88, "w": [["di", 10.82], ["atas", 11.26], ["apa", 11.6]]}, {"s": 11.88, "e": 13.08, "w": [["yang", 11.94], ["kita", 12.08], ["kerjakan", 12.4]]}, {"s": 13.08, "e": 14.6, "w": [["ketika", 13.14], ["mana", 13.68], ["kita", 13.96], ["berada", 14.24]]}, {"s": 14.6, "e": 15.94, "w": [["di", 14.66], ["atas", 14.96], ["muka", 15.14], ["bumi", 15.38]]}, {"s": 15.94, "e": 16.7, "w": [["Haa,", 16.0], ["beringat", 16.2], ["sikit", 16.46]]}, {"s": 16.7, "e": 17.22, "w": [["tuan-tuan", 16.76]]}, {"s": 17.22, "e": 18.06, "w": [["Eh,", 17.28], ["kita", 17.66], ["ni", 17.76], ["buat", 17.94]]}, {"s": 18.06, "e": 19.62, "w": [["apa", 18.12], ["yang", 18.34], ["kita", 18.48], ["buat", 18.78], ["ni?", 18.92]]}, {"s": 19.62, "e": 20.24, "w": [["Jangan", 19.68], ["ingat", 19.92]]}, {"s": 20.24, "e": 21.72, "w": [["kita", 20.3], ["akan", 20.56], ["terlepas", 20.88]]}, {"s": 21.72, "e": 23.4, "w": [["daripada", 21.78], ["persoalan", 22.42]]}, {"s": 23.4, "e": 25.56, "w": [["oleh", 23.46], ["Allah", 23.74], ["SWT", 24.08]]}, {"s": 25.56, "e": 26.34, "w": [["Bahkan", 25.62], ["Allah", 26.02]]}, {"s": 26.34, "e": 27.74, "w": [["akan", 26.4], ["mendedahkan", 26.74]]}, {"s": 27.74, "e": 29.88, "w": [["segala", 27.8], ["pembohongan-pembohongan", 28.24]]}, {"s": 29.88, "e": 31.48, "w": [["segala", 29.94], ["penipuan-penipuan", 30.24]]}, {"s": 31.48, "e": 34.03, "w": [["segala", 31.54], ["kekeliruan-kekeliruan", 32.1]]}, {"s": 34.04, "e": 35.08, "w": [["segala", 34.1], ["kemaksiatan", 34.4]]}, {"s": 35.08, "e": 36.42, "w": [["yang", 35.14], ["telah", 35.28], ["kita", 35.5], ["lakukan", 35.76]]}, {"s": 36.42, "e": 37.74, "w": [["ketika", 36.48], ["kita", 37.04], ["berada", 37.38]]}, {"s": 37.74, "e": 39.84, "w": [["di", 37.8], ["alam", 38.68], ["dunia,", 38.94], ["tuan-tuan", 39.36]]}, {"s": 39.84, "e": 41.0, "w": [["Tidak", 39.9], ["akan", 40.14], ["terlepas", 40.38]]}, {"s": 41.0, "e": 42.6, "w": [["walaupun", 41.06], ["satu", 41.58], ["perkara", 41.88]]}, {"s": 42.6, "e": 43.54, "w": [["daripada", 42.66], ["apa", 43.34]]}, {"s": 43.54, "e": 45.14, "w": [["yang", 43.6], ["kita", 43.76], ["lakukan", 44.08]]}, {"s": 45.14, "e": 46.18, "w": [["melainkan", 45.2]]}, {"s": 46.18, "e": 47.02, "w": [["akan", 46.24], ["dihakimi", 46.32]]}, {"s": 47.02, "e": 48.88, "w": [["oleh", 47.08], ["Allah", 47.32], ["SWT", 47.66]]}, {"s": 48.88, "e": 49.9, "w": [["ketika", 48.94], ["kita", 49.38], ["berada", 49.64]]}, {"s": 49.9, "e": 50.6, "w": [["di", 49.96], ["akhirat", 50.14]]}, {"s": 50.6, "e": 52.32, "w": [["Jangan", 50.66], ["rasa", 50.8], ["selamat", 51.1]]}, {"s": 52.32, "e": 52.9, "w": [["Atas", 52.38], ["dunia", 52.52], ["ni", 52.86]]}, {"s": 52.9, "e": 54.25, "w": [["kita", 52.96], ["rasa", 53.2], ["selamat", 53.4]]}];
+  const CAPS = [{"s": 2.54, "e": 3.86, "w": [["Kerana", 2.6], ["tangan-tangan", 3.1]]}, {"s": 3.86, "e": 5.48, "w": [["akan", 3.92], ["menjadi", 4.28], ["saksi", 4.64]]}, {"s": 5.48, "e": 6.36, "w": [["Tangan,", 5.54], ["kaki", 5.96]]}, {"s": 6.36, "e": 7.9, "w": [["akan", 6.42], ["menjadi", 6.74], ["saksi", 7.12]]}, {"s": 7.9, "e": 9.28, "w": [["Segala", 7.96], ["kulit-kulit", 8.24], ["kita", 9.0]]}, {"s": 9.28, "e": 10.8, "w": [["akan", 9.34], ["menjadi", 9.88], ["saksi", 10.24]]}, {"s": 10.8, "e": 11.86, "w": [["di", 10.86], ["atas", 11.24], ["apa", 11.62]]}, {"s": 11.86, "e": 13.06, "w": [["yang", 11.92], ["kita", 12.06], ["kerjakan", 12.4]]}, {"s": 13.06, "e": 14.54, "w": [["ketika", 13.12], ["mana", 13.64], ["kita", 13.9], ["berada", 14.22]]}, {"s": 14.54, "e": 15.86, "w": [["di", 14.6], ["atas", 14.92], ["muka", 15.1], ["bumi", 15.34]]}, {"s": 15.86, "e": 16.66, "w": [["Haa,", 15.92], ["beringat", 16.12], ["sikit", 16.44]]}, {"s": 16.66, "e": 17.18, "w": [["tuan-tuan", 16.72]]}, {"s": 17.18, "e": 18.0, "w": [["Eh,", 17.24], ["kita", 17.6], ["ni", 17.7], ["buat", 17.88]]}, {"s": 18.0, "e": 19.56, "w": [["apa", 18.06], ["yang", 18.3], ["kita", 18.44], ["buat", 18.72], ["ni?", 18.86]]}, {"s": 19.56, "e": 20.18, "w": [["Jangan", 19.62], ["ingat", 19.88]]}, {"s": 20.18, "e": 21.66, "w": [["kita", 20.24], ["akan", 20.5], ["terlepas", 20.84]]}, {"s": 21.66, "e": 23.34, "w": [["daripada", 21.72], ["persoalan", 22.38]]}, {"s": 23.34, "e": 25.5, "w": [["oleh", 23.4], ["Allah", 23.7], ["SWT", 24.06]]}, {"s": 25.5, "e": 26.28, "w": [["Bahkan", 25.56], ["Allah", 25.94]]}, {"s": 26.28, "e": 27.66, "w": [["akan", 26.34], ["mendedahkan", 26.66]]}, {"s": 27.66, "e": 29.8, "w": [["segala", 27.72], ["pembohongan-pembohongan", 28.18]]}, {"s": 29.8, "e": 31.44, "w": [["segala", 29.86], ["penipuan-penipuan", 30.18]]}, {"s": 31.44, "e": 33.75, "w": [["segala", 31.5], ["kekeliruan-kekeliruan", 32.04]]}, {"s": 33.8, "e": 34.94, "w": [["segala", 33.86], ["kemaksiatan", 34.32]]}, {"s": 34.94, "e": 36.36, "w": [["yang", 35.0], ["telah", 35.22], ["kita", 35.44], ["lakukan", 35.68]]}, {"s": 36.36, "e": 37.68, "w": [["ketika", 36.42], ["kita", 37.0], ["berada", 37.32]]}, {"s": 37.68, "e": 39.84, "w": [["di", 37.74], ["alam", 38.62], ["dunia,", 38.84], ["tuan-tuan", 39.4]]}, {"s": 39.84, "e": 40.94, "w": [["Tidak", 39.9], ["akan", 40.12], ["terlepas", 40.32]]}, {"s": 40.94, "e": 42.56, "w": [["walaupun", 41.0], ["satu", 41.5], ["perkara", 41.82]]}, {"s": 42.56, "e": 43.48, "w": [["daripada", 42.62], ["apa", 43.26]]}, {"s": 43.48, "e": 45.05, "w": [["yang", 43.54], ["kita", 43.72], ["lakukan", 44.0]]}, {"s": 45.06, "e": 46.12, "w": [["melainkan", 45.12]]}, {"s": 46.12, "e": 46.96, "w": [["akan", 46.18], ["dihakimi", 46.24]]}, {"s": 46.96, "e": 48.82, "w": [["oleh", 47.02], ["Allah", 47.24], ["SWT", 47.6]]}, {"s": 48.82, "e": 49.82, "w": [["ketika", 48.88], ["kita", 49.32], ["berada", 49.58]]}, {"s": 49.82, "e": 50.56, "w": [["di", 49.88], ["akhirat", 50.06]]}, {"s": 50.56, "e": 52.26, "w": [["Jangan", 50.62], ["rasa", 50.74], ["selamat", 51.04]]}, {"s": 52.26, "e": 52.84, "w": [["Atas", 52.32], ["dunia", 52.46], ["ni", 52.8]]}, {"s": 52.84, "e": 54.21, "w": [["kita", 52.9], ["rasa", 53.12], ["selamat", 53.34]]}];
+  const WAVE = [0.42, 0.59, 0.9, 0.77, 0.87, 0.67, 0.9, 0.74, 0.88, 0.72, 0.58, 0.89, 0.67, 0.89, 0.98, 0.96, 0.97, 0.99, 0.99, 0.95, 1.0, 0.97, 0.93, 0.94, 0.88, 0.91, 0.94, 0.96, 0.94, 0.91, 0.89, 0.86, 0.83, 0.85, 0.91, 0.88, 0.94, 0.88, 0.85, 0.93, 0.87, 0.93, 0.87, 0.86, 0.93, 0.86, 0.9, 0.88, 0.86, 0.89, 0.88, 0.9, 0.84, 0.79, 0.86, 0.88, 0.91, 0.86, 0.81, 0.82, 0.88, 0.91, 0.91, 0.92, 0.95, 0.93, 0.91, 0.89, 0.86, 0.88, 0.9, 0.8, 0.81, 0.9, 0.9, 0.8, 0.75, 0.84, 0.89, 0.93, 0.8, 0.8, 0.75, 0.73, 0.81, 0.78, 0.86, 0.89, 0.76, 0.89, 0.81, 0.66, 0.83, 0.71, 0.77, 0.88, 0.72, 0.73, 0.61, 0.78, 0.85, 0.93, 0.92, 0.82, 0.88, 0.76, 0.75, 0.91, 0.75, 0.78, 0.89, 0.89, 0.8, 0.69, 0.72, 0.85, 0.63, 0.86, 0.7, 0.91, 0.94, 0.71, 0.93, 0.73, 0.64, 0.61, 0.48, 0.79, 0.87, 0.82, 0.79, 0.9, 0.87, 0.78, 0.88, 0.71, 0.66, 0.86, 0.87, 0.56, 0.9, 0.69, 0.95, 0.51, 0.37, 0.68, 0.8, 0.58, 0.71, 0.59, 0.53, 0.66, 0.6, 0.74, 0.46, 0.21, 0.06, 0.06, 0.5, 0.8, 0.66, 0.93, 0.75, 0.9, 0.71, 0.65, 0.65, 0.78, 0.82, 0.85, 0.76, 0.9, 0.85, 0.59, 0.09, 0.92, 0.85, 0.7, 0.58, 0.84, 0.73, 0.86, 0.62, 0.64, 0.97, 0.72, 0.62, 0.82, 0.88, 0.66, 0.6, 0.81, 0.62, 0.92, 0.78, 0.82, 0.96, 0.79, 0.58, 0.48, 0.39, 0.3, 0.16, 0.87, 0.81, 0.84, 0.69, 0.67, 0.78, 0.89, 0.57, 0.54, 0.67, 0.77, 0.8, 0.73, 0.56, 0.87, 0.51, 0.86, 0.96, 0.95, 0.52, 0.99, 1.0, 0.85, 0.73, 0.65, 0.55, 0.46, 0.81, 0.96, 0.9, 0.73, 0.87, 0.82, 0.72, 0.67, 0.83, 0.66, 0.92, 0.89, 0.86, 0.84, 0.79, 0.84, 0.8, 0.69, 0.59, 0.5, 0.92, 0.93, 0.77, 0.89, 0.8, 0.95, 0.9, 0.77, 0.68, 0.7, 0.89, 0.82, 0.88, 0.85, 0.84, 0.91, 0.94, 0.59, 0.82, 0.88, 0.87, 0.88, 0.78, 0.42, 0.46, 0.94, 0.8, 0.82, 0.93, 0.71, 0.89, 0.93, 0.71, 0.85, 0.78, 0.84, 0.61, 0.87, 0.74, 0.85, 0.87, 0.81, 0.95, 0.86, 0.85, 0.96, 0.85, 0.8, 0.74, 0.65, 0.53, 0.54, 0.94, 0.88, 0.87, 0.83, 0.71, 0.9, 0.69, 1.0, 0.97, 0.79, 0.91, 0.69, 0.84, 0.91, 0.92, 0.89, 0.96, 0.92, 0.91, 0.68, 0.6, 0.45, 0.38, 0.79, 0.89, 0.95, 0.8, 0.9, 0.73, 0.89, 0.83, 0.54, 0.93, 0.91, 0.71, 0.88, 0.81, 0.87, 0.58, 0.92, 0.93, 0.76, 0.76, 0.64, 0.54, 0.54, 0.92, 0.9, 0.9, 0.91, 0.7, 0.82, 0.69, 0.87, 0.93, 0.88, 0.96, 0.69, 0.77, 0.74, 0.8, 0.86, 0.89, 0.99, 0.75, 0.79, 0.88, 0.97, 0.91, 0.78, 0.65, 0.53, 0.46, 0.9, 0.88, 0.96, 0.84, 0.83, 0.93, 0.9, 0.83, 0.74, 0.88, 0.9, 0.69, 0.94, 0.75, 0.88, 0.62, 0.9, 0.89, 0.63, 0.72, 0.73, 0.95, 0.92, 0.68, 0.96, 0.79, 0.9, 0.84, 0.79, 0.77, 0.66, 0.57, 0.88, 0.88, 0.89, 0.65, 0.95, 0.67, 0.76, 0.88, 0.75, 0.92, 0.75, 0.92, 0.91, 0.9, 0.86, 0.82, 0.87, 0.9, 0.7, 0.87, 0.82, 0.68, 0.61, 1.0, 0.81, 0.81, 0.82, 0.8, 0.93, 0.9, 0.96, 0.92, 0.6, 0.88, 0.57, 0.89, 0.6, 0.44, 0.08, 0.78, 0.89, 0.92, 0.85, 0.75, 0.95, 0.68, 0.81, 0.91, 0.65, 0.96, 0.9, 0.74, 0.68, 0.59, 0.98, 0.98, 0.87, 0.79, 0.89, 0.83, 0.91, 0.75, 0.67, 0.84, 0.79, 0.73, 0.98, 0.88, 0.97, 0.78, 0.83, 0.78, 0.68, 0.8, 0.96, 0.88, 0.91, 0.79, 0.94, 0.88, 0.72, 0.9, 0.68, 0.97, 0.94, 0.73, 0.69, 0.7, 0.96, 0.91, 0.62, 0.86, 0.72, 0.88, 0.79, 0.73, 0.65, 0.54, 0.57, 1.0, 0.96, 0.71, 0.74, 0.9, 0.92, 0.94, 0.9, 0.78, 0.83, 0.82, 0.7, 0.6, 0.45, 0.88, 0.51, 0.92, 0.67, 0.88, 0.86, 0.77, 0.73, 0.99, 0.65, 0.91, 0.93, 0.79, 0.91, 0.83, 0.8, 0.9, 0.89, 0.91, 0.74, 0.77, 0.7, 0.88, 0.87, 0.8, 0.87, 0.89, 0.95, 0.71, 0.85, 0.92, 0.78, 0.84, 0.67, 0.61, 0.61, 0.92, 0.76, 0.55, 0.86, 0.51, 0.42, 0.75, 0.86, 0.82, 0.68, 0.88, 0.61, 0.62, 0.53, 0.58, 0.65, 0.47, 0.06, 0.97, 0.88, 0.97, 0.88, 0.92, 0.59, 0.93, 0.56, 0.64, 0.94, 0.8, 0.89, 0.88, 0.81, 0.8, 0.67, 0.54, 0.41, 0.35, 0.25, 0.66, 0.8, 0.81, 0.86, 0.85, 0.75, 0.9, 0.9, 0.87, 0.58, 0.76, 0.87, 0.89, 0.75, 0.84, 0.5, 0.84, 0.83, 0.85, 0.7, 0.68, 0.21, 0.06];
   const tl = gsap.timeline({ paused: true });
   const GOLD = "#f0cf7a";
-
-  // ---- deterministic helpers
   let seed = 1234567;
   const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
   const star8 = (r1, r2) => { let p=[]; for(let i=0;i<16;i++){const a=Math.PI/8*i-Math.PI/2; const r=i%2?r2:r1; p.push((Math.cos(a)*r).toFixed(1)+","+(Math.sin(a)*r).toFixed(1));} return p.join(" "); };
-  document.querySelectorAll("svg.star8").forEach(s=>{
-    const solid = s.classList.contains("solid");
-    s.innerHTML = solid
-      ? `<polygon points="${star8(98,74)}" fill="#e3c06a"/>`
-      : `<polygon points="${star8(96,74)}" fill="rgba(227,192,106,.12)" stroke="#e3c06a" stroke-width="5"/><circle r="62" fill="none" stroke="#e3c06a" stroke-opacity=".5" stroke-width="2"/>`;
-  });
-  // outro ornamental ring
-  (function(){
-    const g = document.getElementById("oRing"); let h = `<circle r="290" fill="none" stroke="#e3c06a" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 10"/>`;
-    for(let i=0;i<24;i++){ const a=i*15; h+=`<g transform="rotate(${a}) translate(0 -300)"><rect x="-7" y="-7" width="14" height="14" fill="#e3c06a" transform="rotate(45)"/></g>`; }
-    h += `<circle r="268" fill="none" stroke="#e3c06a" stroke-width="3"/>`;
-    g.innerHTML = h;
-  })();
+  document.querySelectorAll("svg.star8").forEach(s=>{ s.innerHTML=`<polygon points="${star8(96,74)}" fill="rgba(227,192,106,.12)" stroke="#e3c06a" stroke-width="4"/><circle r="64" fill="rgba(3,28,22,.8)" stroke="#e3c06a" stroke-opacity=".6" stroke-width="2"/>`; });
+  (function(){ const g=document.getElementById("oRing"); let h=`<circle r="290" fill="none" stroke="#e3c06a" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 10"/>`;
+    for(let i=0;i<24;i++){ h+=`<g transform="rotate(${i*15}) translate(0 -300)"><rect x="-7" y="-7" width="14" height="14" fill="#e3c06a" transform="rotate(45)"/></g>`; }
+    g.innerHTML=h+`<circle r="268" fill="none" stroke="#e3c06a" stroke-width="3"/>`; })();
+  (function(){ const g=document.getElementById("cOrbit"); let h=`<circle r="170" fill="none" stroke="#e3c06a" stroke-opacity=".4" stroke-width="2" stroke-dasharray="3 9"/>`;
+    for(let i=0;i<8;i++){ h+=`<g transform="rotate(${i*45}) translate(0 -170)"><circle r="${i%2?5:8}" fill="#e3c06a"/></g>`; } g.innerHTML=h; })();
 
-  // ---- dust particles (whole film)
-  const dl = document.getElementById("dustLayer");
-  for(let i=0;i<34;i++){
-    const d = document.createElement("div"); d.className="abs dust";
-    const x = rnd()*1080, y = 200+rnd()*1700, s = .4+rnd()*1.1;
-    d.style.left = x+"px"; d.style.top = y+"px"; d.style.transform = `scale(${s})`; d.style.opacity = 0;
-    dl.appendChild(d);
+  const dl=document.getElementById("dustLayer");
+  for(let i=0;i<34;i++){ const d=document.createElement("div"); d.className="abs dust";
+    d.style.left=(rnd()*1080)+"px"; d.style.top=(200+rnd()*1700)+"px"; d.style.opacity=0; d.style.transform=`scale(${.4+rnd()*1.1})`; dl.appendChild(d);
     tl.fromTo(d,{y:0,x:0},{y:-(300+rnd()*500),x:(rnd()-.5)*160,duration:60.5,ease:"none"},0);
-    tl.to(d,{opacity:.25+rnd()*.6,duration:2.5+rnd()*3,yoyo:true,repeat:9,ease:"sine.inOut"},rnd()*2);
-  }
+    tl.to(d,{opacity:.25+rnd()*.6,duration:2.5+rnd()*3,yoyo:true,repeat:9,ease:"sine.inOut"},rnd()*2); }
   tl.fromTo("#pattern",{rotation:0,scale:1},{rotation:12,scale:1.12,duration:60.5,ease:"none"},0);
   tl.fromTo("#rays",{rotation:0},{rotation:40,duration:60.5,ease:"none"},0);
+  tl.fromTo("#mosque",{opacity:0,y:30},{opacity:1,y:0,duration:1.5,ease:"power2.out"},2.5);
   tl.fromTo("#glow",{opacity:.55,scale:.95},{opacity:1,scale:1.05,duration:3,yoyo:true,repeat:19,ease:"sine.inOut"},0);
 
-  // ---- HOOK
-  
+  // HOOK
   tl.fromTo("#h1a",{scale:1.04},{scale:1,duration:.6,ease:"power3.out"},0);
   tl.fromTo("#h1b",{opacity:0,y:30,filter:"blur(10px)"},{opacity:1,y:0,filter:"blur(0px)",duration:.4,ease:"power3.out"},0.5);
   tl.fromTo("#h2",{opacity:0,scale:2.2,filter:"blur(14px)"},{opacity:1,scale:1,filter:"blur(0px)",duration:.28,ease:"power4.in"},1.0);
-  tl.fromTo("#flash",{opacity:.0},{opacity:.55,duration:.05},1.27).to("#flash",{opacity:0,duration:.45,ease:"power2.out"},1.32);
   tl.to("#hook",{x:10,duration:.04,yoyo:true,repeat:5,ease:"none"},1.28);
   tl.to("#hookline",{width:620,duration:.6,ease:"power2.out"},1.35);
   tl.to("#h2",{scale:1.06,duration:1.2,ease:"none"},1.3);
   tl.to("#hook",{opacity:0,scale:1.35,filter:"blur(12px)",duration:.4,ease:"power2.in"},2.3);
 
-  // ---- MAIN entrance
-  tl.fromTo("#main",{opacity:0},{opacity:1,duration:.35},2.45);
-  tl.from("#arch",{y:120,scale:.86,opacity:0,duration:.7,ease:"power3.out"},2.5);
-  tl.fromTo("#archPath",{strokeDasharray:2200,strokeDashoffset:2200},{strokeDashoffset:0,duration:1.2,ease:"power2.inOut"},2.55);
-  tl.from("#chip",{y:-40,opacity:0,duration:.5,ease:"power3.out"},2.7);
-  tl.from("#title1",{y:-30,opacity:0,scaleX:1.3,duration:.7,ease:"power3.out"},2.8);
-  tl.from("#title2",{scale:1.6,opacity:0,filter:"blur(10px)",duration:.55,ease:"power3.out"},2.95);
-  tl.to("#title2",{scale:1.04,duration:2,yoyo:true,repeat:11,ease:"sine.inOut"},4);
-  tl.from("#panel",{y:80,opacity:0,duration:.6,ease:"power3.out"},2.75);
-  // speaker pill with ustaz photo
-  tl.set("#speaker",{xPercent:-50},0);tl.set("#chip",{xPercent:-50},0);tl.set("#dStamp",{xPercent:-50,yPercent:-50,rotation:-8},0);
-  tl.fromTo("#speaker",{opacity:0,y:30,scale:.85},{opacity:1,y:0,scale:1,duration:.5,ease:"back.out(1.7)"},3.2);
-  tl.to("#speaker",{opacity:0,y:20,duration:.4,ease:"power2.in"},12.2);
-  tl.fromTo("#archphoto",{scale:1},{scale:1.06,duration:4.3,ease:"none"},2.5);
-  tl.to("#archphoto",{opacity:0,duration:.35,ease:"power1.inOut"},6.72);
-  tl.fromTo("#archframe",{filter:"brightness(1)"},{filter:"brightness(1.8)",duration:.15,yoyo:true,repeat:1},6.72);
+  const flash=(t,a)=>{ tl.to("#flash",{opacity:a,duration:.05,ease:"none"},t); tl.to("#flash",{opacity:0,duration:.45,ease:"power2.out"},t+.05); };
+  flash(1.27,.55);
 
-  // punch-in zoom on footage at jump cuts (hides cuts) + slow drift
-  const cuts=[2.6,14.58,17.12,25.37,39.67,50.37,54.0];
-  cuts.slice(0,-1).forEach((t,i)=>{
-    const s0 = i%2 ? 1.12 : 1.0;
-    tl.set("#archvid",{scale:s0},t);
-    tl.to("#archvid",{scale:s0+0.05,duration:cuts[i+1]-t,ease:"none"},t);
-  });
+  // MAIN in
+  tl.set("#stage",{scale:.925},0); tl.set("#chip",{xPercent:-50},0); tl.set("#speaker",{xPercent:-50},0);
+  tl.to("#main",{opacity:1,duration:.35},2.45);
+  tl.from("#chip",{y:-40,opacity:0,duration:.5,ease:"power3.out"},2.6);
+  tl.from("#title1",{y:-30,opacity:0,scaleX:1.3,duration:.7,ease:"power3.out"},2.7);
+  tl.from("#title2",{scale:1.6,opacity:0,filter:"blur(10px)",duration:.55,ease:"power3.out"},2.85);
+  tl.from("#divider",{scaleX:0,opacity:0,duration:.6},3.1);
+  tl.fromTo("#speaker",{opacity:0,y:60,scale:.85},{opacity:1,y:0,scale:1,duration:.6,ease:"back.out(1.7)"},2.8);
 
-  // ---- captions
-  const capWrap = document.getElementById("caps");
-  CAPS.forEach((c,ci)=>{
-    const el = document.createElement("div"); el.className="cap";
-    const len = c.w.map(w=>w[0]).join(" ").length;
-    if(len>20) el.classList.add("small");
-    if(len>30) el.style.fontSize="38px";
-    const spans = c.w.map(([w,t])=>{ const s=document.createElement("span"); s.textContent=w; el.appendChild(s); return [s,t]; });
-    capWrap.appendChild(el);
+  // audio-reactive waveform
+  const wv=document.getElementById("wave"); const mult=[.45,.7,.9,1,.8,1,.9,.65,.4];
+  mult.forEach((m,b)=>{ const i=document.createElement("i"); wv.appendChild(i);
+    const kf=WAVE.map((v,k)=>{ const vv=WAVE[Math.min(WAVE.length-1,Math.max(0,k+((b*3)%5)-2))]; return {scaleY:Math.max(.08,Math.pow(vv,2.2)*m),duration:1/12,ease:"none"}; });
+    tl.to(i,{keyframes:kf},2.6); });
+
+  // captions
+  const capWrap=document.getElementById("caps");
+  CAPS.forEach(c=>{ const el=document.createElement("div"); el.className="cap";
+    const len=c.w.map(w=>w[0]).join(" ").length; if(len>20) el.classList.add("small"); if(len>28) el.style.fontSize="38px";
+    const spans=c.w.map(([w,t])=>{ const s=document.createElement("span"); s.textContent=w; el.appendChild(s); return [s,t]; }); capWrap.appendChild(el);
     tl.set(el,{visibility:"visible"},c.s);
     tl.fromTo(el,{opacity:0,y:18,scale:.92},{opacity:1,y:0,scale:1,duration:.16,ease:"power2.out"},c.s);
-    spans.forEach(([s,t],k)=>{
-      tl.set(s,{color:GOLD,scale:1.04},Math.max(t,c.s));
-      if(k>0) tl.set(spans[k-1][0],{color:"#ffffff",scale:1},Math.max(t,c.s));
-    });
-    tl.set(el,{visibility:"hidden"},c.e);
-  });
+    spans.forEach(([s,t],k)=>{ tl.set(s,{color:GOLD,scale:1.04},Math.max(t,c.s)); if(k>0) tl.set(spans[k-1][0],{color:"#ffffff",scale:1},Math.max(t,c.s)); });
+    tl.set(el,{visibility:"hidden"},c.e); });
 
-  // ---- scene helper
-  const show=(id,a,b)=>{
-    tl.set(id,{visibility:"visible"},a);
-    tl.fromTo(id,{opacity:0,x:60,filter:"blur(8px)"},{opacity:1,x:0,filter:"blur(0px)",duration:.35,ease:"power3.out"},a);
-    tl.to(id,{opacity:0,x:-60,filter:"blur(8px)",duration:.3,ease:"power2.in"},b-0.3);
-    tl.set(id,{visibility:"hidden"},b);
-  };
-  const pop=(id,t)=>tl.fromTo(id,{opacity:0,scale:.4,y:20},{opacity:1,scale:1,y:0,duration:.45,ease:"back.out(2)"},t);
-  const pulseBorder=(t)=>tl.fromTo("#panel",{borderColor:"#fff1c4",boxShadow:"0 0 50px rgba(255,220,140,.7), inset 0 0 60px rgba(227,192,106,.25)"},{borderColor:"rgba(227,192,106,.75)",boxShadow:"0 20px 60px rgba(0,0,0,.55), inset 0 0 60px rgba(227,192,106,.08)",duration:.8},t);
+  const show=(id,a,b)=>{ tl.set(id,{visibility:"visible"},a);
+    tl.fromTo(id,{opacity:0,y:50,scale:.96,filter:"blur(8px)"},{opacity:1,y:0,scale:1,filter:"blur(0px)",duration:.45,ease:"power3.out"},a);
+    tl.to(id,{opacity:0,y:-50,scale:.96,filter:"blur(8px)",duration:.3,ease:"power2.in"},b-.3); tl.set(id,{visibility:"hidden"},b); };
+  const popIn=(id,t,from)=>tl.fromTo(id,Object.assign({opacity:0,scale:.5},from||{}),{opacity:1,scale:1,x:0,y:0,duration:.5,ease:"back.out(1.8)"},t);
+  const draw=(id,t)=>tl.fromTo(id,{strokeDasharray:400,strokeDashoffset:400},{strokeDashoffset:0,duration:.4,ease:"power2.out"},t);
+  const lit=(id,t)=>{ tl.to(id+" circle, "+id+" ellipse",{fill:"#e3c06a",duration:.25},t); tl.fromTo(id,{scale:1,svgOrigin:"200 460"},{scale:1.06,svgOrigin:"200 460",duration:.25,yoyo:true,repeat:1},t); };
 
-  // A 2.9-12.95
-  show("#sA",2.9,12.95);
-  ["#wA1","#wA2","#wA3"].forEach((id,i)=>{tl.set(id,{opacity:0},2.9); pop(id,[3.1,5.94,8.26][i]); tl.fromTo(id+" svg",{rotation:-15},{rotation:0,duration:.6,ease:"elastic.out(1,.5)"},[3.1,5.94,8.26][i]);});
-  tl.fromTo("#aStrip",{opacity:0,y:20},{opacity:1,y:0,duration:.4},10.7);
-  tl.to(["#wA1","#wA2","#wA3"],{y:-14,duration:.4,ease:"power2.out"},10.7);
+  // A: tangan / kaki / kulit
+  show("#sA",2.85,13.0);
+  tl.from("#fig",{opacity:0,y:40,duration:.6,ease:"power3.out"},2.95);
+  ["#co1","#co2","#co3","#ln1","#ln2","#ln3","#dt1","#dt2","#dt3","#aBottom"].forEach(id=>tl.set(id,{opacity:0},2.85));
+  tl.set("#ln1",{opacity:1},3.05); draw("#ln1",3.05); popIn("#dt1",3.3); popIn("#co1",3.15,{x:-40}); lit("#hands",3.1);
+  tl.set("#ln2",{opacity:1},5.9); draw("#ln2",5.9); popIn("#dt2",6.15); popIn("#co2",6.0,{x:40}); lit("#feet",5.94);
+  tl.set("#ln3",{opacity:1},8.2); draw("#ln3",8.2); popIn("#dt3",8.45); popIn("#co3",8.3,{x:40});
+  tl.to("#skinGlow",{opacity:1,duration:.3},8.3);
+  tl.to("#scanbar",{opacity:1,duration:.1},8.3); tl.fromTo("#scanbar",{y:0},{y:680,duration:1.4,ease:"power1.inOut"},8.3); tl.to("#scanbar",{opacity:0,duration:.2},9.6);
+  tl.to("#body .part",{fill:"#2c8a6f",duration:.4},8.3);
+  tl.to("#skinGlow",{opacity:.4,duration:1.2,yoyo:true,repeat:1},9.0);
+  tl.fromTo("#aBottom",{opacity:0,y:20},{opacity:1,y:0,duration:.5},10.8);
 
-  // B 12.95-19.4 ayat
-  show("#sB",12.95,19.6);
-  tl.fromTo("#ayat",{opacity:0,scale:1.08,filter:"blur(6px)"},{opacity:1,scale:1,filter:"blur(0px)",duration:.9,ease:"power2.out"},13.1);
-  tl.fromTo("#ayatTr",{opacity:0,y:16},{opacity:1,y:0,duration:.6},13.5);
-  tl.fromTo("#ayatRef",{opacity:0,scaleX:1.4},{opacity:1,scaleX:1,duration:.7},14.2);
-  pulseBorder(13.1);
+  // B: Yasin 65
+  show("#sB",13.0,19.6);
+  popIn("#m1",13.15,{y:30}); popIn("#m2",13.55,{y:30}); popIn("#m3",13.95,{y:30});
+  tl.fromTo("#ayatCard",{opacity:0,y:40},{opacity:1,y:0,duration:.6,ease:"power3.out"},13.3);
+  tl.fromTo("#ayat",{opacity:0,scale:1.08,filter:"blur(6px)"},{opacity:1,scale:1,filter:"blur(0px)",duration:.9,ease:"power2.out"},13.5);
+  tl.fromTo("#ayatTr",{opacity:0,y:16},{opacity:1,y:0,duration:.6},14.2);
+  tl.fromTo("#ayatRef",{opacity:0,scaleX:1.4},{opacity:1,scaleX:1,duration:.7},14.6);
 
-  // C 19.45-25.35
-  show("#sC",19.6,25.35);
-  tl.fromTo("#cBadge",{rotation:-90,scale:.3,opacity:0},{rotation:0,scale:1,opacity:1,duration:.7,ease:"back.out(1.6)"},19.65);
-  tl.to("#cBadge svg",{rotation:45,duration:5,ease:"none"},19.6);
-  tl.fromTo("#cBig",{opacity:0,scale:1.5,x:40},{opacity:1,scale:1,x:0,duration:.3,ease:"power4.in"},20.6);
-  tl.fromTo("#cSub",{opacity:0,y:14},{opacity:1,y:0,duration:.5},22.3);
-  tl.to("#panel",{x:8,duration:.04,yoyo:true,repeat:5},20.9);
-  pulseBorder(20.9);
+  // C
+  show("#sC",19.6,25.4);
+  tl.fromTo("#cMed",{scale:.3,rotation:-120,opacity:0},{scale:1,rotation:0,opacity:1,duration:.8,ease:"back.out(1.5)"},19.7);
+  tl.to("#cOrbit",{rotation:120,duration:5.6,ease:"none"},19.7);
+  tl.to("#cStar",{rotation:-45,duration:5.6,ease:"none"},19.7);
+  tl.fromTo("#cT1",{opacity:0,y:20},{opacity:1,y:0,duration:.4},20.2);
+  tl.fromTo("#cT2",{opacity:0,scale:1.7},{opacity:1,scale:1,duration:.28,ease:"power4.in"},20.6);
+  tl.to("#stage",{x:10,duration:.04,yoyo:true,repeat:5},20.9);
+  tl.fromTo("#cT3",{opacity:0,y:16},{opacity:1,y:0,duration:.5},22.3);
 
-  // D 25.35-39.6
-  show("#sD",25.35,39.6);
-  tl.fromTo("#dHead",{opacity:0,y:-10},{opacity:1,y:0,duration:.5},25.6);
-  ["#d1","#d2","#d3","#d4"].forEach((id,i)=>{ const t=[28.2,30.2,32.05,34.35][i]; tl.set(id,{opacity:0},25.35); tl.fromTo(id,{opacity:0,x:-40,scale:.9},{opacity:1,x:0,scale:1,duration:.4,ease:"back.out(1.8)"},t); tl.fromTo(id+" .num svg",{rotation:-120},{rotation:0,duration:.7,ease:"power3.out"},t); });
-  tl.set("#dStamp",{visibility:"visible"},36.45);
-  tl.fromTo("#dStamp",{opacity:0,scale:2.6},{opacity:1,scale:1,duration:.22,ease:"power4.in"},36.4);
-  tl.to(["#d1","#d2","#d3","#d4"],{opacity:.35,duration:.3},36.6);
-  tl.to("#panel",{x:8,duration:.04,yoyo:true,repeat:5},36.62);
+  // D
+  show("#sD",25.4,39.75);
+  tl.fromTo("#dHead",{opacity:0,y:-14},{opacity:1,y:0,duration:.5},25.6);
+  ["#d1","#d2","#d3","#d4"].forEach((id,i)=>{ const t=[28.2,30.2,32.05,34.35][i]; tl.set(id,{opacity:0},25.4);
+    tl.fromTo(id,{opacity:0,x:-80},{opacity:1,x:0,duration:.45,ease:"back.out(1.6)"},t);
+    tl.fromTo(id+" .ic",{rotation:-90,scale:.4},{rotation:0,scale:1,duration:.6,ease:"back.out(2)"},t+.05); });
+  tl.set("#dBanner",{opacity:0},25.4);
+  tl.fromTo("#dBanner",{opacity:0,scale:2.2},{opacity:1,scale:1,duration:.25,ease:"power4.in"},36.4);
+  tl.to(["#d1 .tx","#d2 .tx","#d3 .tx","#d4 .tx"],{color:"#ff9a84",duration:.3},36.65);
+  tl.to("#stage",{x:10,duration:.04,yoyo:true,repeat:5},36.65);
 
-  // E1 39.6-46.15
-  show("#sE1",39.6,46.15);
-  tl.fromTo("#eBadge",{scale:.3,opacity:0},{scale:1,opacity:1,duration:.5,ease:"back.out(1.6)"},39.75);
-  tl.fromTo("#eTop",{opacity:0,y:-10},{opacity:1,y:0,duration:.4},39.9);
-  tl.set("#eNum",{textContent:"1"},41.55);
-  tl.fromTo("#eNum",{scale:2.4,opacity:0},{scale:1,opacity:1,duration:.25,ease:"power4.in"},41.4);
-  tl.fromTo("#eBig",{opacity:0,x:40},{opacity:1,x:0,duration:.4,ease:"power3.out"},40.9);
-  tl.to("#eBadge svg",{rotation:45,duration:4,ease:"none"},41.6);
-  pulseBorder(41.6);
+  // E1
+  show("#sE1",39.75,46.1);
+  tl.fromTo("#eMed",{scale:.4,opacity:0},{scale:1,opacity:1,duration:.6,ease:"back.out(1.6)"},39.85);
+  tl.fromTo("#eT0",{opacity:0,y:-10},{opacity:1,y:0,duration:.4},40.0);
+  tl.fromTo("#eT1",{opacity:0,y:20},{opacity:1,y:0,duration:.4},40.95);
+  tl.set("#eNum",{opacity:0},39.75);
+  tl.fromTo("#eNum",{opacity:0,scale:2.4},{opacity:1,scale:1,duration:.25,ease:"power4.in"},41.35);
+  tl.fromTo("#eT2",{opacity:0,scale:1.5},{opacity:1,scale:1,duration:.28,ease:"power4.in"},41.6);
+  tl.to("#eRing",{strokeDashoffset:0,duration:3.5,ease:"power1.inOut"},41.6);
 
-  // E2 46.15-50.4
-  show("#sE2",46.15,50.45);
-  tl.fromTo("#mizan",{scale:.5,opacity:0},{scale:1,opacity:1,duration:.5,ease:"back.out(1.6)"},46.2);
-  tl.fromTo("#beam",{rotation:-14,transformOrigin:"60px 34px"},{rotation:10,duration:1.2,ease:"sine.inOut",yoyo:true,repeat:2},46.3);
-  tl.fromTo("#e2Big",{opacity:0,scale:1.4},{opacity:1,scale:1,duration:.3,ease:"power4.in"},46.1);
-  pulseBorder(46.4);
+  // E2
+  show("#sE2",46.1,50.5);
+  tl.fromTo("#mizan",{scale:.4,opacity:0},{scale:1,opacity:1,duration:.6,ease:"back.out(1.6)"},46.15);
+  tl.fromTo("#beam",{rotation:-14,svgOrigin:"60 34"},{rotation:12,svgOrigin:"60 34",duration:1.1,ease:"sine.inOut",yoyo:true,repeat:3},46.3);
+  tl.fromTo("#e2T1",{opacity:0,scale:1.6},{opacity:1,scale:1,duration:.28,ease:"power4.in"},46.15);
+  tl.fromTo("#e2T2",{opacity:0,y:20},{opacity:1,y:0,duration:.45},47.2);
 
-  // F 50.45-54.1
-  show("#sF",50.45,54.25);
+  // F
+  show("#sF",50.5,54.1);
   tl.fromTo("#warn",{scale:.3,opacity:0},{scale:1,opacity:1,duration:.4,ease:"back.out(2)"},50.55);
   tl.to("#warn",{scale:1.08,duration:.35,yoyo:true,repeat:7,ease:"sine.inOut"},51.1);
-  tl.fromTo("#fBig",{opacity:0,scale:1.6},{opacity:1,scale:1,duration:.3,ease:"power4.in"},50.8);
-  tl.fromTo("#panel",{borderColor:"#ff7a5e"},{borderColor:"rgba(227,192,106,.75)",duration:1.5},51.1);
-  tl.to("#main",{x:10,duration:.04,yoyo:true,repeat:5},51.12);
-  tl.fromTo("#flash",{opacity:0},{opacity:.25,duration:.05},51.1).to("#flash",{opacity:0,duration:.4},51.15);
+  tl.fromTo("#fT1",{opacity:0,y:20},{opacity:1,y:0,duration:.35},50.6);
+  tl.fromTo("#fT2",{opacity:0,scale:1.6},{opacity:1,scale:1,duration:.28,ease:"power4.in"},50.85);
+  tl.fromTo("#fT3",{opacity:0,y:16},{opacity:1,y:0,duration:.5},52.3);
+  tl.to("#stage",{x:10,duration:.04,yoyo:true,repeat:5},51.12);
+  flash(51.1,.22);
 
-  // MAIN exit -> OUTRO
+  // OUTRO
   tl.to("#main",{opacity:0,scale:.92,filter:"blur(10px)",duration:.5,ease:"power2.in"},54.0);
-  tl.fromTo("#flash",{opacity:0},{opacity:.6,duration:.08},54.15).to("#flash",{opacity:0,duration:.7},54.23);
-    tl.fromTo("#oPhotoWrap",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.4)"},54.2);
+  flash(54.15,.6);
+  tl.fromTo("#oPhotoWrap",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.4)"},54.2);
   tl.fromTo("#oRing",{rotation:0},{rotation:90,duration:6.3,ease:"none"},54.2);
   tl.fromTo("#oArabic",{opacity:0,y:-20,filter:"blur(6px)"},{opacity:1,y:0,filter:"blur(0px)",duration:.8},54.5);
   tl.fromTo("#oSmall",{opacity:0,y:20},{opacity:1,y:0,duration:.5},54.9);
